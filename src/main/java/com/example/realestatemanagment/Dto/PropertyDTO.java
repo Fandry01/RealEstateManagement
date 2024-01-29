@@ -12,7 +12,7 @@ public class PropertyDTO {
     private Boolean rented;
     private String address;
 
-    private MaintainanceDTO maintainanceDTO;
+    private MaintenanceDTO maintenanceDTO;
     public PropertyDTO(){
 
     }
@@ -91,11 +91,11 @@ public class PropertyDTO {
         return squareFeet;
     }
 
-    public MaintainanceDTO getMaintainanceDTO() {
-        return maintainanceDTO;
+    public MaintenanceDTO getMaintainanceDTO() {
+        return maintenanceDTO;
     }
 
-    public void setMaintainanceDTO(MaintainanceDTO maintainanceDTO) {
-        this.maintainanceDTO = maintainanceDTO;
+    public void setMaintainanceDTO(MaintenanceDTO maintenanceDTO) {
+        this.maintenanceDTO = maintenanceDTO;
     }
 }

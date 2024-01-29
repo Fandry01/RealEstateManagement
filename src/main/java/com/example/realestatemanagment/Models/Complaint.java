@@ -9,11 +9,52 @@ import java.util.Date;
 public class Complaint {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private Date dateOfComplaint;
     private String complaintMessage;
 
     @OneToOne(mappedBy = "tenant")
     Tenant tenant;
 
+
+    public Complaint(){
+
+    }
+    public Complaint(Long id, Date dateOfComplaint, String complaintMessage){
+        this.id = id;
+        this.complaintMessage = complaintMessage;
+        this.dateOfComplaint = dateOfComplaint;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public Date getDateOfComplaint() {
+        return dateOfComplaint;
+    }
+
+    public String getComplaintMessage() {
+        return complaintMessage;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+    public void setComplaintMessage(String complaintMessage) {
+        this.complaintMessage = complaintMessage;
+    }
+
+    public void setDateOfComplaint(Date dateOfComplaint) {
+        this.dateOfComplaint = dateOfComplaint;
+    }
 }

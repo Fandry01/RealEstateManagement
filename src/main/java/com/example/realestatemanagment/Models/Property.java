@@ -1,5 +1,6 @@
 package com.example.realestatemanagment.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 
@@ -27,6 +28,9 @@ public class Property {
 @OneToOne(mappedBy = "tenant")
     Tenant tenant;
 
+@OneToMany(mappedBy = "property")
+@JsonIgnore
+Collection<Maintenance> maintenances;
 
 public Property(){
 
@@ -75,6 +79,18 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
         return id;
     }
 
+    public void setMaintenances(Collection<Maintenance> maintenances) {
+        this.maintenances = maintenances;
+    }
+
+    public void setInvestor(Investor investor) {
+        this.investor = investor;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     public void setSquareFeet(String squareFeet) {
         this.squareFeet = squareFeet;
     }
@@ -109,6 +125,10 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
 
     public Tenant getTenant() {
         return tenant;
+    }
+
+    public Collection<Maintenance> getMaintenances() {
+        return maintenances;
     }
 
     public void setType(String type) {

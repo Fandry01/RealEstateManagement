@@ -4,7 +4,6 @@ import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Property;
 import com.example.realestatemanagment.Repository.PropertyRepository;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class PropertyService {
 
         return transferToDTO(property);
     }
-    public void deletePropertyById(Long id, PropertyDTO dto){
+    public void deletePropertyById(Long id){
         propertyRepo.deleteById(id);
     }
 
