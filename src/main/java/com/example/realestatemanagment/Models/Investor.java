@@ -2,7 +2,9 @@ package com.example.realestatemanagment.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -12,14 +14,15 @@ public class Investor {
     @Id
     @GeneratedValue
     private long id;
+    @Column(name = "first_name")
     private String Firstname;
+    @Column(name = "last_name")
     private String Lastname;
+    @Column(name = "date_of_birth")
     private Date Dob;
     private String Address;
-
     @OneToMany(mappedBy = "property")
-    @JsonIgnore
-    List<Property> properties;
+    Collection<Property> properties;
 
 
 public Investor(){
@@ -49,7 +52,7 @@ public Investor(Long id,String firstname,String lastname,Date dob,String address
         return Dob;
     }
 
-    public List<Property> getProperties() {
+    public Collection<Property> getProperties() {
         return properties;
     }
 
@@ -77,7 +80,7 @@ public Investor(Long id,String firstname,String lastname,Date dob,String address
         this.id = id;
     }
 
-    public void setProperties(List<Property> properties) {
+    public void setProperties(Collection<Property> properties) {
         this.properties = properties;
     }
 }

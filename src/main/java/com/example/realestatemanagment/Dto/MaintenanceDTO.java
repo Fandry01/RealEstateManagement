@@ -1,10 +1,16 @@
 package com.example.realestatemanagment.Dto;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 public class MaintenanceDTO {
     private Long id;
+    @NotNull
     private String typeOfMaintenance;
+    @NotNull
+    @Future
     private Date maintenanceDate;
 
     public MaintenanceDTO()

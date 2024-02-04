@@ -1,12 +1,19 @@
 package com.example.realestatemanagment.Dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.util.Date;
 
 public class ComplaintDTO {
 
     private Long id;
+    @NotNull
+    @PastOrPresent
     private Date dateOfComplaint;
+    @NotNull
     private String complaintMessage;
+    @NotNull
     private TenantDTO tenant;
 
     public ComplaintDTO(){

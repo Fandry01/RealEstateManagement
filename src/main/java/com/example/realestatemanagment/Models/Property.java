@@ -22,7 +22,7 @@ public class Property {
     private Boolean rented;
     private String address;
 
-@OneToOne(mappedBy = "investor")
+@ManyToOne
    Investor investor;
 
 @OneToOne(mappedBy = "tenant")

@@ -2,19 +2,19 @@ package com.example.realestatemanagment.Models;
 
 
 import com.sun.tools.javac.Main;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "Maintenances" )
 public class Maintenance {
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
+    @Column(name = "type_of_maintenance")
     public String typeOfMaintenance;
+    @Column(name = "maintenance_date")
     public Date MaintenanceDate;
 
 
@@ -27,13 +27,13 @@ public class Maintenance {
     }
 
     public Maintenance(Long id, String typeOfMaintenance, Date maintenanceDate){
-        this.Id = id;
+        this.id = id;
         this.MaintenanceDate = maintenanceDate;
         this.typeOfMaintenance = typeOfMaintenance;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public Property getProperty() {
@@ -41,7 +41,7 @@ public class Maintenance {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public Date getMaintenanceDate() {

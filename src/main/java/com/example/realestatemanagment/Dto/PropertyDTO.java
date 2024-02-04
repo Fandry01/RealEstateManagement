@@ -1,15 +1,24 @@
 package com.example.realestatemanagment.Dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 public class PropertyDTO {
     private Long id;
+    @NotNull
     private String type;
+    @NotNull
     private Double boughtPrice;
+    @NotNull
     private Double currentPrice;
+    @NotNull
     private Date buildYear;
+    @NotNull
     private String squareFeet;
+    @NotNull
     private Boolean rented;
+    @NotNull
     private String address;
 
     private MaintenanceDTO maintenanceDTO;

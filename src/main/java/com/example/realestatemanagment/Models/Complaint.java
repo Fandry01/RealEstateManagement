@@ -10,7 +10,9 @@ public class Complaint {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(name = "date_of_complaint")
     private Date dateOfComplaint;
+    @Column(name = "complaint_message")
     private String complaintMessage;
 
     @OneToOne(mappedBy = "tenant")
