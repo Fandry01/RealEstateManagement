@@ -34,21 +34,32 @@ public class PropertyController {
     @PostMapping("properties")
     public ResponseEntity<Object> addProperty(@RequestBody PropertyDTO propertyDTO){
         PropertyDTO propDto = propertyService.addProperty(propertyDTO);
-
         return ResponseEntity.created(null).body(propDto);
     }
 
     @DeleteMapping("/properties/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Long id){
         propertyService.deletePropertyById(id);
-
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/properties/{id}")
     public ResponseEntity<Object> updateProperty(@PathVariable Long id, PropertyDTO propertyDTO){
         PropertyDTO dto = propertyService.updateProperty(id,propertyDTO);
-
         return ResponseEntity.ok().body(dto);
     }
+
+    @PutMapping("/properties/{id}/complaints")
+    public ResponseEntity<Object> assignComplaintToProperties(@PathVariable("id") Long id, @PathVariable("complaintId") Long complaintId){
+     propertyService.assignComplaintToProperty(id,complaintId);
+     return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/properties/{id}/maintenance")
+    public ResponseEntity<Object> assignMaintenanceProperties(@PathVariable ("id") Long id, @PathVariable("maintenanceId") Long maintenanceId)
+    {
+       propertyService.assignMaintenanceToProperty(id,maintenanceId);
+       return ResponseEntity.noContent().build();
+    }
+
 }

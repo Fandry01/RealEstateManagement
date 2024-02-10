@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Investors")
+@Table(name = "investors")
 public class Investor {
     @Id
     @GeneratedValue
@@ -21,7 +21,7 @@ public class Investor {
     @Column(name = "date_of_birth")
     private Date Dob;
     private String Address;
-    @OneToMany(mappedBy = "property")
+    @OneToMany(mappedBy = "investor")
     Collection<Property> properties;
 
 

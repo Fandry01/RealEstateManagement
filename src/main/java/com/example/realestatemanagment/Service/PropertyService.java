@@ -1,21 +1,35 @@
 package com.example.realestatemanagment.Service;
 
+import com.example.realestatemanagment.Dto.MaintenanceDTO;
 import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Property;
+import com.example.realestatemanagment.Repository.ComplaintRepository;
+import com.example.realestatemanagment.Repository.MaintenanceRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
+import com.example.realestatemanagment.Repository.TenantRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
+
 @Service
 public class PropertyService {
     private final PropertyRepository propertyRepo;
+    private final ComplaintRepository complaintRepo;
+    private final ComplaintService complaintService;
+    private final MaintenanceRepository maintenanceRepo;
+    private final MaintenanceService maintenanceService;
 
-    public PropertyService(PropertyRepository propertyRepo){
+    public PropertyService(PropertyRepository propertyRepo, ComplaintRepository complaintRepo, ComplaintService complaintService, MaintenanceRepository maintenanceRepo, MaintenanceService maintenanceService){
         this.propertyRepo = propertyRepo;
+        this.complaintRepo = complaintRepo;
+        this.complaintService = complaintService;
+        this.maintenanceRepo = maintenanceRepo;
+        this.maintenanceService = maintenanceService;
     }
 
     public List<PropertyDTO> getAllProperties(){
@@ -91,5 +105,43 @@ public class PropertyService {
 
         return property;
     }
+
+    public void assignComplaintToProperty(Long id, Long complaintId){
+     var optionalProperty = propertyRepo.findById(id);
+     var optionalComplaint = complaintRepo.findById(complaintId);
+
+     if(optionalProperty.isPresent() && optionalComplaint.isPresent()){
+         var property = optionalProperty.get();
+         var complaint = optionalComplaint.get();
+
+         property.setComplaint(complaint);
+         propertyRepo.save(property);
+     } else{
+        throw new RecordNotFoundException("");
+     }
+
+     }
+
+    public void assignMaintenanceToProperty(Long id, Long maintenanceId){
+        var optionalProperty = propertyRepo.findById(id);
+        var optionalMaintenance = maintenanceRepo.findById(maintenanceId);
+
+        if (optionalProperty.isPresent() && optionalMaintenance.isPresent()){
+            var property = optionalProperty.get();
+            var maintenance = optionalMaintenance.get();
+
+            property.getMaintenances().add(maintenance);
+            maintenance.setProperty(property);
+
+            maintenanceRepo.save(maintenance);
+            propertyRepo.save(property);
+
+        } else{
+            throw new RecordNotFoundException("record not found");
+        }
+
+    }
+
+
 
 }

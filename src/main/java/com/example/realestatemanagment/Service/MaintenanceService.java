@@ -82,7 +82,6 @@ public class MaintenanceService {
          maintenance.setMaintenanceDate(dto.getMaintenanceDate());
          maintenance.setTypeOfMaintenance(dto.getTypeOfMaintenance());
 
-
          return maintenance;
     }
 }

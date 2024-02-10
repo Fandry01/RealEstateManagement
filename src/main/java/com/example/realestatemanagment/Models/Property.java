@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Properties")
+@Table(name = "properties")
 public class Property {
     @Id
     @GeneratedValue
@@ -17,7 +17,7 @@ public class Property {
     private String type;
     private Double boughtPrice;
     private Double currentPrice;
-    private Date buildYear;
+    private Integer buildYear;
     private String squareFeet;
     private Boolean rented;
     private String address;
@@ -25,8 +25,11 @@ public class Property {
 @ManyToOne
    Investor investor;
 
-@OneToOne(mappedBy = "tenant")
+@OneToOne
     Tenant tenant;
+
+@OneToOne
+Complaint complaint;
 
 @OneToMany(mappedBy = "property")
 @JsonIgnore
@@ -36,7 +39,7 @@ public Property(){
 
 }
 
-public Property(Long id,String type, Double boughtPrice, Double currentPrice, Date buildYear, String squareFeet, Boolean rented, String address ){
+public Property(Long id,String type, Double boughtPrice, Double currentPrice, Integer buildYear, String squareFeet, Boolean rented, String address ){
  this.id = id;
  this.address = address;
  this.squareFeet = squareFeet;
@@ -63,7 +66,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
         return rented;
     }
 
-    public Date getBuildYear() {
+    public Integer getBuildYear() {
         return buildYear;
     }
 
@@ -103,7 +106,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
         this.currentPrice = currentPrice;
     }
 
-    public void setBuildYear(Date buildYear) {
+    public void setBuildYear(Integer buildYear) {
         this.buildYear = buildYear;
     }
 
@@ -134,6 +137,14 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
     public void setType(String type) {
         this.type = type;
     }
+    public Complaint getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
+    }
+
 }
 
 

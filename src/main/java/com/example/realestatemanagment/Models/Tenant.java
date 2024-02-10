@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Tenants")
+@Table(name = "tenants")
 public class Tenant {
     @Id
     @GeneratedValue
@@ -21,9 +21,9 @@ public class Tenant {
     @Column(name = "rent_price")
     private Integer rentPrice;
 
-    @OneToOne(mappedBy = "properties")
+    @OneToOne
     Property property;
 
-    @OneToOne(mappedBy = "complaint")
+    @OneToOne
     Complaint complaint;
 }

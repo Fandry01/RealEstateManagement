@@ -69,4 +69,8 @@ public class InvestorService {
         return investor;
     }
 
+    public void assignPropertyToInvestor(){
+
+    }
+
 }
