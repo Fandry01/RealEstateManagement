@@ -69,8 +69,10 @@ private final ComplaintRepository complaintRepo;
     public static ComplaintDTO transferToDTO(Complaint complaint){
         var dto = new ComplaintDTO();
 
-        dto.getComplaintMessage();
-        dto.getDateOfComplaint();
+        dto.setId(complaint.getId());
+
+        dto.setComplaintMessage(complaint.getComplaintMessage());
+        dto.setDateOfComplaint(complaint.getDateOfComplaint());
 
         return dto;
     }

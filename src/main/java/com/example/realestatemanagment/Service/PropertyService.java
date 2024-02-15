@@ -1,20 +1,18 @@
 package com.example.realestatemanagment.Service;
 
-import com.example.realestatemanagment.Dto.MaintenanceDTO;
+
 import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Property;
 import com.example.realestatemanagment.Repository.ComplaintRepository;
 import com.example.realestatemanagment.Repository.MaintenanceRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
-import com.example.realestatemanagment.Repository.TenantRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Service
 public class PropertyService {
@@ -82,19 +80,21 @@ public class PropertyService {
     public static PropertyDTO transferToDTO(Property property){
         var dto = new PropertyDTO();
 
-        dto.getAddress();
-        dto.getBoughtPrice();
-        dto.getBuildYear();
-        dto.getRented();
-        dto.getSquareFeet();
-        dto.getCurrentPrice();
-        dto.getType();
+        dto.setId(property.getId());
+        dto.setAddress(property.getAddress());
+        dto.setBoughtPrice(property.getBoughtPrice());
+        dto.setBuildYear(property.getBuildYear());
+        dto.setRented(property.getRented());
+        dto.setSquareFeet(property.getSquareFeet());
+        dto.setCurrentPrice(property.getCurrentPrice());
+        dto.setType(property.getType());
 
         return dto;
     }
 
     public Property transferToProperty(PropertyDTO dto){
         var property = new Property();
+
         property.setAddress(dto.getAddress());
         property.setBoughtPrice(dto.getBoughtPrice());
         property.setBuildYear(dto.getBuildYear());

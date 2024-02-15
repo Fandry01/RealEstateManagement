@@ -37,4 +37,8 @@ public class MaintenanceDTO {
     public String getTypeOfMaintenance() {
         return typeOfMaintenance;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

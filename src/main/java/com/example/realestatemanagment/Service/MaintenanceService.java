@@ -68,9 +68,9 @@ public class MaintenanceService {
 
     public static MaintenanceDTO transferToDTO (Maintenance maintenance){
         var dto = new MaintenanceDTO();
-
-        dto.getMaintenanceDate();
-        dto.getTypeOfMaintenance();
+        dto.setId(maintenance.getId());
+        dto.setMaintenanceDate(maintenance.getMaintenanceDate());
+        dto.setTypeOfMaintenance(maintenance.getTypeOfMaintenance());
 
         return dto;
 

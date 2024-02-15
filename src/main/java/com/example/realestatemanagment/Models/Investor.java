@@ -12,8 +12,10 @@ import java.util.List;
 @Table(name = "investors")
 public class Investor {
     @Id
-    @GeneratedValue
-    private long id;
+    @Column(nullable = false,unique = true)
+    private String username;
+    @Column(nullable = false, length = 255)
+    private String password;
     @Column(name = "first_name")
     private String Firstname;
     @Column(name = "last_name")
@@ -28,17 +30,14 @@ public class Investor {
 public Investor(){
 
 }
-public Investor(Long id,String firstname,String lastname,Date dob,String address){
-    this.id = id;
+public Investor(String firstname,String lastname,Date dob,String address){
     this.Firstname = firstname;
     this.Address = address;
     this.Lastname = lastname;
     this.Dob = dob;
 }
 
-    public long getId() {
-        return id;
-    }
+
 
     public String getLastname() {
         return Lastname;
@@ -76,9 +75,6 @@ public Investor(Long id,String firstname,String lastname,Date dob,String address
         Lastname = lastname;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public void setProperties(Collection<Property> properties) {
         this.properties = properties;
