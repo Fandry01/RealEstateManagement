@@ -1,11 +1,17 @@
 package com.example.realestatemanagment.Dto;
 
+import com.example.realestatemanagment.Models.AuthorityRoles;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.Set;
 
 public class InvestorDTO {
-    private Long id;
+    @NotNull
+    private String username;
+    @NotNull
+    private String password;
     @NotNull
     private String firstName;
     @NotNull
@@ -16,21 +22,22 @@ public class InvestorDTO {
     private String address;
     @NotNull
     private PropertyDTO propertyDTO;
+    @JsonSerialize
+    private Set<AuthorityRoles> authorities;
 
     public InvestorDTO(){
 
     }
 
-    public InvestorDTO( Long id, String firstName, String lastname, Date dob, String address){
-      this.address = address;
-      this.dob = dob;
-      this.lastname = lastname;
-      this.firstName = firstName;
-      this.id = id;
-    }
+    public InvestorDTO(String username, String password, String firstName, String lastname, Date dob, String address, Set<AuthorityRoles> authorities){
+        this.username = username;
+        this.password = password;
+        this.address = address;
+        this.dob = dob;
+        this.lastname = lastname;
+        this.firstName = firstName;
 
-    public void setId(Long id) {
-        this.id = id;
+        this.authorities = authorities;
     }
 
     public void setAddress(String address) {
@@ -53,10 +60,6 @@ public class InvestorDTO {
         this.propertyDTO = propertyDTO;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public Date getDob() {
         return dob;
     }
@@ -75,5 +78,29 @@ public class InvestorDTO {
 
     public PropertyDTO getPropertyDTO() {
         return propertyDTO;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<AuthorityRoles> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<AuthorityRoles> authorities) {
+        this.authorities = authorities;
     }
 }
