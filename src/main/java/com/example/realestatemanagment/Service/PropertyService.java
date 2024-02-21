@@ -1,11 +1,11 @@
 package com.example.realestatemanagment.Service;
 
 
-import com.example.realestatemanagment.Dto.ComplaintDTO;
 import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Property;
 import com.example.realestatemanagment.Repository.ComplaintRepository;
+import com.example.realestatemanagment.Repository.InvestorRepository;
 import com.example.realestatemanagment.Repository.MaintenanceRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
 import org.springframework.stereotype.Service;
@@ -23,12 +23,17 @@ public class PropertyService {
     private final MaintenanceRepository maintenanceRepo;
     private final MaintenanceService maintenanceService;
 
-    public PropertyService(PropertyRepository propertyRepo, ComplaintRepository complaintRepo, ComplaintService complaintService, MaintenanceRepository maintenanceRepo, MaintenanceService maintenanceService){
+    private final InvestorService investorService;
+    private final InvestorRepository investorRepo;
+
+    public PropertyService(PropertyRepository propertyRepo, ComplaintRepository complaintRepo, ComplaintService complaintService, MaintenanceRepository maintenanceRepo, MaintenanceService maintenanceService, InvestorService investorService, InvestorRepository investorRepo){
         this.propertyRepo = propertyRepo;
         this.complaintRepo = complaintRepo;
         this.complaintService = complaintService;
         this.maintenanceRepo = maintenanceRepo;
         this.maintenanceService = maintenanceService;
+        this.investorService = investorService;
+        this.investorRepo = investorRepo;
     }
 
     public List<PropertyDTO> getAllProperties(){
@@ -85,6 +90,7 @@ public class PropertyService {
             dto.setComplaintDTO(complaintService.getComplaintsById(property.getComplaint().getId()));
         }
 
+
         dto.setId(property.getId());
         dto.setAddress(property.getAddress());
         dto.setBoughtPrice(property.getBoughtPrice());
@@ -110,6 +116,22 @@ public class PropertyService {
         property.setCurrentPrice(dto.getCurrentPrice());
 
         return property;
+    }
+
+    public void assignPropertyToInvestor(Long id, String investorId){
+        var optionalProperty = propertyRepo.findById(id);
+        var optionalInvestor = investorRepo.findById(investorId);
+
+        if(optionalProperty.isPresent() && optionalInvestor.isPresent()){
+            var property = optionalProperty.get();
+            var investor = optionalInvestor.get();
+
+            property.setInvestor(investor);
+            propertyRepo.save(property);
+
+        } else{
+            throw new RecordNotFoundException("Investor or Property not found");
+        }
     }
 
     public void assignComplaintToProperty(Long id, Long complaintId){

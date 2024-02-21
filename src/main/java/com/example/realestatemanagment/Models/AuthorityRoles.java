@@ -14,7 +14,7 @@ public class AuthorityRoles implements Serializable {
     private String username;
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false,name = "authority_roles")
     private String authorityRoles;
 
 

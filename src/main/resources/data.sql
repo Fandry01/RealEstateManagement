@@ -8,4 +8,9 @@ INSERT INTO complaints (id, date_of_complaint, complaint_message) VALUES (1,'202
                                                                          (2,'2024-05-20','floor heating not working'),
                                                                          (3,'2024-04-20','floor heating not working');
 
+INSERT INTO investors(username, password,first_name,last_name,date_of_birth,address) VALUES ('derrickRose', '$2a$12$zy.31am6X/FXaGq0oYDL8Oxv0kLBmpwDIhbWo0iiZ9.SWogqo7IJC','derrick','rose','2000-12-12','rozengracht 12');
+INSERT INTO  roles (username, authority_roles) VALUES ('derrickRose','ROLE_ADMIN');
+
+
 UPDATE properties SET complaint_id = 1 WHERE id = 1;
+UPDATE properties SET investor_username = 'derrickRose' WHERE id = 1;

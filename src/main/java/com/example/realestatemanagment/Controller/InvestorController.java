@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Controller;
 
 import com.example.realestatemanagment.Dto.InvestorDTO;
+import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Service.InvestorService;
 import org.springframework.http.ResponseEntity;
@@ -46,9 +47,10 @@ public class InvestorController {
         return  ResponseEntity.created(location).build();
     }
 
+
     @PutMapping(value="/{username}")
     public ResponseEntity<InvestorDTO> updateInvestor(@PathVariable("username") String username, @RequestBody InvestorDTO dto){
-        investorService.UpdateInvestor(username,dto);
+        investorService.updateInvestor(username,dto);
 
         return ResponseEntity.noContent().build();
     }
@@ -70,6 +72,10 @@ public class InvestorController {
             throw new BadRequestException();
         }
 
+    }
+    @GetMapping(value = "/{username}/authorities")
+    public ResponseEntity<Object> getInvestorAuthorityRoles(@PathVariable("username") String username){
+        return ResponseEntity.ok().body(investorService.getAuthorities(username));
     }
 
     @DeleteMapping(value = "/{username}/roles/{authority}")

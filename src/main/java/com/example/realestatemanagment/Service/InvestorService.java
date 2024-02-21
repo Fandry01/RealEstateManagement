@@ -40,7 +40,7 @@ public class InvestorService {
 
             return transferToDTO(investor);
         }else{
-           throw new RecordNotFoundException("geen Gebruiker gevonden");
+           throw new RecordNotFoundException("Investor not found");
         }
 
     }
@@ -50,7 +50,7 @@ public class InvestorService {
         return newInvestor.getUsername();
     }
 
-    public void UpdateInvestor(String username, InvestorDTO investorDTO){
+    public void updateInvestor(String username, InvestorDTO investorDTO){
         if(!investorRepo.existsById(username)) throw new RecordNotFoundException("investor not found");
         Investor investor = investorRepo.findById(username).get();
         investor.setPassword(investorDTO.getPassword());
@@ -115,20 +115,6 @@ public class InvestorService {
         return investor;
     }
 
-    public void assignPropertyToInvestor(String username, Long propertyId){
-        var optionalProperty = propertyRepo.findById(propertyId);
-        var optionalInvestor = investorRepo.findById(username);
 
-        if(optionalProperty.isPresent() && optionalInvestor.isPresent()){
-            var property = optionalProperty.get();
-            var investor = optionalInvestor.get();
-
-            investor.getProperties().add(property);
-            property.setInvestor(investor);
-            investorRepo.save(investor);
-        } else{
-            throw new RecordNotFoundException("Investor or Property not found");
-        }
-    }
 
 }

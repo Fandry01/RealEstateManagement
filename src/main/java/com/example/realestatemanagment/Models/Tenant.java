@@ -13,25 +13,46 @@ public class Tenant extends User {
     @Column(name = "rent_price")
     private Integer rentPrice;
 
-    @OneToMany(targetEntity = AuthorityRoles.class,
-    mappedBy = "username",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER)
-    private Set<AuthorityRoles> authoritySet = new HashSet<>();
-
-    public Set<AuthorityRoles> getRoles() { return authoritySet; }
-    public void addAuthorityRoles(AuthorityRoles authorityRoles) {
-      this.authoritySet.add(authorityRoles);
-    }
-    public void deleteAuthorityRoles(AuthorityRoles authorityRoles){
-        this.authoritySet.remove(authorityRoles);
-    }
-
     @OneToOne
     Property property;
 
     @OneToOne
     Complaint complaint;
 
+    public Tenant(){
+        super();
+    }
+
+
+    public Date getRentalPeriod() {
+        return rentalPeriod;
+    }
+
+    public void setRentalPeriod(Date rentalPeriod) {
+        this.rentalPeriod = rentalPeriod;
+    }
+
+    public Integer getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(Integer rentPrice) {
+        this.rentPrice = rentPrice;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public Complaint getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
+    }
 }

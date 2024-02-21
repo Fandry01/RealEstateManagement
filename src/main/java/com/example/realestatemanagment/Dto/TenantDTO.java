@@ -2,10 +2,12 @@ package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class TenantDTO {
     private String username;
@@ -14,10 +16,14 @@ public class TenantDTO {
     private String firstName;
     @NotNull
     private String lastName;
-    private String Dob;
+    private Date Dob;
+
+    private Date rentalPeriod;
+
+    private Integer rentPrice;
 
     @JsonSerialize
-    public List<AuthorityRoles> AuthorityRoles;
+    public Set<AuthorityRoles> Authorities;
 
 
     public String getUsername() {
@@ -52,11 +58,35 @@ public class TenantDTO {
         this.lastName = lastName;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return Dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         Dob = dob;
+    }
+
+    public Date getRentalPeriod() {
+        return rentalPeriod;
+    }
+
+    public void setRentalPeriod(Date rentalPeriod) {
+        this.rentalPeriod = rentalPeriod;
+    }
+
+    public Integer getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(Integer rentPrice) {
+        this.rentPrice = rentPrice;
+    }
+
+    public Set<AuthorityRoles> getAuthorities() {
+        return Authorities;
+    }
+
+    public void setAuthorities(Set<AuthorityRoles> authorities) {
+        Authorities = authorities;
     }
 }

@@ -54,6 +54,13 @@ public class PropertyController {
      return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}/investors")
+        public ResponseEntity<Object> assignPropertyToInvestor(@PathVariable("id") Long id,@PathVariable("investorId") String investorId){
+        propertyService.assignPropertyToInvestor(id,investorId);
+        return ResponseEntity.noContent().build();
+    }
+
+
     @PutMapping("/{id}/maintenance")
     public ResponseEntity<Object> assignMaintenanceProperties(@PathVariable ("id") Long id, @PathVariable("maintenanceId") Long maintenanceId)
     {

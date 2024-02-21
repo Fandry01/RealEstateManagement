@@ -22,7 +22,7 @@ public class Property {
     private Boolean rented;
     private String address;
 
-@ManyToOne
+@ManyToOne(fetch = FetchType.EAGER)
    Investor investor;
 
 @OneToOne
@@ -32,7 +32,6 @@ public class Property {
 Complaint complaint;
 
 @OneToMany(mappedBy = "property")
-@JsonIgnore
 Collection<Maintenance> maintenances;
 
 public Property(){
