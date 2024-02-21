@@ -1,5 +1,7 @@
 package com.example.realestatemanagment.Security;
 
+import com.example.realestatemanagment.Filter.JwtRequestFilter;
+import com.example.realestatemanagment.Service.CustomDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,22 +19,31 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-@Bean
-public PasswordEncoder passwordEncoder(){
+
+    private CustomDetailsService customDetailsService;
+    private JwtRequestFilter jwtRequestFilter;
+
+    public SecurityConfig(CustomDetailsService customDetailsService, JwtRequestFilter jwtRequestFilter) {
+        this.customDetailsService = customDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
 }
 
-@Bean
+    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception{
 
     var auth = new DaoAuthenticationProvider();
     auth.setPasswordEncoder(passwordEncoder);
-    auth.setUserDetailsService(customUserDetailsService);
+    auth.setUserDetailsService(customDetailsService);
 
     return new ProviderManager(auth);
 }
-
-protected SecurityFilterChain filter (HttpSecurity http) throws  Exception{
+    @Bean
+    protected SecurityFilterChain filter (HttpSecurity http) throws  Exception{
 
     http
             .csrf(csrf -> csrf.disable())

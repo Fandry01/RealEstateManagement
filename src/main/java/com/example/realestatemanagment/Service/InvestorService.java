@@ -33,8 +33,8 @@ public class InvestorService {
         return investorList;
     }
 
-    public InvestorDTO getInvestorById(Long id){
-        Optional<Investor> optionalInvestor = investorRepo.findById(id);
+    public InvestorDTO getInvestorById(String username){
+        Optional<Investor> optionalInvestor = investorRepo.findById(username);
         if(optionalInvestor.isPresent()){
             Investor investor = optionalInvestor.get();
 
@@ -43,6 +43,18 @@ public class InvestorService {
            throw new RecordNotFoundException("geen Gebruiker gevonden");
         }
 
+    }
+
+    public String createInvestor(InvestorDTO investorDTO){
+        Investor newInvestor = investorRepo.save(transferToInvestor(investorDTO));
+        return newInvestor.getUsername();
+    }
+
+    public void UpdateInvestor(String username, InvestorDTO investorDTO){
+        if(!investorRepo.existsById(username)) throw new RecordNotFoundException("investor not found");
+        Investor investor = investorRepo.findById(username).get();
+        investor.setPassword(investorDTO.getPassword());
+        investorRepo.save(investor);
     }
 
     public void deleteInvestor(String username){
@@ -60,7 +72,7 @@ public class InvestorService {
     public void addAuthority(String username, String authority){
         if(!investorRepo.existsById(username)) throw new UsernameNotFoundException(username);
         Investor investor = investorRepo.findById(username).get();
-        investor.addAuthority(new AuthorityRoles(username, authority));
+        investor.addAuthorityRoles(new AuthorityRoles(username, authority));
 
         investorRepo.save(investor);
     }
@@ -70,7 +82,7 @@ public class InvestorService {
         Investor investor = investorRepo.findById(username).get();
         AuthorityRoles authorityRemove = investor.getAuthorities().stream().filter(a -> a.getAuthorityRoles().equalsIgnoreCase(authority)).findAny().get();
 
-        investor.removeAuthority(authorityRemove);
+        investor.deleteAuthorityRoles(authorityRemove);
     }
 
 
@@ -83,8 +95,9 @@ public class InvestorService {
         dto.setPassword(investor.getPassword());
         dto.setAddress(investor.getAddress());
         dto.setDob(investor.getDob());
-        dto.setFirstName(investor.getFirstname());
-        dto.setLastname(investor.getLastname());
+        dto.setFirstName(investor.getFirstName());
+        dto.setLastname(investor.getLastName());
+        dto.setAuthorities(investor.getAuthorities());
 
         return dto;
     }
@@ -92,8 +105,10 @@ public class InvestorService {
     public Investor transferToInvestor(InvestorDTO dto){
         var investor = new Investor();
 
-        investor.setFirstname(dto.getFirstName());
-        investor.setLastname(dto.getLastname());
+        investor.setUsername(dto.getUsername());
+        investor.setPassword(dto.getPassword());
+        investor.setFirstName(dto.getFirstName());
+        investor.setLastName(dto.getLastname());
         investor.setAddress(dto.getAddress());
         investor.setDob(dto.getDob());
 

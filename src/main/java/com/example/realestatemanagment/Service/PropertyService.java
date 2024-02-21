@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Service;
 
 
+import com.example.realestatemanagment.Dto.ComplaintDTO;
 import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Property;
@@ -77,8 +78,12 @@ public class PropertyService {
     }
 
 
-    public static PropertyDTO transferToDTO(Property property){
+    public PropertyDTO transferToDTO(Property property){
         var dto = new PropertyDTO();
+
+        if(property.getComplaint().getId() != null){
+            dto.setComplaintDTO(complaintService.getComplaintsById(property.getComplaint().getId()));
+        }
 
         dto.setId(property.getId());
         dto.setAddress(property.getAddress());
@@ -91,6 +96,7 @@ public class PropertyService {
 
         return dto;
     }
+
 
     public Property transferToProperty(PropertyDTO dto){
         var property = new Property();

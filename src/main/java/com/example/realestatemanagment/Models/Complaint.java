@@ -18,7 +18,8 @@ public class Complaint {
     @OneToOne
     Tenant tenant;
 
-
+    @OneToOne
+    Property property;
     public Complaint(){
 
     }

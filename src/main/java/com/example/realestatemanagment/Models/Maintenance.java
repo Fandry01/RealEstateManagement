@@ -18,7 +18,7 @@ public class Maintenance {
     public Date MaintenanceDate;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Property property;
 
 

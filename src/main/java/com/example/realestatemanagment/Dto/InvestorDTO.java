@@ -13,14 +13,13 @@ public class InvestorDTO {
     @NotNull
     private String password;
     @NotNull
-    private String firstName;
+    private String firstname;
     @NotNull
     private String lastname;
     @NotNull
     private Date dob;
     @NotNull
     private String address;
-    @NotNull
     private PropertyDTO propertyDTO;
     @JsonSerialize
     private Set<AuthorityRoles> authorities;
@@ -29,13 +28,13 @@ public class InvestorDTO {
 
     }
 
-    public InvestorDTO(String username, String password, String firstName, String lastname, Date dob, String address, Set<AuthorityRoles> authorities){
+    public InvestorDTO(String username, String password, String firstname, String lastname, Date dob, String address, Set<AuthorityRoles> authorities){
         this.username = username;
         this.password = password;
         this.address = address;
         this.dob = dob;
         this.lastname = lastname;
-        this.firstName = firstName;
+        this.firstname = firstname;
 
         this.authorities = authorities;
     }
@@ -49,7 +48,7 @@ public class InvestorDTO {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstname = firstName;
     }
 
     public void setLastname(String lastname) {
@@ -69,7 +68,7 @@ public class InvestorDTO {
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
 
     public String getLastname() {

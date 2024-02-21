@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/maintenances")
 @RestController
 public class MaintenanceController {
     private final MaintenanceService maintenanceService;
@@ -17,28 +18,28 @@ public class MaintenanceController {
     }
 
 
-    @GetMapping("/maintenances")
+    @GetMapping
     public ResponseEntity <List<MaintenanceDTO>> getAllMaintenances(){
      List<MaintenanceDTO> maintenanceDTOS = maintenanceService.getAllMaintenance();
 
      return ResponseEntity.ok().body(maintenanceDTOS);
     }
 
-    @GetMapping("/maintenances/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<MaintenanceDTO> getMaintenanceById(@PathVariable("id") Long id){
         MaintenanceDTO maintenanceDTO = maintenanceService.getMaintenanceById(id);
 
         return ResponseEntity.ok().body(maintenanceDTO);
     }
 
-    @PostMapping("maintenances")
+    @PostMapping
     public ResponseEntity<Object> addMaintenance(@RequestBody MaintenanceDTO maintenanceDTO){
         MaintenanceDTO maintenanceDto = maintenanceService.addMaintenance(maintenanceDTO);
 
         return ResponseEntity.created(null).body(maintenanceDTO);
     }
 
-    @DeleteMapping("/maintenances/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteMaintenance(@PathVariable("id") Long id){
         maintenanceService.deleteMaintenance(id);
 

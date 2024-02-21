@@ -22,6 +22,7 @@ public class PropertyDTO {
     private String address;
 
     private MaintenanceDTO maintenanceDTO;
+    private ComplaintDTO complaintDTO;
     public PropertyDTO(){
 
     }
@@ -106,5 +107,13 @@ public class PropertyDTO {
 
     public void setMaintainanceDTO(MaintenanceDTO maintenanceDTO) {
         this.maintenanceDTO = maintenanceDTO;
+    }
+
+    public ComplaintDTO getComplaintDTO() {
+        return complaintDTO;
+    }
+
+    public void setComplaintDTO(ComplaintDTO complaintDTO) {
+        this.complaintDTO = complaintDTO;
     }
 }

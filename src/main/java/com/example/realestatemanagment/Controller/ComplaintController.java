@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("complaints")
 @RestController
 public class ComplaintController {
 
@@ -18,35 +19,35 @@ public class ComplaintController {
         this.complaintService = complaintService;
     }
 
-    @GetMapping("/complaints")
+    @GetMapping
     public ResponseEntity<List<ComplaintDTO>> getAllComplaints(){
         List<ComplaintDTO> complaintDTOS = complaintService.getAllComplaints();
 
         return ResponseEntity.ok().body(complaintDTOS);
     }
 
-    @GetMapping("/complaints/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ComplaintDTO> getComplaintsById(@PathVariable("id") Long id){
         ComplaintDTO complaintDTO = complaintService.getComplaintsById(id);
 
         return ResponseEntity.ok().body(complaintDTO);
     }
 
-    @PostMapping("/complaints")
+    @PostMapping
     public ResponseEntity<Object> addComplaint(@RequestBody ComplaintDTO complaintDTO){
         ComplaintDTO complaintD = complaintService.addComplaint(complaintDTO);
 
         return ResponseEntity.ok().body(complaintD);
     }
 
-    @PutMapping("/complaints/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Object> updateComplaint(@PathVariable Long id, ComplaintDTO complaintDTO){
         ComplaintDTO complaintD = complaintService.updateComplaint(id,complaintDTO);
 
         return ResponseEntity.ok().body(complaintD);
     }
 
-    @DeleteMapping("/complaints/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteComplaint(@PathVariable Long id){
         complaintService.deleteComplaint(id);
 

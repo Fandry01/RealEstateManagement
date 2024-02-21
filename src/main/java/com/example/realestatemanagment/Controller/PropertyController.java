@@ -6,17 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RequestMapping("/properties")
 @RestController
 public class PropertyController {
     private final PropertyService propertyService;
-
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
 
 
-    @GetMapping("/properties")
+    @GetMapping
     public ResponseEntity<List<PropertyDTO>> getAllProperties(){
         List<PropertyDTO> propDtos;
         propDtos = propertyService.getAllProperties();
@@ -24,7 +23,7 @@ public class PropertyController {
         return ResponseEntity.ok().body(propDtos);
     }
 
-    @GetMapping("/properties/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PropertyDTO> getProperty(@PathVariable("id")Long id){
         PropertyDTO propertyDTO = propertyService.getPropertyById(id);
 
@@ -37,25 +36,25 @@ public class PropertyController {
         return ResponseEntity.created(null).body(propDto);
     }
 
-    @DeleteMapping("/properties/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Long id){
         propertyService.deletePropertyById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/properties/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Object> updateProperty(@PathVariable Long id, PropertyDTO propertyDTO){
         PropertyDTO dto = propertyService.updateProperty(id,propertyDTO);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PutMapping("/properties/{id}/complaints")
+    @PutMapping("/{id}/complaints")
     public ResponseEntity<Object> assignComplaintToProperties(@PathVariable("id") Long id, @PathVariable("complaintId") Long complaintId){
      propertyService.assignComplaintToProperty(id,complaintId);
      return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/properties/{id}/maintenance")
+    @PutMapping("/{id}/maintenance")
     public ResponseEntity<Object> assignMaintenanceProperties(@PathVariable ("id") Long id, @PathVariable("maintenanceId") Long maintenanceId)
     {
        propertyService.assignMaintenanceToProperty(id,maintenanceId);

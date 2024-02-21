@@ -4,4 +4,8 @@ INSERT INTO properties (id, type, bought_price, current_price,build_year, square
 INSERT INTO maintenances (id,type_of_Maintenance, maintenance_date ) VALUES (1,'floorRepair', '2024-03-15'),
                                                                          (2,'refill heating system', '2024-03-20');
 
-INSERT INTO complaints (id, date_of_complaint, complaint_message) VALUES (1,'2024-03-20','floor heating not working');
+INSERT INTO complaints (id, date_of_complaint, complaint_message) VALUES (1,'2024-03-20','floor heating not working'),
+                                                                         (2,'2024-05-20','floor heating not working'),
+                                                                         (3,'2024-04-20','floor heating not working');
+
+UPDATE properties SET complaint_id = 1 WHERE id = 1;
