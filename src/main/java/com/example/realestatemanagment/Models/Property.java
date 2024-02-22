@@ -1,12 +1,11 @@
 package com.example.realestatemanagment.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
-import org.hibernate.annotations.LazyCollection;
+
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+
 
 @Entity
 @Table(name = "properties")

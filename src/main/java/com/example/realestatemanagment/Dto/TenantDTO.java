@@ -16,6 +16,7 @@ public class TenantDTO {
     private String firstName;
     @NotNull
     private String lastName;
+
     private Date Dob;
 
     private Date rentalPeriod;
@@ -23,7 +24,10 @@ public class TenantDTO {
     private Integer rentPrice;
 
     @JsonSerialize
-    public Set<AuthorityRoles> Authorities;
+    public Set<AuthorityRoles> authorities;
+
+    private ComplaintDTO complaintDTO;
+    private PropertyDTO propertyDTO;
 
 
     public String getUsername() {
@@ -83,10 +87,26 @@ public class TenantDTO {
     }
 
     public Set<AuthorityRoles> getAuthorities() {
-        return Authorities;
+        return authorities;
     }
 
     public void setAuthorities(Set<AuthorityRoles> authorities) {
-        Authorities = authorities;
+        authorities = authorities;
+    }
+
+    public ComplaintDTO getComplaintDTO() {
+        return complaintDTO;
+    }
+
+    public void setComplaintDTO(ComplaintDTO complaintDTO) {
+        this.complaintDTO = complaintDTO;
+    }
+
+    public PropertyDTO getPropertyDTO() {
+        return propertyDTO;
+    }
+
+    public void setPropertyDTO(PropertyDTO propertyDTO) {
+        this.propertyDTO = propertyDTO;
     }
 }

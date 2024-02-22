@@ -60,4 +60,12 @@ public class Complaint {
     public void setDateOfComplaint(Date dateOfComplaint) {
         this.dateOfComplaint = dateOfComplaint;
     }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
 }

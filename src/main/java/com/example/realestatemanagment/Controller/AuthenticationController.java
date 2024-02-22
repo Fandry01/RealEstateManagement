@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
 public class AuthenticationController {
 
@@ -33,7 +33,7 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(principal);
     }
 
-    @PostMapping(value = "/authenticate")
+    @PostMapping(value = "/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
         throws Exception{
         String username = authenticationRequest.getUsername();

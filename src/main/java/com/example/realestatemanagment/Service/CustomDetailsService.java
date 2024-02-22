@@ -2,6 +2,7 @@ package com.example.realestatemanagment.Service;
 
 
 import com.example.realestatemanagment.Dto.InvestorDTO;
+import com.example.realestatemanagment.Dto.UserDTO;
 import com.example.realestatemanagment.Models.AuthorityRoles;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,19 +16,20 @@ import java.util.Set;
 
 @Service
 public class CustomDetailsService  implements UserDetailsService {
-    private final InvestorService investorService;
+    private final UserService userService;
 
-    public CustomDetailsService(InvestorService investorService) {
-        this.investorService = investorService;
+    public CustomDetailsService(InvestorService investorService, UserService userService) {
+
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username){
-        InvestorDTO investorDTO = investorService.getInvestorById(username);
+        UserDTO userDTO = userService.getUser(username);
 
-        String password = investorDTO.getPassword();
+        String password = userDTO.getPassword();
 
-        Set<AuthorityRoles> authorities = investorDTO.getAuthorities();
+        Set<AuthorityRoles> authorities = userDTO.getAuthorities();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
         for(AuthorityRoles authorityRoles: authorities){

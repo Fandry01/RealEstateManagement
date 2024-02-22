@@ -116,4 +116,13 @@ public class PropertyDTO {
     public void setComplaintDTO(ComplaintDTO complaintDTO) {
         this.complaintDTO = complaintDTO;
     }
+
+    public MaintenanceDTO getMaintenanceDTO() {
+        return maintenanceDTO;
+    }
+
+    public void setMaintenanceDTO(MaintenanceDTO maintenanceDTO) {
+        this.maintenanceDTO = maintenanceDTO;
+    }
+
 }

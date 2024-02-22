@@ -1,44 +1,20 @@
-package com.example.realestatemanagment.Models;
+package com.example.realestatemanagment.Dto;
 
-import jakarta.persistence.*;
+import com.example.realestatemanagment.Models.AuthorityRoles;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.persistence.Column;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-
-@MappedSuperclass
-public class User {
-    @Id
+public class UserDTO {
     private String username;
-    @Column(nullable = false, length = 255)
     private String password;
-    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "date_of_birth")
     private Date Dob;
-    @OneToMany(
-            targetEntity = AuthorityRoles.class,
-            mappedBy = "username",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER)
-    private Set<AuthorityRoles> authorities = new HashSet<>();
-
-    public Set<AuthorityRoles> getRoles() {
-        return authorities;
-    }
-
-    public void addAuthorityRoles(AuthorityRoles authorityRoles) {
-        this.authorities.add(authorityRoles);
-    }
-
-    public void deleteAuthorityRoles(AuthorityRoles authorityRoles) {
-        this.authorities.remove(authorityRoles);
-    }
+    @JsonSerialize
+    public Set<AuthorityRoles> authorities;
 
     public String getUsername() {
         return username;

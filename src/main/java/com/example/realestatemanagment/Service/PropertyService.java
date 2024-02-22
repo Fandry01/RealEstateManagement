@@ -81,14 +81,25 @@ public class PropertyService {
         }
 
     }
+    public void updateCurrentPrice(PropertyDTO property) {
+        if (property.getBoughtPrice() != null) {
+            double increaseAmount = property.getBoughtPrice() * 0.03;
+            double newCurrentPrice = property.getBoughtPrice() + increaseAmount;
+            property.setCurrentPrice(newCurrentPrice);
+
+
+
+        }
+    }
 
 
     public PropertyDTO transferToDTO(Property property){
         var dto = new PropertyDTO();
 
-        if(property.getComplaint().getId() != null){
+        if(property.getComplaint() != null){
             dto.setComplaintDTO(complaintService.getComplaintsById(property.getComplaint().getId()));
         }
+
 
 
         dto.setId(property.getId());
@@ -145,7 +156,7 @@ public class PropertyService {
          property.setComplaint(complaint);
          propertyRepo.save(property);
      } else{
-        throw new RecordNotFoundException("");
+        throw new RecordNotFoundException("property or complaint not found");
      }
 
      }

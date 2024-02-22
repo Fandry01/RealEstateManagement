@@ -19,13 +19,17 @@ import java.util.Set;
 public class TenantService {
     private final TenantRepository tenantRepo;
     private final PropertyRepository propertyRepo;
+    private final PropertyService propertyService;
     private final ComplaintRepository complaintRepo;
+    private final ComplaintService complaintService;
 
 
-    public TenantService(TenantRepository tenantRepo, PropertyRepository propertyRepo, ComplaintRepository complaintRepo) {
+    public TenantService(TenantRepository tenantRepo, PropertyRepository propertyRepo, PropertyService propertyService, ComplaintRepository complaintRepo, ComplaintService complaintService) {
         this.tenantRepo = tenantRepo;
         this.propertyRepo = propertyRepo;
+        this.propertyService = propertyService;
         this.complaintRepo = complaintRepo;
+        this.complaintService = complaintService;
     }
 
 
@@ -118,8 +122,15 @@ public class TenantService {
 
 
 
-    public static TenantDTO transferToDTO(Tenant tenant){
+    public TenantDTO transferToDTO(Tenant tenant){
         var dto = new TenantDTO();
+
+        if(tenant.getComplaint() != null){
+            dto.setComplaintDTO(complaintService.getComplaintsById(tenant.getComplaint().getId()));
+        }
+        if(tenant.getProperty() != null){
+            dto.setPropertyDTO(propertyService.getPropertyById(tenant.getProperty().getId()));
+        }
 
         dto.setUsername(tenant.getUsername());
         dto.setPassword(tenant.getPassword());

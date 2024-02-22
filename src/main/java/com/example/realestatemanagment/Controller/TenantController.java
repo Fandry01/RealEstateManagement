@@ -15,7 +15,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/tenats")
+@RequestMapping(value = "/tenants")
 public class TenantController {
     private final TenantService tenantService;
 

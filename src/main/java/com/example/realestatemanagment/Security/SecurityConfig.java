@@ -4,6 +4,7 @@ import com.example.realestatemanagment.Filter.JwtRequestFilter;
 import com.example.realestatemanagment.Service.CustomDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -51,7 +52,11 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/**").permitAll()
+                    //.requestMatchers(HttpMethod.GET,"/maintenances").hasRole("ADMIN")
+                    //.requestMatchers(HttpMethod.POST,"/authenticate").permitAll()
+                    //.requestMatchers("/authenticate").permitAll()
                     .anyRequest().denyAll()
+
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
