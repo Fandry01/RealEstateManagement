@@ -9,7 +9,7 @@ INSERT INTO complaints (id, date_of_complaint, complaint_message) VALUES (1,'202
                                                                          (3,'2024-04-20','floor heating not working');
 
 INSERT INTO investors(username, password,first_name,last_name,date_of_birth,address) VALUES ('derrickRose', '$2a$12$Q8pV8rTv0yiCvIwR.NWgPuXBzFDpAJRrLKElOnI6twuwgUSQJ6c3q','derrick','rose','2000-12-12','rozengracht 12');
-INSERT INTO tenants(username,password,first_name,last_name,date_of_birth,rental_periode,rent_price) VALUES ('markMillions','$2a$12$LKNWAn404x9V2hwDTEPd.e18kx7yYM87iY5rnR8nkkH7NmycaIbca','mark','millions','1999-09-21','2025-10-1','1500');
+INSERT INTO tenants(username,password,first_name,last_name,date_of_birth,rental_periode,rent_price) VALUES ('markMillions','$2a$12$Q8pV8rTv0yiCvIwR.NWgPuXBzFDpAJRrLKElOnI6twuwgUSQJ6c3q','mark','millions','1999-09-21','2025-10-1','1500');
 INSERT INTO roles (username, authority_roles) VALUES ('derrickRose','ROLE_ADMIN');
 INSERT INTO roles (username, authority_roles) VALUES ('markMillions','ROLE_USER');
 

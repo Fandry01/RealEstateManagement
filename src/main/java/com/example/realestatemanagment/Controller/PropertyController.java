@@ -4,7 +4,9 @@ import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Service.PropertyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 @RequestMapping("/properties")
 @RestController
@@ -30,10 +32,16 @@ public class PropertyController {
         return ResponseEntity.ok().body(propertyDTO);
     }
 
-    @PostMapping("properties")
+    @PostMapping
     public ResponseEntity<Object> addProperty(@RequestBody PropertyDTO propertyDTO){
         PropertyDTO propDto = propertyService.addProperty(propertyDTO);
-        return ResponseEntity.created(null).body(propDto);
+
+        URI uri = URI.create(
+                ServletUriComponentsBuilder
+                        .fromCurrentRequest()
+                        .path("/" + propDto).toUriString());
+
+        return ResponseEntity.created(uri).body(propDto);
     }
 
     @DeleteMapping("/{id}")

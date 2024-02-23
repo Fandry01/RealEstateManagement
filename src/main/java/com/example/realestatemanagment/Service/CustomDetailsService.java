@@ -18,9 +18,11 @@ import java.util.Set;
 public class CustomDetailsService  implements UserDetailsService {
     private final UserService userService;
 
-    public CustomDetailsService(InvestorService investorService, UserService userService) {
+
+    public CustomDetailsService(UserService userService) {
 
         this.userService = userService;
+
     }
 
     @Override

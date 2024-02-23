@@ -6,7 +6,9 @@ import com.example.realestatemanagment.Service.ComplaintService;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RequestMapping("complaints")
@@ -37,7 +39,9 @@ public class ComplaintController {
     public ResponseEntity<Object> addComplaint(@RequestBody ComplaintDTO complaintDTO){
         ComplaintDTO complaintD = complaintService.addComplaint(complaintDTO);
 
-        return ResponseEntity.ok().body(complaintD);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/"+ complaintD).buildAndExpand(complaintD).toUri();
+
+        return ResponseEntity.created(location).body(complaintD);
     }
 
     @PutMapping("/{id}")

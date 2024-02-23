@@ -3,9 +3,12 @@ package com.example.realestatemanagment.Service;
 import com.example.realestatemanagment.Dto.UserDTO;
 import com.example.realestatemanagment.Exceptions.UsernameNotFoundException;
 import com.example.realestatemanagment.Models.AuthorityRoles;
+import com.example.realestatemanagment.Models.Investor;
+import com.example.realestatemanagment.Models.Tenant;
 import com.example.realestatemanagment.Models.User;
+import com.example.realestatemanagment.Repository.InvestorRepository;
+import com.example.realestatemanagment.Repository.TenantRepository;
 import com.example.realestatemanagment.Repository.UserRepository;
-import com.example.realestatemanagment.Utils.RandomStringGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,9 +19,12 @@ import java.util.Set;
 @Service
 public class UserService {
     private final UserRepository userRepo;
-
-    public UserService(UserRepository userRepo) {
+    private final InvestorRepository investorRepo;
+    private final TenantRepository tenantRepo;
+    public UserService(UserRepository userRepo, InvestorRepository investorRepo, TenantRepository tenantRepo) {
         this.userRepo = userRepo;
+        this.investorRepo = investorRepo;
+        this.tenantRepo = tenantRepo;
     }
 
     public List<UserDTO> getUsers(){
@@ -34,10 +40,14 @@ public class UserService {
 
     public UserDTO getUser(String username){
         UserDTO dto = new UserDTO();
-        Optional<User> user = userRepo.findById(username);
-        if(user.isPresent()){
-            dto = fromUser(user.get());
-        }else{
+        Optional<Tenant> tenant = tenantRepo.findById(username);
+        Optional<Investor> investor = investorRepo.findById(username);
+        if (tenant.isPresent()){
+            dto = fromUser(tenant.get());
+        }else if(investor.isPresent()){
+            dto = fromUser(investor.get());
+        }
+        else{
             throw new UsernameNotFoundException(username);
         }
         return dto;
