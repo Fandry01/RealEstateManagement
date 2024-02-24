@@ -70,21 +70,25 @@ class PropertyServiceTest {
     }
 
     @Test
-    public void ShouldReturnAProperty(){
+    public void shouldReturnAProperty(){
+        Property property = new Property(10L,"Appartement",15000.00,17000.00,1999,"150M2",true,"Holendrecht12");
 
-        //Arrange
-        when(propertyRepo.findById(anyLong())).thenReturn(Optional.of(property1));
-        //Act
+        when(propertyRepo.findById(anyLong())).thenReturn((Optional.of(property)));
+
         PropertyDTO propertyDTO = propertyService.getPropertyById(10L);
-        assertEquals("Appartement", propertyDTO.getType());
-        assertEquals(15000.00, propertyDTO.getBoughtPrice());
-        assertEquals(17000.00, propertyDTO.getCurrentPrice());
-        assertEquals(1999, propertyDTO.getBuildYear());
-        assertEquals("150M2", propertyDTO.getSquareFeet());
-        assertEquals(true, propertyDTO.getRented());
-        assertEquals("Holendrecht12", propertyDTO.getAddress());
 
+        assertEquals("Appartement",propertyDTO.getType());
+        assertEquals(15000.00,propertyDTO.getBoughtPrice());
+        assertEquals(17000.00,propertyDTO.getCurrentPrice());
+        assertEquals(1999,propertyDTO.getBuildYear());
+        assertEquals("150M2",propertyDTO.getSquareFeet());
+        assertEquals(true,propertyDTO.getRented());
+        assertEquals("Holendrecht12",propertyDTO.getAddress());
     }
+
+
+
+
     @Test
     public void shouldSaveAProperty(){
         when(propertyRepo.save(property1)).thenReturn((property1));
