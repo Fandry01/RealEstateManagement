@@ -4,6 +4,7 @@ package com.example.realestatemanagment.Models;
 import com.sun.tools.javac.Main;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -15,7 +16,7 @@ public class Maintenance {
     @Column(name = "type_of_maintenance")
     public String typeOfMaintenance;
     @Column(name = "maintenance_date")
-    public Date MaintenanceDate;
+    public LocalDate MaintenanceDate;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,7 +27,7 @@ public class Maintenance {
 
     }
 
-    public Maintenance(Long id, String typeOfMaintenance, Date maintenanceDate){
+    public Maintenance(Long id, String typeOfMaintenance, LocalDate maintenanceDate){
         this.id = id;
         this.MaintenanceDate = maintenanceDate;
         this.typeOfMaintenance = typeOfMaintenance;
@@ -44,7 +45,7 @@ public class Maintenance {
         return id;
     }
 
-    public Date getMaintenanceDate() {
+    public LocalDate getMaintenanceDate() {
         return MaintenanceDate;
     }
 
@@ -52,7 +53,7 @@ public class Maintenance {
         return typeOfMaintenance;
     }
 
-    public void setMaintenanceDate(Date maintenanceDate) {
+    public void setMaintenanceDate(LocalDate maintenanceDate) {
         MaintenanceDate = maintenanceDate;
     }
 

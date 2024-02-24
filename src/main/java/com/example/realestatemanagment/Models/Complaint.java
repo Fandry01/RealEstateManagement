@@ -2,6 +2,7 @@ package com.example.realestatemanagment.Models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -11,7 +12,7 @@ public class Complaint {
     @GeneratedValue
     private Long id;
     @Column(name = "date_of_complaint")
-    private Date dateOfComplaint;
+    private LocalDate dateOfComplaint;
     @Column(name = "complaint_message")
     private String complaintMessage;
 
@@ -23,7 +24,7 @@ public class Complaint {
     public Complaint(){
 
     }
-    public Complaint(Long id, Date dateOfComplaint, String complaintMessage){
+    public Complaint(Long id, LocalDate dateOfComplaint, String complaintMessage){
         this.id = id;
         this.complaintMessage = complaintMessage;
         this.dateOfComplaint = dateOfComplaint;
@@ -37,7 +38,7 @@ public class Complaint {
         return tenant;
     }
 
-    public Date getDateOfComplaint() {
+    public LocalDate getDateOfComplaint() {
         return dateOfComplaint;
     }
 
@@ -57,7 +58,7 @@ public class Complaint {
         this.complaintMessage = complaintMessage;
     }
 
-    public void setDateOfComplaint(Date dateOfComplaint) {
+    public void setDateOfComplaint(LocalDate dateOfComplaint) {
         this.dateOfComplaint = dateOfComplaint;
     }
 

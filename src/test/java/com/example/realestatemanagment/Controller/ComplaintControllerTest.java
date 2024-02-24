@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
@@ -39,8 +41,11 @@ class ComplaintControllerTest {
     void shouldReturnComplaint() throws Exception{
         ComplaintDTO dto = new ComplaintDTO();
         dto.setComplaintMessage("heater broken");
-        dto.setDateOfComplaint(new Date(2024-10-10));
+        dto.setDateOfComplaint(LocalDate.of(2024,10,10));
         dto.setId(123L);
+
+        System.out.println(LocalDate.of(2024,10,10));
+
 
         Mockito.when(complaintService.getComplaintsById(anyLong())).thenReturn(dto);
 
@@ -52,6 +57,7 @@ class ComplaintControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.dateOfComplaint",is("2024-10-10")));
 
     }
+
 
 
 }

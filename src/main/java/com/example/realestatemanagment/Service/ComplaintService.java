@@ -44,7 +44,7 @@ private final ComplaintRepository complaintRepo;
         Complaint complaint = transferToComplaint(complaintDTO);
         complaintRepo.save(complaint);
 
-        return  transferToDTO(complaint);
+        return transferToDTO(complaint);
     }
 
     public void deleteComplaint(Long id){
@@ -80,8 +80,8 @@ private final ComplaintRepository complaintRepo;
     public Complaint transferToComplaint(ComplaintDTO complaintDTO){
         var complaint = new Complaint();
 
-        complaint.getComplaintMessage();
-        complaint.getDateOfComplaint();
+        complaint.setComplaintMessage(complaintDTO.getComplaintMessage());
+        complaint.setDateOfComplaint(complaintDTO.getDateOfComplaint());
 
         return complaint;
     }

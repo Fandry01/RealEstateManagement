@@ -29,6 +29,8 @@ public class Property {
 
 @OneToOne
 Complaint complaint;
+@OneToOne(mappedBy = "property")
+private ImageData imageData;
 
 @OneToMany(mappedBy = "property")
 Collection<Maintenance> maintenances;
@@ -143,6 +145,13 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, In
         this.complaint = complaint;
     }
 
+    public ImageData getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(ImageData imageData) {
+        this.imageData = imageData;
+    }
 }
 
 

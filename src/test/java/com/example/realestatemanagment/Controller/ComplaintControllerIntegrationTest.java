@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -26,7 +27,7 @@ class ComplaintControllerIntegrationTest {
     void ShouldCreateComplaint() throws Exception{
         String requestJson = """
                 {
-                "dateOfComplaint": '2024-10-10',
+                "dateOfComplaint": "2024-10-10",
                 "complaintMessage": "heaterbroken"
                 }
                 """;
@@ -37,11 +38,15 @@ class ComplaintControllerIntegrationTest {
                         .content(requestJson))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(jsonPath("id").value(1))
+                .andExpect(jsonPath("dateOfComplaint").value("2024-10-10"))
+                .andExpect(jsonPath("complaintMessage").value("heaterbroken"))
+
                 .andReturn();
 
-        String createdId = result.getResponse().getContentAsString();
 
-        assertThat(result.getResponse().getHeader("Location"), matchesPattern("^.*/complaints/"+ createdId));
+
+        assertThat(result.getResponse().getHeader("Location"), matchesPattern("^.*/complaints/"+ 1));
 
     }
 

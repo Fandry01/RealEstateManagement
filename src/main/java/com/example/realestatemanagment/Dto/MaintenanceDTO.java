@@ -3,6 +3,7 @@ package com.example.realestatemanagment.Dto;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MaintenanceDTO {
@@ -11,7 +12,7 @@ public class MaintenanceDTO {
     private String typeOfMaintenance;
     @NotNull
     @Future
-    private Date maintenanceDate;
+    private LocalDate maintenanceDate;
 
     public MaintenanceDTO()
     {
@@ -22,11 +23,11 @@ public class MaintenanceDTO {
         this.typeOfMaintenance = typeOfMaintenance;
     }
 
-    public void setMaintenanceDate(Date maintenanceDate) {
+    public void setMaintenanceDate(LocalDate maintenanceDate) {
         this.maintenanceDate = maintenanceDate;
     }
 
-    public Date getMaintenanceDate() {
+    public LocalDate getMaintenanceDate() {
         return maintenanceDate;
     }
 

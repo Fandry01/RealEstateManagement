@@ -39,7 +39,7 @@ public class ComplaintController {
     public ResponseEntity<Object> addComplaint(@RequestBody ComplaintDTO complaintDTO){
         ComplaintDTO complaintD = complaintService.addComplaint(complaintDTO);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/"+ complaintD).buildAndExpand(complaintD).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/"+ complaintD.getId()).buildAndExpand(complaintD.getId()).toUri();
 
         return ResponseEntity.created(location).body(complaintD);
     }

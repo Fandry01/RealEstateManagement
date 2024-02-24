@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -30,15 +31,18 @@ class ComplaintServiceTest {
     @Test
     public void shouldReturnAnComplaint(){
         // Arrange
-            Complaint complaint = new Complaint(10L,new Date(2024-12-12),"Broken heater");
+            Complaint complaint = new Complaint(10L,LocalDate.of(2024,12,12),"Broken heater");
 
             when(repos.findById(anyLong())).thenReturn(Optional.of(complaint));
         // Act
             ComplaintDTO complaintDTO = service.getComplaintsById(10L);
         // Assert
             assertEquals("Broken heater",complaintDTO.getComplaintMessage());
-            assertEquals(new Date(2024-12-12),complaintDTO.getDateOfComplaint());
+            assertEquals( LocalDate.of(2024,12,12),complaintDTO.getDateOfComplaint());
 
     }
+
+
+
 
 }

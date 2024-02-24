@@ -3,13 +3,14 @@ package com.example.realestatemanagment.Dto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ComplaintDTO {
     private Long id;
     @NotNull
     @PastOrPresent
-    private Date dateOfComplaint;
+    private LocalDate dateOfComplaint;
     @NotNull
     private String complaintMessage;
 
@@ -19,13 +20,13 @@ public class ComplaintDTO {
 
     }
 
-    public ComplaintDTO(Long id, Date dateOfComplaint, String complaintMessage){
+    public ComplaintDTO(Long id, LocalDate dateOfComplaint, String complaintMessage){
         this.complaintMessage = complaintMessage;
         this.dateOfComplaint = dateOfComplaint;
         this.id = id;
     }
 
-    public void setDateOfComplaint(Date dateOfComplaint) {
+    public void setDateOfComplaint(LocalDate dateOfComplaint) {
         this.dateOfComplaint = dateOfComplaint;
     }
 
@@ -41,7 +42,7 @@ public class ComplaintDTO {
         this.id = id;
     }
 
-    public Date getDateOfComplaint() {
+    public LocalDate getDateOfComplaint() {
         return dateOfComplaint;
     }
 
