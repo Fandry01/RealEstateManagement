@@ -1,22 +1,32 @@
 package com.example.realestatemanagment.Dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 public class PropertyDTO {
     private Long id;
+    @NotNull
     private String type;
+    @NotNull
     private Double boughtPrice;
+    @NotNull
     private Double currentPrice;
-    private Date buildYear;
+    @NotNull
+    private Integer buildYear;
+    @NotNull
     private String squareFeet;
+    @NotNull
     private Boolean rented;
+    @NotNull
     private String address;
 
-    private MaintainanceDTO maintainanceDTO;
+    private MaintenanceDTO maintenanceDTO;
+    private ComplaintDTO complaintDTO;
     public PropertyDTO(){
 
     }
-    public PropertyDTO(Long id, String type, Double boughtPrice, Double currentPrice,Date buildYear, String squareFeet, Boolean rented,String address){
+    public PropertyDTO(Long id, String type, Double boughtPrice, Double currentPrice,Integer buildYear, String squareFeet, Boolean rented,String address){
         this.id = id;
         this.type = type;
         this.boughtPrice = boughtPrice;
@@ -43,7 +53,7 @@ public class PropertyDTO {
         this.boughtPrice = boughtPrice;
     }
 
-    public void setBuildYear(Date buildYear) {
+    public void setBuildYear(Integer buildYear) {
         this.buildYear = buildYear;
     }
 
@@ -75,7 +85,7 @@ public class PropertyDTO {
         return rented;
     }
 
-    public Date getBuildYear() {
+    public Integer getBuildYear() {
         return buildYear;
     }
 
@@ -91,11 +101,28 @@ public class PropertyDTO {
         return squareFeet;
     }
 
-    public MaintainanceDTO getMaintainanceDTO() {
-        return maintainanceDTO;
+    public MaintenanceDTO getMaintainanceDTO() {
+        return maintenanceDTO;
     }
 
-    public void setMaintainanceDTO(MaintainanceDTO maintainanceDTO) {
-        this.maintainanceDTO = maintainanceDTO;
+    public void setMaintainanceDTO(MaintenanceDTO maintenanceDTO) {
+        this.maintenanceDTO = maintenanceDTO;
     }
+
+    public ComplaintDTO getComplaintDTO() {
+        return complaintDTO;
+    }
+
+    public void setComplaintDTO(ComplaintDTO complaintDTO) {
+        this.complaintDTO = complaintDTO;
+    }
+
+    public MaintenanceDTO getMaintenanceDTO() {
+        return maintenanceDTO;
+    }
+
+    public void setMaintenanceDTO(MaintenanceDTO maintenanceDTO) {
+        this.maintenanceDTO = maintenanceDTO;
+    }
+
 }

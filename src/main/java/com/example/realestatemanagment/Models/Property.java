@@ -1,14 +1,15 @@
 package com.example.realestatemanagment.Models;
 
+
 import jakarta.persistence.*;
-import org.hibernate.annotations.LazyCollection;
+
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
+
 @Entity
-@Table(name = "Properties")
+@Table(name = "properties")
 public class Property {
     @Id
     @GeneratedValue
@@ -16,23 +17,30 @@ public class Property {
     private String type;
     private Double boughtPrice;
     private Double currentPrice;
-    private Date buildYear;
+    private Integer buildYear;
     private String squareFeet;
     private Boolean rented;
     private String address;
 
-@OneToOne(mappedBy = "investor")
+@ManyToOne(fetch = FetchType.EAGER)
    Investor investor;
 
-@OneToOne(mappedBy = "tenant")
+@OneToOne
     Tenant tenant;
 
+@OneToOne
+Complaint complaint;
+@OneToOne(mappedBy = "property")
+private ImageData imageData;
+
+@OneToMany(mappedBy = "property")
+List<Maintenance> maintenances;
 
 public Property(){
 
 }
 
-public Property(Long id,String type, Double boughtPrice, Double currentPrice, Date buildYear, String squareFeet, Boolean rented, String address ){
+public Property(Long id,String type, Double boughtPrice, Double currentPrice, Integer buildYear, String squareFeet, Boolean rented, String address ){
  this.id = id;
  this.address = address;
  this.squareFeet = squareFeet;
@@ -59,7 +67,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
         return rented;
     }
 
-    public Date getBuildYear() {
+    public Integer getBuildYear() {
         return buildYear;
     }
 
@@ -75,6 +83,18 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
         return id;
     }
 
+    public void setMaintenances(List<Maintenance> maintenances) {
+        this.maintenances = maintenances;
+    }
+
+    public void setInvestor(Investor investor) {
+        this.investor = investor;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     public void setSquareFeet(String squareFeet) {
         this.squareFeet = squareFeet;
     }
@@ -87,7 +107,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
         this.currentPrice = currentPrice;
     }
 
-    public void setBuildYear(Date buildYear) {
+    public void setBuildYear(Integer buildYear) {
         this.buildYear = buildYear;
     }
 
@@ -111,8 +131,27 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, Da
         return tenant;
     }
 
+    public List<Maintenance> getMaintenances() {
+        return maintenances;
+    }
+
     public void setType(String type) {
         this.type = type;
+    }
+    public Complaint getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
+    }
+
+    public ImageData getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(ImageData imageData) {
+        this.imageData = imageData;
     }
 }
 
