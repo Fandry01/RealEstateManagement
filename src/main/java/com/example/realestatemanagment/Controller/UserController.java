@@ -46,7 +46,7 @@ public class UserController {
 
         return ResponseEntity.created(location).build();
     }
-    @PostMapping
+    @PostMapping("/tenants")
     public ResponseEntity<TenantDTO> createTenant(@RequestBody TenantDTO tenantDTO){
         String  newUsername = tenantService.createTenant(tenantDTO);
         tenantService.addAuthority(newUsername,"ROLE_USER");

@@ -175,15 +175,15 @@ class PropertyServiceTest {
         when(propertyRepo.findById(propertyId)).thenReturn(Optional.of(property));
         when(investorRepo.findById(investorId)).thenReturn(Optional.of(investor));
 
-        // Call the method
+
         propertyService.assignPropertyToInvestor(propertyId, investorId);
 
-        // Verify interactions
+
         verify(propertyRepo, times(1)).findById(propertyId);
         verify(investorRepo, times(1)).findById(investorId);
         verify(propertyRepo, times(1)).save(property);
 
-        // Assert that the investor is assigned to the property
+
         assertEquals(investor, property.getInvestor());
     }
 
@@ -212,16 +212,16 @@ class PropertyServiceTest {
 
     @Test
     public void shouldThrowRecordNotFoundExceptionWhenPropertyOrComplaintNotFound() {
-        // Configure behavior of repositories to return empty optionals
+
         when(propertyRepo.findById(anyLong())).thenReturn(Optional.empty());
         when(complaintRepo.findById(anyLong())).thenReturn(Optional.empty());
 
-        // Call the method to be tested and verify that it throws RecordNotFoundException
+
         assertThrows(RecordNotFoundException.class, () -> {
             propertyService.assignComplaintToProperty(1L, 1L);
         });
 
-        // Verify that save method is not called when either property or complaint is not found
+
         verify(propertyRepo, never()).save(any());
     }
 
