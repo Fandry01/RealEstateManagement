@@ -6,6 +6,8 @@ import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Models.Tenant;
 import com.example.realestatemanagment.Service.TenantService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,20 +34,14 @@ public class TenantController {
 
     @GetMapping(value ="/{username}")
     public ResponseEntity<TenantDTO> getTenant(@PathVariable("username") String username){
+        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //String username1 = authentication.getName(); // Get username from authentication
         TenantDTO optionalTenant = tenantService.getTenantByUsername(username);
 
         return ResponseEntity.ok().body(optionalTenant);
     }
 
-    @PostMapping
-    public ResponseEntity<TenantDTO> createTenant(@RequestBody TenantDTO tenantDTO){
-        String  newUsername = tenantService.createTenant(tenantDTO);
-        tenantService.addAuthority(newUsername,"ROLE_USER");
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username").buildAndExpand(newUsername).toUri();
-
-        return ResponseEntity.created(location).build();
-    }
 
     @PutMapping(value = "/{username}")
     public ResponseEntity<TenantDTO> updateTenant(@PathVariable("username") String username,@RequestBody TenantDTO dto){

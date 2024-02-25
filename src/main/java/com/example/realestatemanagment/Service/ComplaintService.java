@@ -77,7 +77,7 @@ private final ComplaintRepository complaintRepo;
         return dto;
     }
 
-    public Complaint transferToComplaint(ComplaintDTO complaintDTO){
+    public static Complaint transferToComplaint(ComplaintDTO complaintDTO){
         var complaint = new Complaint();
 
         complaint.setComplaintMessage(complaintDTO.getComplaintMessage());

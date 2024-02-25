@@ -16,11 +16,11 @@ public class Complaint {
     @Column(name = "complaint_message")
     private String complaintMessage;
 
-    @OneToOne
-    Tenant tenant;
+        @OneToOne
+        Tenant tenant;
 
-    @OneToOne
-    Property property;
+        @OneToOne
+        Property property;
     public Complaint(){
 
     }

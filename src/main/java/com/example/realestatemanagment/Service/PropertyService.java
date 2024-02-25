@@ -81,17 +81,6 @@ public class PropertyService {
         }
 
     }
-    public void updateCurrentPrice(PropertyDTO property) {
-        if (property.getBoughtPrice() != null) {
-            double increaseAmount = property.getBoughtPrice() * 0.03;
-            double newCurrentPrice = property.getBoughtPrice() + increaseAmount;
-            property.setCurrentPrice(newCurrentPrice);
-
-
-
-        }
-    }
-
 
     public PropertyDTO transferToDTO(Property property){
         var dto = new PropertyDTO();

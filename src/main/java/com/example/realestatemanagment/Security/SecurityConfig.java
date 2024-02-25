@@ -50,12 +50,16 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .httpBasic(basic -> basic.disable())
             .cors(Customizer.withDefaults())
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/**").permitAll()
+            .authorizeHttpRequests(authorize -> authorize
+                            .requestMatchers("/tenants/**", "/investors/**").authenticated()
+                            .anyRequest().permitAll()
+            //.authorizeHttpRequests(auth -> auth
+
+                    //.requestMatchers("/**").permitAll()
                     //.requestMatchers(HttpMethod.GET,"/maintenances").hasRole("ADMIN")
                     //.requestMatchers(HttpMethod.POST,"/authenticate").permitAll()
                     //.requestMatchers("/authenticate").permitAll()
-                    .anyRequest().denyAll()
+                    //.anyRequest().denyAll()
 
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

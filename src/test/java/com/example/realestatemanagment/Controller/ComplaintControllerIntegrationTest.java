@@ -1,5 +1,8 @@
 package com.example.realestatemanagment.Controller;
 
+import com.example.realestatemanagment.Models.Complaint;
+import com.example.realestatemanagment.Repository.ComplaintRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,10 +14,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -22,6 +29,15 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 class ComplaintControllerIntegrationTest {
     @Autowired
     MockMvc mockMvc;
+    @Autowired
+    private ComplaintRepository complaintRepo;
+
+    Complaint complaint1;
+    @BeforeEach
+    public void setUp(){
+        complaint1 = new Complaint(1L, LocalDate.of(2024,03,03),"no hot water");
+        complaintRepo.save(complaint1);
+    }
 
     @Test
     void ShouldCreateComplaint() throws Exception{
@@ -37,7 +53,7 @@ class ComplaintControllerIntegrationTest {
                         .contentType(APPLICATION_JSON)
                         .content(requestJson))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").value(1))
                 .andExpect(jsonPath("dateOfComplaint").value("2024-10-10"))
                 .andExpect(jsonPath("complaintMessage").value("heaterbroken"))
@@ -49,5 +65,15 @@ class ComplaintControllerIntegrationTest {
         assertThat(result.getResponse().getHeader("Location"), matchesPattern("^.*/complaints/"+ 1));
 
     }
+
+    @Test
+    public void shouldReturnComplaintById() throws Exception {
+        mockMvc.perform(get("/complaints/" + complaint1.getId().longValue())).
+                andExpect(status().isOk())
+                .andExpect(jsonPath("id").value(complaint1.getId().longValue()))
+                .andExpect(jsonPath("dateOfComplaint").value("2024-03-03"))
+                .andExpect(jsonPath("complaintMessage").value("no hot water"));
+    }
+
 
 }

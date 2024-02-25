@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -33,7 +34,7 @@ Complaint complaint;
 private ImageData imageData;
 
 @OneToMany(mappedBy = "property")
-Collection<Maintenance> maintenances;
+List<Maintenance> maintenances;
 
 public Property(){
 
@@ -82,7 +83,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, In
         return id;
     }
 
-    public void setMaintenances(Collection<Maintenance> maintenances) {
+    public void setMaintenances(List<Maintenance> maintenances) {
         this.maintenances = maintenances;
     }
 
@@ -130,7 +131,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, In
         return tenant;
     }
 
-    public Collection<Maintenance> getMaintenances() {
+    public List<Maintenance> getMaintenances() {
         return maintenances;
     }
 

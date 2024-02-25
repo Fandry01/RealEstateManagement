@@ -7,6 +7,7 @@ import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.example.realestatemanagment.Models.Investor;
 import com.example.realestatemanagment.Repository.InvestorRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ import java.util.Set;
 public class InvestorService {
     private final InvestorRepository investorRepo;
     private final PropertyRepository propertyRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public InvestorService(InvestorRepository investorRepo, PropertyRepository propertyRepo) {
+    public InvestorService(InvestorRepository investorRepo, PropertyRepository propertyRepo, PasswordEncoder passwordEncoder) {
         this.investorRepo = investorRepo;
         this.propertyRepo = propertyRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<InvestorDTO> getALlInvestors(){
@@ -106,7 +109,7 @@ public class InvestorService {
         var investor = new Investor();
 
         investor.setUsername(dto.getUsername());
-        investor.setPassword(dto.getPassword());
+        investor.setPassword(passwordEncoder.encode(dto.getPassword()));
         investor.setFirstName(dto.getFirstName());
         investor.setLastName(dto.getLastname());
         investor.setAddress(dto.getAddress());

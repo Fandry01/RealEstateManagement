@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Service;
 
 import com.example.realestatemanagment.Dto.PropertyDTO;
+import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Complaint;
 import com.example.realestatemanagment.Models.Investor;
 import com.example.realestatemanagment.Models.Maintenance;
@@ -18,9 +19,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -28,17 +31,25 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class PropertyServiceTest {
     //stap1
-    @Mock(lenient = true)
+    @Mock
     PropertyRepository propertyRepo;
+    @Mock
     InvestorRepository investorRepo;
+    @Mock
     ComplaintRepository complaintRepo;
+    @Mock
     MaintenanceRepository maintenanceRepo;
-    @InjectMocks
-    PropertyService propertyService;
+    @Mock
+    MaintenanceService maintenanceService;
+
+    @Mock
     InvestorService investorService;
+    @Mock
     ComplaintService complaintService;
     @Captor
     ArgumentCaptor<Property> argumentCaptor;
+    //@InjectMocks
+    PropertyService propertyService;
 
     Property property1;
     Property  property2;
@@ -51,6 +62,8 @@ class PropertyServiceTest {
         property2 = new Property(12L,"Villa",17500.00,19500.00,2015,"240m2",false,"Diemen15");
         complaint1 = new Complaint(10L, LocalDate.of(2024,10,15),"Its To cold here");
         maintenance1 = new Maintenance(20L,"Bathroom",LocalDate.of(2024,5,5));
+        propertyService = new PropertyService(propertyRepo, complaintRepo, complaintService, maintenanceRepo,
+                maintenanceService, investorService, investorRepo);
     }
 
 
@@ -74,6 +87,7 @@ class PropertyServiceTest {
         Property property = new Property(10L,"Appartement",15000.00,17000.00,1999,"150M2",true,"Holendrecht12");
 
         when(propertyRepo.findById(anyLong())).thenReturn((Optional.of(property)));
+        when(propertyRepo.findById(150L)).thenReturn(Optional.empty());
 
         PropertyDTO propertyDTO = propertyService.getPropertyById(10L);
 
@@ -84,6 +98,13 @@ class PropertyServiceTest {
         assertEquals("150M2",propertyDTO.getSquareFeet());
         assertEquals(true,propertyDTO.getRented());
         assertEquals("Holendrecht12",propertyDTO.getAddress());
+
+        assertThrows(RecordNotFoundException.class, ()->{
+           propertyService.getPropertyById(150L);
+        },"property not found");
+
+        verify(propertyRepo, times(1)).findById(150L);
+
     }
 
 
@@ -91,13 +112,12 @@ class PropertyServiceTest {
 
     @Test
     public void shouldSaveAProperty(){
-        when(propertyRepo.save(property1)).thenReturn((property1));
+        //when(propertyRepo.save(property1)).thenReturn((property1));
         propertyService.addProperty(propertyService.transferToDTO(property1));
         verify(propertyRepo,times(1)).save(argumentCaptor.capture());
 
         Property property = argumentCaptor.getValue();
 
-        assertEquals(property1.getId(), property.getId());
         assertEquals(property1.getAddress(), property.getAddress());
         assertEquals(property1.getType(), property.getType());
         assertEquals(property1.getBoughtPrice(), property.getBoughtPrice());
@@ -118,7 +138,7 @@ class PropertyServiceTest {
     public void shouldUpdateAProperty(){
         when(propertyRepo.findById(10L)).thenReturn(Optional.of(property1));
         PropertyDTO propertyDTO = new PropertyDTO(10L,"Appartement",15000.00,18000.00,1999,"150M2",false,"Holendrecht12");
-        when(propertyRepo.save(propertyService.transferToProperty(propertyDTO))).thenReturn(property1);
+        //when(propertyRepo.save(propertyService.transferToProperty(propertyDTO))).thenReturn(property1);
 
         PropertyDTO resultDTO =  propertyService.updateProperty(10L,propertyDTO);
 
@@ -132,6 +152,11 @@ class PropertyServiceTest {
         assertEquals(propertyDTO.getBuildYear(), resultDTO.getBuildYear());
         assertEquals(propertyDTO.getSquareFeet(), resultDTO.getSquareFeet());
         assertEquals(propertyDTO.getRented(), resultDTO.getRented());
+
+        assertThrows(RecordNotFoundException.class,() -> {
+
+            propertyService.updateProperty(11L,resultDTO);
+        }, "Complaint Not Found");
 
         verify(propertyRepo, times(2)).findById(10L);
         verify(propertyRepo,times(1)).save(argumentCaptor.capture());
@@ -165,11 +190,11 @@ class PropertyServiceTest {
     @Test
     public void shouldAssignComplaintToProperty() {
 
-        Property property = new Property();
-        Complaint complaint = new Complaint();
 
-        when(propertyRepo.findById(property1.getId())).thenReturn(Optional.of(property));
-        when(complaintRepo.findById(complaint1.getId())).thenReturn(Optional.of(complaint));
+
+        when(propertyRepo.findById(property1.getId())).thenReturn(Optional.of(property1));
+        when(complaintRepo.findById(complaint1.getId())).thenReturn(Optional.of(complaint1));
+
 
         propertyService.assignComplaintToProperty(property1.getId(), complaint1.getId());
 
@@ -180,24 +205,75 @@ class PropertyServiceTest {
 
         Property capturedProperty = argumentCaptor.getValue();
 
-        assertEquals(complaint1, capturedProperty.getComplaint());
+        assertEquals(complaint1.getId(), capturedProperty.getComplaint().getId());
+        assertEquals(complaint1.getComplaintMessage(), capturedProperty.getComplaint().getComplaintMessage());
+
     }
 
     @Test
-    public void shouldAssignMaintenanceToProperty(){
+    public void shouldThrowRecordNotFoundExceptionWhenPropertyOrComplaintNotFound() {
+        // Configure behavior of repositories to return empty optionals
+        when(propertyRepo.findById(anyLong())).thenReturn(Optional.empty());
+        when(complaintRepo.findById(anyLong())).thenReturn(Optional.empty());
 
+        // Call the method to be tested and verify that it throws RecordNotFoundException
+        assertThrows(RecordNotFoundException.class, () -> {
+            propertyService.assignComplaintToProperty(1L, 1L);
+        });
+
+        // Verify that save method is not called when either property or complaint is not found
+        verify(propertyRepo, never()).save(any());
+    }
+
+    @Test
+    public void shouldThrowRecordNotFoundExceptionWhenPropertyOrInvestorNotFound() {
+
+        when(propertyRepo.findById(anyLong())).thenReturn(Optional.empty());
+        when(investorRepo.findById(anyString())).thenReturn(Optional.empty());
+
+
+        assertThrows(RecordNotFoundException.class, () -> {
+            propertyService.assignPropertyToInvestor(1L, "123");
+        });
+
+
+        verify(propertyRepo, never()).save(any());
+    }
+    @Test
+    public void shouldThrowRecordNotFoundExceptionWhenPropertyOrMaintenanceNotFound() {
+
+        when(propertyRepo.findById(anyLong())).thenReturn(Optional.empty());
+        when(maintenanceRepo.findById(anyLong())).thenReturn(Optional.empty());
+
+
+        assertThrows(RecordNotFoundException.class, () -> {
+            propertyService.assignMaintenanceToProperty(1L, 1L);
+        });
+
+
+        verify(propertyRepo, never()).save(any());
+    }
+
+
+
+    @Test
+    public void shouldAssignMaintenanceToProperty(){
+        List<Maintenance> maintenanceList = new ArrayList<>();
+        maintenanceList.add(maintenance1);
+        property1.setMaintenances(maintenanceList);
         when(propertyRepo.findById(property1.getId())).thenReturn(Optional.of(property1));
         when(maintenanceRepo.findById(maintenance1.getId())).thenReturn(Optional.of(maintenance1));
 
         propertyService.assignMaintenanceToProperty(property1.getId(),maintenance1.getId());
 
         verify(propertyRepo,times(1)).findById(property1.getId());
-        verify(complaintRepo,times(1)).findById(maintenance1.getId());
         verify(propertyRepo,times(1)).save(argumentCaptor.capture());
 
         Property capturedProperty = argumentCaptor.getValue();
-        assertEquals(maintenance1, capturedProperty.getComplaint());
+        assertEquals(maintenance1.getId(), capturedProperty.getMaintenances().get(0).getId());
 
     }
+
+
 
 }

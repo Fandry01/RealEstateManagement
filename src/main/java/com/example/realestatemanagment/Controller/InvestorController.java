@@ -36,16 +36,7 @@ public class InvestorController {
         return ResponseEntity.ok().body(optionalInvestor);
     }
 
-    @PostMapping
-    public ResponseEntity<InvestorDTO> createInvestors(@RequestBody InvestorDTO dto){
 
-        String newUsername = investorService.createInvestor(dto);
-        investorService.addAuthority(newUsername,"ROLE_ADMIN");
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(newUsername).toUri();
-
-        return  ResponseEntity.created(location).build();
-    }
 
 
     @PutMapping(value="/{username}")

@@ -8,6 +8,7 @@ import com.example.realestatemanagment.Models.Tenant;
 import com.example.realestatemanagment.Repository.ComplaintRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
 import com.example.realestatemanagment.Repository.TenantRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,14 +23,16 @@ public class TenantService {
     private final PropertyService propertyService;
     private final ComplaintRepository complaintRepo;
     private final ComplaintService complaintService;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public TenantService(TenantRepository tenantRepo, PropertyRepository propertyRepo, PropertyService propertyService, ComplaintRepository complaintRepo, ComplaintService complaintService) {
+    public TenantService(TenantRepository tenantRepo, PropertyRepository propertyRepo, PropertyService propertyService, ComplaintRepository complaintRepo, ComplaintService complaintService, PasswordEncoder passwordEncoder) {
         this.tenantRepo = tenantRepo;
         this.propertyRepo = propertyRepo;
         this.propertyService = propertyService;
         this.complaintRepo = complaintRepo;
         this.complaintService = complaintService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -146,7 +149,7 @@ public class TenantService {
         var tenant = new Tenant();
 
         tenant.setUsername(dto.getUsername());
-        tenant.setPassword(dto.getPassword());
+        tenant.setPassword(passwordEncoder.encode(dto.getPassword()));
         tenant.setFirstName(dto.getFirstName());
         tenant.setLastName(dto.getLastName());
         tenant.setDob(dto.getDob());

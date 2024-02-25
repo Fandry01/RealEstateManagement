@@ -1,7 +1,11 @@
 package com.example.realestatemanagment.Controller;
 
+import com.example.realestatemanagment.Dto.InvestorDTO;
+import com.example.realestatemanagment.Dto.TenantDTO;
 import com.example.realestatemanagment.Dto.UserDTO;
 import com.example.realestatemanagment.Exceptions.BadRequestException;
+import com.example.realestatemanagment.Service.InvestorService;
+import com.example.realestatemanagment.Service.TenantService;
 import com.example.realestatemanagment.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +21,13 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    private final TenantService tenantService;
+    private final InvestorService investorService;
+
+    public UserController(UserService userService, TenantService tenantService, InvestorService investorService) {
         this.userService = userService;
+        this.tenantService = tenantService;
+        this.investorService = investorService;
     }
 
     @GetMapping
@@ -36,6 +45,26 @@ public class UserController {
                 .buildAndExpand(newUsername).toUri();
 
         return ResponseEntity.created(location).build();
+    }
+    @PostMapping
+    public ResponseEntity<TenantDTO> createTenant(@RequestBody TenantDTO tenantDTO){
+        String  newUsername = tenantService.createTenant(tenantDTO);
+        tenantService.addAuthority(newUsername,"ROLE_USER");
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username").buildAndExpand(newUsername).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping("/investors")
+    public ResponseEntity<InvestorDTO> createInvestors(@RequestBody InvestorDTO dto){
+
+        String newUsername = investorService.createInvestor(dto);
+        investorService.addAuthority(newUsername,"ROLE_ADMIN");
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(newUsername).toUri();
+
+        return  ResponseEntity.created(location).build();
     }
 
     @PutMapping(value = "/{username}")
