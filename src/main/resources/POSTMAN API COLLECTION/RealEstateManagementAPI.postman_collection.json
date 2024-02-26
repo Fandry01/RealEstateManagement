@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "76419189-914d-4952-9f60-19fa61feab1e",
+		"name": "RealEstateManagementAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7462082"
+	},
+	"item": [
+		{
+			"name": "UserAPI's",
+			"item": [
+				{
+					"name": "GetUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateInvestor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/investors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"investors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTenant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/tenants",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"tenants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InvestorAPI's",
+			"item": [
+				{
+					"name": "GetInvestor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/investors/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"investors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInvestors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/investors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"investors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateInvestor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/investors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"investors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateInvestor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/investors/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"investors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteInvestor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/investors/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"investors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInvestorAuthorityRoles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/investor/{username}/authorities",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"investor",
+								"{username}",
+								"authorities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ComplaintAPI's",
+			"item": [
+				{
+					"name": "GetAllComplaints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/complaints",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetComplaint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/complaints/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"complaints",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddComplaint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/complaints",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateComplaint",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/complaints/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"complaints",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteComplaint",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/complaints/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"complaints",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MaintenanceAPI's",
+			"item": [
+				{
+					"name": "GetAllMaintenances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenances",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMaintenance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenances/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenances",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateMaintenance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenances",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateMaintenance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenances/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenances",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteMaintenance",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenances/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenances",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PropertyAPI's",
+			"item": [
+				{
+					"name": "GetProperties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProperty",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProperties",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProperty",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignComplaintToProperty",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties/{id}/complaints",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties",
+								"{id}",
+								"complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignPropertyToInvestor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties/{id}/investors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties",
+								"{id}",
+								"investors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignMaintenanceProperty",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties/{id}/maintenance",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties",
+								"{id}",
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProperty",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/properties/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"properties",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TenantAPI",
+			"item": [
+				{
+					"name": "GetTenants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tenants",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tenants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTenant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tenants/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tenants",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTenant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tenants/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tenants",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTenant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tenants/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tenants",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTenantAuthorityRole",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tenants/{id}/authorities",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tenants",
+								"{id}",
+								"authorities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthenticationAPI",
+			"item": [
+				{
+					"name": "LoginAPI",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
