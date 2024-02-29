@@ -1,17 +1,14 @@
 package com.example.realestatemanagment.Controller;
 
-import com.example.realestatemanagment.Dto.InvestorDTO;
+
 import com.example.realestatemanagment.Dto.TenantDTO;
 import com.example.realestatemanagment.Exceptions.BadRequestException;
-import com.example.realestatemanagment.Models.Tenant;
 import com.example.realestatemanagment.Service.TenantService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
+import org.springframework.web.bind.annotation.*;
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +31,6 @@ public class TenantController {
 
     @GetMapping(value ="/{username}")
     public ResponseEntity<TenantDTO> getTenant(@PathVariable("username") String username){
-        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //String username1 = authentication.getName(); // Get username from authentication
         TenantDTO optionalTenant = tenantService.getTenantByUsername(username);
 
         return ResponseEntity.ok().body(optionalTenant);

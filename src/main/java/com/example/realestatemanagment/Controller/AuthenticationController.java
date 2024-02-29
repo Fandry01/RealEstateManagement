@@ -18,9 +18,9 @@ import java.security.Principal;
 @RestController
 public class AuthenticationController {
 
-    private UserDetailsService userDetailsService;
-    private JwtUtils jwtUtils;
-    private AuthenticationManager authenticationManager;
+    private final UserDetailsService userDetailsService;
+    private final JwtUtils jwtUtils;
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationController(UserDetailsService userDetailsService, JwtUtils jwtUtils, AuthenticationManager authenticationManager) {
         this.userDetailsService = userDetailsService;

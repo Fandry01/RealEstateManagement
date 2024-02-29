@@ -80,7 +80,7 @@ class ComplaintServiceTest {
 
     @Test
     public void shouldSaveAComplaint(){
-        complaintService.addComplaint(complaintService.transferToDTO(complaint1));
+        complaintService.addComplaint(ComplaintService.transferToDTO(complaint1));
         verify(complaintrepo,times(1)).save(argumentCaptor.capture());
         Complaint complaint = argumentCaptor.getValue();
 

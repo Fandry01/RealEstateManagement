@@ -2,6 +2,7 @@ package com.example.realestatemanagment.Models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -9,7 +10,7 @@ import java.util.*;
 public class Tenant extends User {
 
     @Column(name = "rental_periode")
-    private Date rentalPeriod;
+    private LocalDate rentalPeriod;
     @Column(name = "rent_price")
     private Integer rentPrice;
 
@@ -24,11 +25,11 @@ public class Tenant extends User {
     }
 
 
-    public Date getRentalPeriod() {
+    public LocalDate getRentalPeriod() {
         return rentalPeriod;
     }
 
-    public void setRentalPeriod(Date rentalPeriod) {
+    public void setRentalPeriod(LocalDate rentalPeriod) {
         this.rentalPeriod = rentalPeriod;
     }
 

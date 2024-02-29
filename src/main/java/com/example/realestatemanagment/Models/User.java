@@ -2,9 +2,8 @@ package com.example.realestatemanagment.Models;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -19,7 +18,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "date_of_birth")
-    private Date Dob;
+    private LocalDate Dob;
     @OneToMany(
             targetEntity = AuthorityRoles.class,
             mappedBy = "username",
@@ -72,11 +71,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return Dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         Dob = dob;
     }
 

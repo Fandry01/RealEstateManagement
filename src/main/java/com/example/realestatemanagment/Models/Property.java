@@ -4,7 +4,7 @@ package com.example.realestatemanagment.Models;
 import jakarta.persistence.*;
 
 
-import java.util.Collection;
+
 import java.util.List;
 
 
