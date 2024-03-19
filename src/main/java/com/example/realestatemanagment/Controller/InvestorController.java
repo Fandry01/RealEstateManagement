@@ -1,14 +1,11 @@
 package com.example.realestatemanagment.Controller;
 
 import com.example.realestatemanagment.Dto.InvestorDTO;
-import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Service.InvestorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +32,6 @@ public class InvestorController {
 
         return ResponseEntity.ok().body(optionalInvestor);
     }
-
-
 
 
     @PutMapping(value="/{username}")

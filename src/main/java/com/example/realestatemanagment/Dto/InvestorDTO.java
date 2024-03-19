@@ -4,7 +4,7 @@ import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 public class InvestorDTO {
@@ -17,7 +17,7 @@ public class InvestorDTO {
     @NotNull
     private String lastname;
     @NotNull
-    private Date dob;
+    private LocalDate dob;
     @NotNull
     private String address;
     private PropertyDTO propertyDTO;
@@ -28,7 +28,7 @@ public class InvestorDTO {
 
     }
 
-    public InvestorDTO(String username, String password, String firstname, String lastname, Date dob, String address, Set<AuthorityRoles> authorities){
+    public InvestorDTO(String username, String password, String firstname, String lastname, LocalDate dob, String address, Set<AuthorityRoles> authorities){
         this.username = username;
         this.password = password;
         this.address = address;
@@ -43,7 +43,7 @@ public class InvestorDTO {
         this.address = address;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -59,7 +59,7 @@ public class InvestorDTO {
         this.propertyDTO = propertyDTO;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 

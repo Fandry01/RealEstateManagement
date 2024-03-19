@@ -3,7 +3,6 @@ package com.example.realestatemanagment.Models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "complaints")
