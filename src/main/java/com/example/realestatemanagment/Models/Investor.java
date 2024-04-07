@@ -15,6 +15,7 @@ public class Investor extends User {
     public Investor() {
     super();
     }
+
     public Investor(String address) {
 
         this.Address = address;

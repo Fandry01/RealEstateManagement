@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Models;
 
 
+import com.example.realestatemanagment.Enums.MaintenanceTypes;
 import com.sun.tools.javac.Main;
 import jakarta.persistence.*;
 
@@ -13,7 +14,7 @@ public class Maintenance {
     @GeneratedValue
     private Long id;
     @Column(name = "type_of_maintenance")
-    public String typeOfMaintenance;
+    public MaintenanceTypes typeOfMaintenance;
     @Column(name = "maintenance_date")
     public LocalDate MaintenanceDate;
 
@@ -26,7 +27,7 @@ public class Maintenance {
 
     }
 
-    public Maintenance(Long id, String typeOfMaintenance, LocalDate maintenanceDate){
+    public Maintenance(Long id, MaintenanceTypes typeOfMaintenance, LocalDate maintenanceDate){
         this.id = id;
         this.MaintenanceDate = maintenanceDate;
         this.typeOfMaintenance = typeOfMaintenance;
@@ -48,7 +49,7 @@ public class Maintenance {
         return MaintenanceDate;
     }
 
-    public String getTypeOfMaintenance() {
+    public MaintenanceTypes getTypeOfMaintenance() {
         return typeOfMaintenance;
     }
 
@@ -56,7 +57,7 @@ public class Maintenance {
         MaintenanceDate = maintenanceDate;
     }
 
-    public void setTypeOfMaintenance(String typeOfMaintenance) {
+    public void setTypeOfMaintenance(MaintenanceTypes typeOfMaintenance) {
         this.typeOfMaintenance = typeOfMaintenance;
     }
 

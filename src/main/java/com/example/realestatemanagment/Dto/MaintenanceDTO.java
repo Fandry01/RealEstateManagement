@@ -1,5 +1,7 @@
 package com.example.realestatemanagment.Dto;
 
+import com.example.realestatemanagment.Enums.MaintenanceTypes;
+import com.example.realestatemanagment.Models.Maintenance;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
@@ -8,7 +10,7 @@ import java.time.LocalDate;
 public class MaintenanceDTO {
     private Long id;
     @NotNull
-    private String typeOfMaintenance;
+    private MaintenanceTypes typeOfMaintenance;
     @NotNull
     @Future
     private LocalDate maintenanceDate;
@@ -18,7 +20,7 @@ public class MaintenanceDTO {
 
     }
 
-    public void setTypeOfMaintenance(String typeOfMaintenance) {
+    public void setTypeOfMaintenance(MaintenanceTypes typeOfMaintenance) {
         this.typeOfMaintenance = typeOfMaintenance;
     }
 
@@ -34,7 +36,7 @@ public class MaintenanceDTO {
         return id;
     }
 
-    public String getTypeOfMaintenance() {
+    public MaintenanceTypes getTypeOfMaintenance() {
         return typeOfMaintenance;
     }
 
