@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Models;
 
 
+import com.example.realestatemanagment.Enums.HouseTypes;
 import jakarta.persistence.*;
 
 
@@ -14,7 +15,7 @@ public class Property {
     @Id
     @GeneratedValue
     private Long id;
-    private String type;
+    private HouseTypes type;
     private Double boughtPrice;
     private Double currentPrice;
     private Integer buildYear;
@@ -40,7 +41,7 @@ public Property(){
 
 }
 
-public Property(Long id,String type, Double boughtPrice, Double currentPrice, Integer buildYear, String squareFeet, Boolean rented, String address ){
+public Property(Long id,HouseTypes type, Double boughtPrice, Double currentPrice, Integer buildYear, String squareFeet, Boolean rented, String address ){
  this.id = id;
  this.address = address;
  this.squareFeet = squareFeet;
@@ -75,7 +76,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, In
         return address;
     }
 
-    public String getType() {
+    public HouseTypes getType() {
         return type;
     }
 
@@ -135,7 +136,7 @@ public Property(Long id,String type, Double boughtPrice, Double currentPrice, In
         return maintenances;
     }
 
-    public void setType(String type) {
+    public void setType(HouseTypes type) {
         this.type = type;
     }
     public Complaint getComplaint() {

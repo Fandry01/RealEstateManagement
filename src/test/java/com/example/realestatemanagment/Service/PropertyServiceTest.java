@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Service;
 
 import com.example.realestatemanagment.Dto.PropertyDTO;
+import com.example.realestatemanagment.Enums.HouseTypes;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Complaint;
 import com.example.realestatemanagment.Models.Investor;
@@ -58,8 +59,8 @@ class PropertyServiceTest {
     @BeforeEach
     void setUp(){
         MockitoAnnotations.openMocks(this);
-        property1 = new Property(10L,"Appartement",15000.00,17000.00,1999,"150M2",true,"Holendrecht12");
-        property2 = new Property(12L,"Villa",17500.00,19500.00,2015,"240m2",false,"Diemen15");
+        property1 = new Property(10L,HouseTypes.APPARTEMENT,15000.00,17000.00,1999,"150M2",true,"Holendrecht12");
+        property2 = new Property(12L,HouseTypes.VRIJSTAANDEHUIS,17500.00,19500.00,2015,"240m2",false,"Diemen15");
         complaint1 = new Complaint(10L, LocalDate.of(2024,10,15),"Its To cold here");
         maintenance1 = new Maintenance(20L,"Bathroom",LocalDate.of(2024,5,5));
         propertyService = new PropertyService(propertyRepo, complaintRepo, complaintService, maintenanceRepo,
@@ -84,7 +85,7 @@ class PropertyServiceTest {
 
     @Test
     public void shouldReturnAProperty(){
-        Property property = new Property(10L,"Appartement",15000.00,17000.00,1999,"150M2",true,"Holendrecht12");
+        Property property = new Property(10L,HouseTypes.APPARTEMENT,15000.00,17000.00,1999,"150M2",true,"Holendrecht12");
 
         when(propertyRepo.findById(anyLong())).thenReturn((Optional.of(property)));
         when(propertyRepo.findById(150L)).thenReturn(Optional.empty());
@@ -137,7 +138,7 @@ class PropertyServiceTest {
     @Test
     public void shouldUpdateAProperty(){
         when(propertyRepo.findById(10L)).thenReturn(Optional.of(property1));
-        PropertyDTO propertyDTO = new PropertyDTO(10L,"Appartement",15000.00,18000.00,1999,"150M2",false,"Holendrecht12");
+        PropertyDTO propertyDTO = new PropertyDTO(10L, HouseTypes.APPARTEMENT,15000.00,18000.00,1999,"150M2",false,"Holendrecht12");
         //when(propertyRepo.save(propertyService.transferToProperty(propertyDTO))).thenReturn(property1);
 
         PropertyDTO resultDTO =  propertyService.updateProperty(10L,propertyDTO);

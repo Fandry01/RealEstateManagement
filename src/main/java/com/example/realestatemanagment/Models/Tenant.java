@@ -10,9 +10,9 @@ import java.util.*;
 public class Tenant extends User {
 
     @Column(name = "rental_periode")
-    private LocalDate rentalPeriod;
+    private String rentalPeriod;
     @Column(name = "rent_price")
-    private Integer rentPrice;
+    private Double rentPrice;
 
     @OneToOne
     Property property;
@@ -25,19 +25,19 @@ public class Tenant extends User {
     }
 
 
-    public LocalDate getRentalPeriod() {
+    public String getRentalPeriod() {
         return rentalPeriod;
     }
 
-    public void setRentalPeriod(LocalDate rentalPeriod) {
+    public void setRentalPeriod(String rentalPeriod) {
         this.rentalPeriod = rentalPeriod;
     }
 
-    public Integer getRentPrice() {
+    public Double getRentPrice() {
         return rentPrice;
     }
 
-    public void setRentPrice(Integer rentPrice) {
+    public void setRentPrice(Double rentPrice) {
         this.rentPrice = rentPrice;
     }
 

@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Controller;
 
 import com.example.realestatemanagment.Dto.PropertyDTO;
+import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Service.PropertyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,14 +35,20 @@ public class PropertyController {
 
     @PostMapping
     public ResponseEntity<Object> addProperty(@RequestBody PropertyDTO propertyDTO){
-        PropertyDTO propDto = propertyService.addProperty(propertyDTO);
+        try{
+            PropertyDTO propDto = propertyService.addProperty(propertyDTO);
+            return ResponseEntity.created(null).body(propDto);
+        }catch (Exception ex){
+            throw new BadRequestException();
+        }
 
-        URI uri = URI.create(
-                ServletUriComponentsBuilder
-                        .fromCurrentRequest()
-                        .path("/" + propDto).toUriString());
 
-        return ResponseEntity.created(uri).body(propDto);
+        //URI uri = URI.create(
+                //ServletUriComponentsBuilder
+                        //.fromCurrentRequest()
+                        //.path("/" + propDto).toUriString());
+
+
     }
 
     @DeleteMapping("/{id}")
@@ -56,15 +63,15 @@ public class PropertyController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @PutMapping("/{id}/complaints")
+    @PutMapping("/{id}/complaints/{complaintId}")
     public ResponseEntity<Object> assignComplaintToProperties(@PathVariable("id") Long id, @PathVariable("complaintId") Long complaintId){
      propertyService.assignComplaintToProperty(id,complaintId);
      return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}/investors")
-        public ResponseEntity<Object> assignPropertyToInvestor(@PathVariable("id") Long id,@PathVariable("investorId") String investorId){
-        propertyService.assignPropertyToInvestor(id,investorId);
+    @PutMapping("/{id}/investors/{username}")
+        public ResponseEntity<Object> assignPropertyToInvestor(@PathVariable("id") Long id,@PathVariable("username") String username){
+        propertyService.assignPropertyToInvestor(id,username);
         return ResponseEntity.noContent().build();
     }
 

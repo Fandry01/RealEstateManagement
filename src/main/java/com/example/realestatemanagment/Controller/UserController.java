@@ -20,7 +20,6 @@ import java.util.Map;
 @RequestMapping(value="users")
 public class UserController {
     private final UserService userService;
-
     private final TenantService tenantService;
     private final InvestorService investorService;
 
@@ -36,7 +35,7 @@ public class UserController {
         return ResponseEntity.ok().body(userDTOList);
     }
 
-    @GetMapping(value = "/{username}")
+    @PostMapping(value = "/{username}")
     public ResponseEntity<UserDTO> creatUser(@RequestBody UserDTO userDTO){
         String newUsername = userService.createUser(userDTO);
 

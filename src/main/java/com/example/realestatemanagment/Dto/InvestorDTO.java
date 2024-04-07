@@ -13,9 +13,9 @@ public class InvestorDTO {
     @NotNull
     private String password;
     @NotNull
-    private String firstname;
+    private String firstName;
     @NotNull
-    private String lastname;
+    private String lastName;
     @NotNull
     private LocalDate dob;
     @NotNull
@@ -28,13 +28,13 @@ public class InvestorDTO {
 
     }
 
-    public InvestorDTO(String username, String password, String firstname, String lastname, LocalDate dob, String address, Set<AuthorityRoles> authorities){
+    public InvestorDTO(String username, String password, String firstName, String lastName, LocalDate dob, String address, Set<AuthorityRoles> authorities){
         this.username = username;
         this.password = password;
         this.address = address;
         this.dob = dob;
-        this.lastname = lastname;
-        this.firstname = firstname;
+        this.lastName = lastName;
+        this.firstName = firstName;
 
         this.authorities = authorities;
     }
@@ -48,11 +48,11 @@ public class InvestorDTO {
     }
 
     public void setFirstName(String firstName) {
-        this.firstname = firstName;
+        this.firstName = firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setPropertyDTO(PropertyDTO propertyDTO) {
@@ -68,11 +68,11 @@ public class InvestorDTO {
     }
 
     public String getFirstName() {
-        return firstname;
+        return firstName;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public PropertyDTO getPropertyDTO() {

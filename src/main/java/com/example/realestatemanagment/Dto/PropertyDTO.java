@@ -1,5 +1,6 @@
 package com.example.realestatemanagment.Dto;
 
+import com.example.realestatemanagment.Enums.HouseTypes;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Date;
 public class PropertyDTO {
     private Long id;
     @NotNull
-    private String type;
+    private HouseTypes type;
     @NotNull
     private Double boughtPrice;
     @NotNull
@@ -26,7 +27,7 @@ public class PropertyDTO {
     public PropertyDTO(){
 
     }
-    public PropertyDTO(Long id, String type, Double boughtPrice, Double currentPrice,Integer buildYear, String squareFeet, Boolean rented,String address){
+    public PropertyDTO(Long id, HouseTypes type, Double boughtPrice, Double currentPrice, Integer buildYear, String squareFeet, Boolean rented, String address){
         this.id = id;
         this.type = type;
         this.boughtPrice = boughtPrice;
@@ -41,7 +42,7 @@ public class PropertyDTO {
         this.id = id;
     }
 
-    public void setType(String type) {
+    public void setType(HouseTypes type) {
         this.type = type;
     }
 
@@ -77,7 +78,7 @@ public class PropertyDTO {
         return address;
     }
 
-    public String getType() {
+    public HouseTypes getType() {
         return type;
     }
 

@@ -1,5 +1,6 @@
 package com.example.realestatemanagment.Controller;
 
+import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Exceptions.UsernameNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,10 @@ public class ExceptionController {
 @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity<Object> exception( UsernameNotFoundException exception){
     return  new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+
 }
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<Object> exception (BadRequestException exception){
+    return  new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    }
 }

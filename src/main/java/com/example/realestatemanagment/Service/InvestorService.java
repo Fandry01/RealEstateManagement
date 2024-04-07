@@ -99,7 +99,7 @@ public class InvestorService {
         dto.setAddress(investor.getAddress());
         dto.setDob(investor.getDob());
         dto.setFirstName(investor.getFirstName());
-        dto.setLastname(investor.getLastName());
+        dto.setLastName(investor.getLastName());
         dto.setAuthorities(investor.getAuthorities());
 
         return dto;

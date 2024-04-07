@@ -17,9 +17,9 @@ public class TenantDTO {
 
     private LocalDate Dob;
 
-    private LocalDate rentalPeriod;
+    private String rentalPeriod;
 
-    private Integer rentPrice;
+    private Double rentPrice;
 
     @JsonSerialize
     public Set<AuthorityRoles> authorities;
@@ -68,19 +68,19 @@ public class TenantDTO {
         Dob = dob;
     }
 
-    public LocalDate getRentalPeriod() {
+    public String getRentalPeriod() {
         return rentalPeriod;
     }
 
-    public void setRentalPeriod(LocalDate rentalPeriod) {
+    public void setRentalPeriod(String rentalPeriod) {
         this.rentalPeriod = rentalPeriod;
     }
 
-    public Integer getRentPrice() {
+    public Double getRentPrice() {
         return rentPrice;
     }
 
-    public void setRentPrice(Integer rentPrice) {
+    public void setRentPrice(Double rentPrice) {
         this.rentPrice = rentPrice;
     }
 

@@ -51,11 +51,11 @@ public class SecurityConfig {
             .httpBasic(basic -> basic.disable())
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
-                            .requestMatchers("/tenants/**", "/investors/**").authenticated()
-                            .anyRequest().permitAll()
+                            //.requestMatchers("/tenants/**", "/investors/**").authenticated()
+                            //.anyRequest().permitAll()
             //.authorizeHttpRequests(auth -> auth
 
-                    //.requestMatchers("/**").permitAll()
+                    .requestMatchers("/**").permitAll()
                     //.requestMatchers(HttpMethod.GET,"/maintenances").hasRole("ADMIN")
                     //.requestMatchers(HttpMethod.POST,"/authenticate").permitAll()
                     //.requestMatchers("/authenticate").permitAll()
