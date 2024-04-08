@@ -30,7 +30,7 @@ public class Property {
     Tenant tenant;
 
 @OneToOne
-Complaint complaint;
+    Complaint complaint;
 @OneToOne(mappedBy = "property")
 private ImageData imageData;
 
