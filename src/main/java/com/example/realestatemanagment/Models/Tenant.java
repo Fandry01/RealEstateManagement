@@ -16,6 +16,8 @@ public class Tenant extends User {
 
     @OneToOne
     Property property;
+    @OneToOne
+    LeaseAgreement leaseAgreement;
 
     @OneToOne
     Complaint complaint;

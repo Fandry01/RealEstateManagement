@@ -1,5 +1,6 @@
 package com.example.realestatemanagment.Models;
 
+import com.example.realestatemanagment.Service.LeaseAgreementService;
 import jakarta.persistence.*;
 
 
@@ -10,6 +11,8 @@ import java.util.*;
 public class Investor extends User {
     @OneToMany(mappedBy = "investor")
     List<Property> properties;
+    @OneToMany(mappedBy = "investor")
+    List<LeaseAgreement> agreements;
     private String Address;
 
     public Investor() {
@@ -30,13 +33,6 @@ public class Investor extends User {
         Address = address;
     }
 
-    public void addProperty(Property property) {
-        if (properties == null) {
-            properties = new ArrayList<>();
-        }
-        properties.add(property);
-        property.setInvestor(this);
-    }
 
     public List<Property> getProperties() {
         return properties;
@@ -44,5 +40,13 @@ public class Investor extends User {
 
     public void setProperties(List<Property> properties) {
         this.properties = properties;
+    }
+
+    public List<LeaseAgreement> getAgreements() {
+        return agreements;
+    }
+
+    public void setAgreements(List<LeaseAgreement> agreements) {
+        this.agreements = agreements;
     }
 }
