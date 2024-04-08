@@ -23,7 +23,8 @@ public class LeaseAgreement {
     private Tenant tenant;
     @OneToOne
     private Property property;
-
+    @OneToOne(mappedBy = "")
+    private ImageData contract;
     public LeaseAgreement(){
 
     }
