@@ -15,6 +15,10 @@ public class LeaseAgreementDTO {
     private PropertyDTO propertyDTO;
     private InvestorDTO investorDTO;
 
+    public LeaseAgreementDTO(){
+
+    }
+
     public LeaseAgreementDTO(Long id, Double rentalPrice, String rentalPeriod, LocalDate startDate, LocalDate endDate, PaymentTerms paymentTerms, TenantDTO tenantDTO, PropertyDTO propertyDTO, InvestorDTO investorDTO) {
         this.id = id;
         this.rentalPrice = rentalPrice;

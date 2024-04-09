@@ -65,7 +65,8 @@ public class PropertyService {
 
         return transferToDTO(property);
     }
-    public void deletePropertyById(Long id){
+    public void deletePropertyById(Long id)
+    {
         propertyRepo.deleteById(id);
     }
 
