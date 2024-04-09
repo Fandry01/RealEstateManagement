@@ -1,15 +1,22 @@
 package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Enums.PaymentTerms;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public class LeaseAgreementDTO {
     private Long id;
+    @NotBlank(message ="Rental Price can't be empty")
     private Double rentalPrice;
+    @NotBlank(message ="Please note the rental period")
     private String rentalPeriod;
+    @NotNull(message ="Please note when the rental starts")
     private LocalDate startDate;
+    @NotNull(message ="Please note when the rental ends" )
     private LocalDate endDate;
+    @NotBlank(message ="payment terms can't be empty" )
     private PaymentTerms paymentTerms;
     private TenantDTO tenantDTO;
     private PropertyDTO propertyDTO;

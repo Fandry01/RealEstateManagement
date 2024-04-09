@@ -2,24 +2,26 @@ package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 public class TenantDTO {
+    @NotBlank(message = "username can't be empty")
     private String username;
+    @NotBlank()
+    @Size(min=5,max=15, message = "required password length 4-15 characters")
     private String password;
-    @NotNull
+    @NotBlank(message = "first name can't be empty")
     private String firstName;
-    @NotNull
+    @NotBlank(message = "last name can't be empty")
     private String lastName;
-
+    @NotBlank(message = "Date of Birth can't be empty")
     private LocalDate Dob;
 
-    private String rentalPeriod;
-
-    private Double rentPrice;
 
     @JsonSerialize
     public Set<AuthorityRoles> authorities;
@@ -68,21 +70,6 @@ public class TenantDTO {
         Dob = dob;
     }
 
-    public String getRentalPeriod() {
-        return rentalPeriod;
-    }
-
-    public void setRentalPeriod(String rentalPeriod) {
-        this.rentalPeriod = rentalPeriod;
-    }
-
-    public Double getRentPrice() {
-        return rentPrice;
-    }
-
-    public void setRentPrice(Double rentPrice) {
-        this.rentPrice = rentPrice;
-    }
 
     public Set<AuthorityRoles> getAuthorities() {
         return authorities;

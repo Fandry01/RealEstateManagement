@@ -1,16 +1,19 @@
 package com.example.realestatemanagment.Dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 public class ComplaintDTO {
     private Long id;
     @NotNull
-    @PastOrPresent
+    @PastOrPresent()
     private LocalDate dateOfComplaint;
-    @NotNull
+    @NotBlank()
+    @Size(max=200, message = "Explain the situation within 200 characters")
     private String complaintMessage;
 
     private TenantDTO tenant;

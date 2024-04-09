@@ -3,16 +3,17 @@ package com.example.realestatemanagment.Dto;
 import com.example.realestatemanagment.Enums.MaintenanceTypes;
 import com.example.realestatemanagment.Models.Maintenance;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public class MaintenanceDTO {
     private Long id;
-    @NotNull
+    @NotBlank(message = "Please state what type of maintenance ")
     private MaintenanceTypes typeOfMaintenance;
     @NotNull
-    @Future
+    @Future(message = "Please date the maintenance ahead")
     private LocalDate maintenanceDate;
 
     public MaintenanceDTO()

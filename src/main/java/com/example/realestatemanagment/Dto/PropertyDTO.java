@@ -1,25 +1,29 @@
 package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Enums.HouseTypes;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
 public class PropertyDTO {
     private Long id;
-    @NotNull
+    @NotBlank(message = "Please choose House type")
     private HouseTypes type;
     @NotNull
+    @Digits(integer = 8,fraction = 2,message = "maximum of 8 whole numbers and it must have 2 decimals")
     private Double boughtPrice;
     @NotNull
+    @Digits(integer = 8,fraction = 2,message = "maximum of 8 whole numbers and it must have 2 decimals")
     private Double currentPrice;
-    @NotNull
+    @NotNull(message = "Please enter the build year")
     private Integer buildYear;
-    @NotNull
+    @NotBlank(message = "Square Feet can't be empty")
     private String squareFeet;
-    @NotNull
+    @NotNull(message = "Please state if it's rented or not")
     private Boolean rented;
-    @NotNull
+    @NotNull(message = "Please note the addres of the property")
     private String address;
 
     private MaintenanceDTO maintenanceDTO;
