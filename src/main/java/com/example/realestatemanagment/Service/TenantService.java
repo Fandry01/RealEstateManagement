@@ -140,8 +140,7 @@ public class TenantService {
         dto.setFirstName(tenant.getFirstName());
         dto.setDob(tenant.getDob());
         dto.setLastName(tenant.getLastName());
-        dto.setRentalPeriod(tenant.getRentalPeriod());
-        dto.setRentPrice(tenant.getRentPrice());
+
 
         return dto;
     }
@@ -153,8 +152,6 @@ public class TenantService {
         tenant.setFirstName(dto.getFirstName());
         tenant.setLastName(dto.getLastName());
         tenant.setDob(dto.getDob());
-        tenant.setRentalPeriod(dto.getRentalPeriod());
-        tenant.setRentPrice(dto.getRentPrice());
 
         return tenant;
     }

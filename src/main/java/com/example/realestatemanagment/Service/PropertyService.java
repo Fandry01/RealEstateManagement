@@ -40,10 +40,9 @@ public class PropertyService {
         List<PropertyDTO> propertyList = new ArrayList<>();
         List<Property> propList = propertyRepo.findAll();
 
-        for(Property property:propList){
+        for(Property property : propList){
             propertyList.add(transferToDTO(property));
         }
-
         return propertyList;
 
     }
@@ -89,8 +88,6 @@ public class PropertyService {
         if(property.getComplaint() != null){
             dto.setComplaintDTO(complaintService.getComplaintsById(property.getComplaint().getId()));
         }
-
-
 
         dto.setId(property.getId());
         dto.setAddress(property.getAddress());

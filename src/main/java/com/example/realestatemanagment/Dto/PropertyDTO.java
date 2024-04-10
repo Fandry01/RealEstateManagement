@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class PropertyDTO {
     private Long id;
-    @NotBlank(message = "Please choose House type")
+    @NotNull(message = "Please choose House type")
     private HouseTypes type;
     @NotNull
     @Digits(integer = 8,fraction = 2,message = "maximum of 8 whole numbers and it must have 2 decimals")

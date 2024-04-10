@@ -14,6 +14,7 @@ public class Maintenance {
     @GeneratedValue
     private Long id;
     @Column(name = "type_of_maintenance")
+    @Enumerated(EnumType.STRING)
     public MaintenanceTypes typeOfMaintenance;
     @Column(name = "maintenance_date")
     public LocalDate MaintenanceDate;

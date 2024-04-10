@@ -15,6 +15,7 @@ public class Property {
     @Id
     @GeneratedValue
     private Long id;
+    @Enumerated(EnumType.STRING)
     private HouseTypes type;
     private Double boughtPrice;
     private Double currentPrice;
