@@ -5,6 +5,7 @@ import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Exceptions.UsernameNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,8 +34,19 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity <List<String>> exception(MethodArgumentNotValidException exception) {
-        return new ResponseEntity<>(exception.getBindingResult().getFieldErrors().stream().map(fieldError -> fieldError.getField() + " " + fieldError.getDefaultMessage() ).collect(Collectors.toList()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<List<String>> exceptions(MethodArgumentNotValidException ex) {
+        List<String> errors = ex.getBindingResult().getFieldErrors().stream()
+                .map(this::getErrorMessage)
+                .collect(Collectors.toList());
+        return ResponseEntity.badRequest().body(errors);
+    }
+    private String getErrorMessage(FieldError fieldError) {
+        String fieldName = fieldError.getField();
+        String errorMessage = fieldError.getDefaultMessage();
+        if (fieldName.equals("type") && errorMessage.equals("must be one of APPARTEMENT, RIJTJESHUIS, VRIJSTAANDEHUIS, PENTHOUSE, TWEEONDEREENKAP")) {
+            return "Invalid value for " + fieldName + ": " + errorMessage;
+        }
+        return fieldName + " " + errorMessage;
     }
 }
 

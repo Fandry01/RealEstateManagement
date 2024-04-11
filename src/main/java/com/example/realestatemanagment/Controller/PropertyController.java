@@ -42,7 +42,7 @@ public class PropertyController {
 
     @PostMapping
     public ResponseEntity<Object> addProperty(@Valid @RequestBody PropertyDTO propertyDTO, BindingResult bindingResult) throws MethodArgumentNotValidException{
-            if(bindingResult.hasErrors()){
+            if(bindingResult.hasErrors() ){
                 throw new MethodArgumentNotValidException(null,bindingResult);
             }else{
                 PropertyDTO propDto = propertyService.addProperty(propertyDTO);
