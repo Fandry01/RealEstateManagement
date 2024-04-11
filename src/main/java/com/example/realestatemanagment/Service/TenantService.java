@@ -51,17 +51,18 @@ public class TenantService {
 
             return transferToDTO(tenant);
         }else {
-            throw new RecordNotFoundException("Tenant not found");
+            throw new RecordNotFoundException("Tenant with " +username+ " not found");
         }
     }
 
     public String createTenant(TenantDTO tenant){
+
         Tenant newTenant = tenantRepo.save(transferToTenant(tenant));
         return newTenant.getUsername();
     }
 
     public void updateTenant(String username, TenantDTO tenantDTO){
-        if(!tenantRepo.existsById(username)) throw new RecordNotFoundException("Tenant not found");
+        if(!tenantRepo.existsById(username)) throw new RecordNotFoundException("Tenant with " +username+ " not found");
         Tenant tenant = tenantRepo.findById(username).get();
         tenant.setPassword(tenantDTO.getPassword());
         tenantRepo.save(tenant);

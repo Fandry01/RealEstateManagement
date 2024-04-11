@@ -54,7 +54,7 @@ public class PropertyService {
 
             return  transferToDTO(property);
         }else {
-            throw new RecordNotFoundException("no Property Found");
+            throw new RecordNotFoundException("Property with ID " + id + "not found");
         }
     }
 
@@ -66,7 +66,12 @@ public class PropertyService {
     }
     public void deletePropertyById(Long id)
     {
-        propertyRepo.deleteById(id);
+        if(propertyRepo.findById(id).isPresent()){
+            propertyRepo.deleteById(id);
+        }else {
+            throw new RecordNotFoundException("property with ID " + id + "not found");
+        }
+
     }
 
     public PropertyDTO updateProperty(Long id, PropertyDTO dto){
@@ -163,7 +168,7 @@ public class PropertyService {
             propertyRepo.save(property);
 
         } else{
-            throw new RecordNotFoundException("record not found");
+            throw new RecordNotFoundException("property or maintenance not found");
         }
 
     }

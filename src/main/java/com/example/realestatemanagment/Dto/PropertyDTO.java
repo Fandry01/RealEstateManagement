@@ -1,9 +1,11 @@
 package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Enums.HouseTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.apache.tomcat.Jar;
 
 import java.util.Date;
 
@@ -26,7 +28,9 @@ public class PropertyDTO {
     @NotNull(message = "Please note the addres of the property")
     private String address;
 
+
     private MaintenanceDTO maintenanceDTO;
+
     private ComplaintDTO complaintDTO;
     public PropertyDTO(){
 

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class MaintenanceDTO {
     private Long id;
-    @NotBlank(message = "Please state what type of maintenance ")
+    @NotBlank(message = "Please choose what type of maintenance ")
     private MaintenanceTypes typeOfMaintenance;
     @NotNull
     @Future(message = "Please date the maintenance ahead")

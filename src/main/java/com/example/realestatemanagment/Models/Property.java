@@ -1,10 +1,6 @@
 package com.example.realestatemanagment.Models;
-
-
 import com.example.realestatemanagment.Enums.HouseTypes;
 import jakarta.persistence.*;
-
-
 
 import java.util.List;
 
@@ -24,7 +20,7 @@ public class Property {
     private Boolean rented;
     private String address;
 
-@ManyToOne(fetch = FetchType.EAGER)
+@ManyToOne(fetch = FetchType.LAZY)
    Investor investor;
 
 @OneToOne

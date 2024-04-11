@@ -16,8 +16,9 @@ public class LeaseAgreement {
     private String rentalPeriod;
     private LocalDate startDate;
     private LocalDate endDate;
+
     private PaymentTerms paymentTerms;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Investor investor;
     @OneToOne
     private Tenant tenant;

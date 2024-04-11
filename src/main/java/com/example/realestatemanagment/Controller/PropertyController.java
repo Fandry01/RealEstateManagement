@@ -24,20 +24,21 @@ public class PropertyController {
 
     @GetMapping
     public ResponseEntity <List<PropertyDTO>> getAllProperties(){
+        try{
             List<PropertyDTO> propDTOS = propertyService.getAllProperties();
             return ResponseEntity.ok().body(propDTOS);
+        }catch (Exception ex){
+            throw new RecordNotFoundException("List cant be created");
+        }
 
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PropertyDTO> getProperty(@PathVariable("id")Long id){
-        try{
             PropertyDTO propertyDTO = propertyService.getPropertyById(id);
 
             return ResponseEntity.ok().body(propertyDTO);
-        }catch(Exception e){
-            throw new RecordNotFoundException("Property with ID " + id + "not found");
-        }
+
     }
 
     @PostMapping
@@ -61,13 +62,8 @@ public class PropertyController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Long id){
-        try{
             propertyService.deletePropertyById(id);
             return ResponseEntity.noContent().build();
-        }catch (Exception ex){
-            throw new RecordNotFoundException(id +"Not Found");
-
-        }
 
     }
 

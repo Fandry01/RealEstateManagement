@@ -36,7 +36,7 @@ public class MaintenanceService {
 
             return transferToDTO(maintenance);
         }else{
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException("maintenance with "+id+ "not Found");
         }
     }
 
@@ -48,7 +48,12 @@ public class MaintenanceService {
     }
 
     public void deleteMaintenance(Long id){
-        repo.deleteById(id);
+        if(repo.findById(id).isPresent()){
+            repo.deleteById(id);
+        }else {
+            throw new RecordNotFoundException("maintenance with "+id+ "not Found");
+        }
+
     }
 
     public MaintenanceDTO UpdateMaintenance(Long id, MaintenanceDTO maintenanceDTO){
