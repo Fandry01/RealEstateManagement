@@ -28,7 +28,7 @@ public class PropertyDTO {
     @NotNull(message = "Please note the addres of the property")
     private String address;
 
-
+    private InvestorDTO investorDTO;
     private MaintenanceDTO maintenanceDTO;
 
     private ComplaintDTO complaintDTO;
@@ -134,4 +134,11 @@ public class PropertyDTO {
         this.maintenanceDTO = maintenanceDTO;
     }
 
+    public InvestorDTO getInvestorDTO() {
+        return investorDTO;
+    }
+
+    public void setInvestorDTO(InvestorDTO investorDTO) {
+        this.investorDTO = investorDTO;
+    }
 }

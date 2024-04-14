@@ -5,5 +5,7 @@ public enum HouseTypes {
     RIJTJESHUIS,
     VRIJSTAANDEHUIS,
     PENTHOUSE,
-    TWEEONDEREENKAP;
+    TWEEONDEREENKAP,
+    STUDIO,
+    DEFAULT;
 }

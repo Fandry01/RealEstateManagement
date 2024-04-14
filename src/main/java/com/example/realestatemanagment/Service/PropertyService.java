@@ -93,6 +93,9 @@ public class PropertyService {
         if(property.getComplaint() != null){
             dto.setComplaintDTO(complaintService.getComplaintsById(property.getComplaint().getId()));
         }
+        if(property.getInvestor() != null){
+            dto.setInvestorDTO(investorService.getInvestorById(property.getInvestor().getUsername()));
+        }
 
         dto.setId(property.getId());
         dto.setAddress(property.getAddress());

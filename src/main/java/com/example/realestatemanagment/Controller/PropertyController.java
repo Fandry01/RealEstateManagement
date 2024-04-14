@@ -1,7 +1,9 @@
 package com.example.realestatemanagment.Controller;
 
 import com.example.realestatemanagment.Dto.PropertyDTO;
+import com.example.realestatemanagment.Enums.HouseTypes;
 import com.example.realestatemanagment.Exceptions.BadRequestException;
+import com.example.realestatemanagment.Exceptions.HttpMessageNotReadableException;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Service.PropertyService;
 import jakarta.validation.Valid;
@@ -45,7 +47,11 @@ public class PropertyController {
     public ResponseEntity<Object> addProperty(@Valid @RequestBody PropertyDTO propertyDTO, BindingResult bindingResult) throws MethodArgumentNotValidException{
             if(bindingResult.hasErrors() ){
                 throw new MethodArgumentNotValidException(null,bindingResult);
-            }else{
+            }else if(propertyDTO.getType() == HouseTypes.DEFAULT){
+                throw new HttpMessageNotReadableException("please choose type property");
+            }
+
+            else{
                 PropertyDTO propDto = propertyService.addProperty(propertyDTO);
 
                 URI uri = URI.create(
