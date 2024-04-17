@@ -5,7 +5,9 @@ import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Service.InvestorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +33,17 @@ public class InvestorController {
         InvestorDTO optionalInvestor = investorService.getInvestorById(username);
 
         return ResponseEntity.ok().body(optionalInvestor);
+    }
+
+    @PostMapping("/investors")
+    public ResponseEntity<InvestorDTO> createInvestors(@RequestBody InvestorDTO dto){
+
+        String newUsername = investorService.createInvestor(dto);
+        investorService.addAuthority(newUsername,"ROLE_INVESTOR");
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(newUsername).toUri();
+
+        return  ResponseEntity.created(location).build();
     }
 
 

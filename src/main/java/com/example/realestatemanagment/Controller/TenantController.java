@@ -7,8 +7,10 @@ import com.example.realestatemanagment.Service.TenantService;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +37,15 @@ public class TenantController {
 
         return ResponseEntity.ok().body(optionalTenant);
     }
+    @PostMapping
+    public ResponseEntity<TenantDTO> createTenant(@RequestBody TenantDTO tenantDTO){
+        String  newUsername = tenantService.createTenant(tenantDTO);
+        tenantService.addAuthority(newUsername,"ROLE_USER");
 
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username").buildAndExpand(newUsername).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
 
 
     @PutMapping(value = "/{username}")

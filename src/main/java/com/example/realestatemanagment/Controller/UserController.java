@@ -39,32 +39,14 @@ public class UserController {
     public ResponseEntity<UserDTO> creatUser(@RequestBody UserDTO userDTO){
         String newUsername = userService.createUser(userDTO);
 
-        userService.addAuthority(newUsername,"ROLE_USER");
+        userService.addAuthority(newUsername,"ROLE_ADMIN");
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
                 .buildAndExpand(newUsername).toUri();
 
         return ResponseEntity.created(location).build();
     }
-    @PostMapping("/tenants")
-    public ResponseEntity<TenantDTO> createTenant(@RequestBody TenantDTO tenantDTO){
-        String  newUsername = tenantService.createTenant(tenantDTO);
-        tenantService.addAuthority(newUsername,"ROLE_USER");
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username").buildAndExpand(newUsername).toUri();
 
-        return ResponseEntity.created(location).build();
-    }
-
-    @PostMapping("/investors")
-    public ResponseEntity<InvestorDTO> createInvestors(@RequestBody InvestorDTO dto){
-
-        String newUsername = investorService.createInvestor(dto);
-        investorService.addAuthority(newUsername,"ROLE_ADMIN");
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(newUsername).toUri();
-
-        return  ResponseEntity.created(location).build();
-    }
 
     @PutMapping(value = "/{username}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable("username") String username, @RequestBody UserDTO dto) {
