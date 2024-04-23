@@ -2,7 +2,7 @@ package com.example.realestatemanagment.Models;
 
 
 import com.example.realestatemanagment.Enums.MaintenanceTypes;
-import com.sun.tools.javac.Main;
+import com.example.realestatemanagment.Enums.Priority;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,6 +19,10 @@ public class Maintenance {
     @Column(name = "maintenance_date")
     public LocalDate MaintenanceDate;
 
+    @Column(name ="priority")
+    @Enumerated(EnumType.STRING)
+    public Priority priority;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Property property;
@@ -28,10 +32,11 @@ public class Maintenance {
 
     }
 
-    public Maintenance(Long id, MaintenanceTypes typeOfMaintenance, LocalDate maintenanceDate){
+    public Maintenance(Long id, MaintenanceTypes typeOfMaintenance, LocalDate maintenanceDate, Priority priority){
         this.id = id;
         this.MaintenanceDate = maintenanceDate;
         this.typeOfMaintenance = typeOfMaintenance;
+        this.priority = priority;
     }
 
     public void setId(Long id) {
@@ -64,5 +69,13 @@ public class Maintenance {
 
     public void setProperty(Property property) {
         this.property = property;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

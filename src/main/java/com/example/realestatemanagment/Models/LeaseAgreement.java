@@ -12,11 +12,9 @@ public class LeaseAgreement {
     @GeneratedValue
     private Long id;
     private Double rentalPrice;
-
     private String rentalPeriod;
     private LocalDate startDate;
     private LocalDate endDate;
-
     private PaymentTerms paymentTerms;
     @ManyToOne(fetch = FetchType.LAZY)
     private Investor investor;

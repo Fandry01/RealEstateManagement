@@ -9,38 +9,23 @@ import java.util.*;
 @Table(name = "tenants")
 public class Tenant extends User {
 
-    @Column(name = "rental_periode")
-    private String rentalPeriod;
-    @Column(name = "rent_price")
-    private Double rentPrice;
 
     @OneToOne
     Property property;
     @OneToOne
     LeaseAgreement leaseAgreement;
 
-    @OneToOne
-    Complaint complaint;
+    @OneToMany(mappedBy = "tenant")
+    private List<Complaint> complaints;
 
-    public Tenant(){
+    public Tenant() {
         super();
     }
 
-
-    public String getRentalPeriod() {
-        return rentalPeriod;
-    }
-
-    public void setRentalPeriod(String rentalPeriod) {
-        this.rentalPeriod = rentalPeriod;
-    }
-
-    public Double getRentPrice() {
-        return rentPrice;
-    }
-
-    public void setRentPrice(Double rentPrice) {
-        this.rentPrice = rentPrice;
+    public Tenant(Property property, LeaseAgreement leaseAgreement, List<Complaint> complaints) {
+        this.property = property;
+        this.leaseAgreement = leaseAgreement;
+        this.complaints = complaints;
     }
 
     public Property getProperty() {
@@ -51,11 +36,20 @@ public class Tenant extends User {
         this.property = property;
     }
 
-    public Complaint getComplaint() {
-        return complaint;
+    public LeaseAgreement getLeaseAgreement() {
+        return leaseAgreement;
     }
 
-    public void setComplaint(Complaint complaint) {
-        this.complaint = complaint;
+    public void setLeaseAgreement(LeaseAgreement leaseAgreement) {
+        this.leaseAgreement = leaseAgreement;
+    }
+
+    public List<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(List<Complaint> complaints) {
+        this.complaints = complaints;
     }
 }
+
