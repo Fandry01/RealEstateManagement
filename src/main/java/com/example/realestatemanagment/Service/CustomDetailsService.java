@@ -1,7 +1,7 @@
 package com.example.realestatemanagment.Service;
 
 
-import com.example.realestatemanagment.Dto.InvestorDTO;
+
 import com.example.realestatemanagment.Dto.UserDTO;
 import com.example.realestatemanagment.Models.AuthorityRoles;
 import org.springframework.security.core.GrantedAuthority;

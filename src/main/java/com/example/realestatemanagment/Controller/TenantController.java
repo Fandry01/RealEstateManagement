@@ -90,4 +90,10 @@ public class TenantController {
         tenantService.assignComplaintToTenant(username,complaintId);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(value = "/{username}/property/{propertyId}")
+    public ResponseEntity<Object> assignPropertyToTenant(@PathVariable("username") String username, @PathVariable("propertyId") Long propertyId){
+        tenantService.assignPropertyToTenant(username,propertyId);
+        return ResponseEntity.noContent().build();
+    }
 }

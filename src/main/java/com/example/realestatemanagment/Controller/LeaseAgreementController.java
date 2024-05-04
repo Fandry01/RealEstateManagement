@@ -63,7 +63,7 @@ public class LeaseAgreementController {
         leaseAgreementService.assignLeaseAgreementToTenant(id,tenantId);
         return ResponseEntity.ok().build();
     }
-    @PutMapping("/{id}/investor/{tenantId}")
+    @PutMapping("/{id}/investor/{investorId}")
     public ResponseEntity<Object> assignInvestorToLeaseAgreement(@PathVariable("id") long id,@PathVariable("investorId") String investorId){
         leaseAgreementService.assignLeaseAgreementToInvestor(id,investorId);
         return ResponseEntity.ok().build();

@@ -4,6 +4,7 @@ import com.example.realestatemanagment.Filter.JwtRequestFilter;
 import com.example.realestatemanagment.Service.CustomDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -54,27 +55,27 @@ public class SecurityConfig {
                             //.anyRequest().permitAll()
             //.authorizeHttpRequests(auth -> auth
 
-                    .requestMatchers("/**").permitAll()
-                    //.requestMatchers(HttpMethod.GET,"/maintenances").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.POST,"/maintenances").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.PUT,"/maintenances").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.DELETE,"/maintenances").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.GET,"/properties").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.POST,"/properties").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.PUT,"/properties").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.DELETE,"/properties").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.POST,"/tenants").hasRole("ADMIN")
-                    //.requestMatchers(HttpMethod.GET,"/tenants").hasAnyRole("ADMIN","INVESTOR")
-                    //.requestMatchers(HttpMethod.PUT,"/tenants").hasRole("TENANT")
-                    //.requestMatchers(HttpMethod.DELETE,"/tenants").hasRole("ADMIN")
-                    //.requestMatchers(HttpMethod.POST,"/investors").hasRole("ADMIN")
-                    //.requestMatchers(HttpMethod.GET,"/investors").hasRole("ADMIN")
-                    //.requestMatchers(HttpMethod.PUT,"/investors").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.DELETE,"/investors").hasRole("ADMIN")
-                    //.requestMatchers(HttpMethod.POST,"/leaseagreements").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.GET,"/leaseagreements").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.PUT,"/leaseagreements").hasRole("INVESTOR")
-                    //.requestMatchers(HttpMethod.DELETE,"/leaseagreements").hasRole("INVESTOR")
+                    //.requestMatchers("/**").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/maintenances").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.POST,"/maintenances").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.PUT,"/maintenances").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.DELETE,"/maintenances").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.GET,"/properties").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.POST,"/properties").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.PUT,"/properties").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.DELETE,"/properties").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.POST,"/tenants").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET,"/tenants").hasAnyRole("ADMIN","INVESTOR")
+                    .requestMatchers(HttpMethod.PUT,"/tenants").hasRole("TENANT")
+                    .requestMatchers(HttpMethod.DELETE,"/tenants").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST,"/investors").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET,"/investors").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT,"/investors").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.DELETE,"/investors").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST,"/leaseagreements").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.GET,"/leaseagreements").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.PUT,"/leaseagreements").hasRole("INVESTOR")
+                    .requestMatchers(HttpMethod.DELETE,"/leaseagreements").hasRole("INVESTOR")
 
                     //.requestMatchers(HttpMethod.POST,"/authenticate").permitAll()
                     //.requestMatchers("/authenticate").permitAll()
