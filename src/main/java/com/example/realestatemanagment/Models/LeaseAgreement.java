@@ -15,6 +15,7 @@ public class LeaseAgreement {
     private String rentalPeriod;
     private LocalDate startDate;
     private LocalDate endDate;
+    @Enumerated(EnumType.STRING)
     private PaymentTerms paymentTerms;
     @ManyToOne(fetch = FetchType.LAZY)
     private Investor investor;
@@ -22,8 +23,6 @@ public class LeaseAgreement {
     private Tenant tenant;
     @OneToOne
     private Property property;
-    @OneToOne(mappedBy = "")
-    private ImageData contract;
     public LeaseAgreement(){
 
     }

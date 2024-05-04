@@ -18,24 +18,25 @@ public class LeaseAgreementDTO {
     private LocalDate endDate;
     @NotBlank(message ="payment terms can't be empty" )
     private PaymentTerms paymentTerms;
-    private TenantDTO tenantDTO;
+    private TenantShortDTO tenantShortDTO;
     private PropertyDTO propertyDTO;
-    private InvestorDTO investorDTO;
+    private InvestorShortDTO investorShortDTO;
+
 
     public LeaseAgreementDTO(){
 
     }
 
-    public LeaseAgreementDTO(Long id, Double rentalPrice, String rentalPeriod, LocalDate startDate, LocalDate endDate, PaymentTerms paymentTerms, TenantDTO tenantDTO, PropertyDTO propertyDTO, InvestorDTO investorDTO) {
+    public LeaseAgreementDTO(Long id, Double rentalPrice, String rentalPeriod, LocalDate startDate, LocalDate endDate, PaymentTerms paymentTerms, TenantShortDTO tenantShortDTO, PropertyDTO propertyDTO, InvestorShortDTO investorShortDTO) {
         this.id = id;
         this.rentalPrice = rentalPrice;
         this.rentalPeriod = rentalPeriod;
         this.startDate = startDate;
         this.endDate = endDate;
         this.paymentTerms = paymentTerms;
-        this.tenantDTO = tenantDTO;
         this.propertyDTO = propertyDTO;
-        this.investorDTO = investorDTO;
+        this.tenantShortDTO = tenantShortDTO;
+        this.investorShortDTO = investorShortDTO;
     }
 
     public Long getId() {
@@ -86,13 +87,6 @@ public class LeaseAgreementDTO {
         this.paymentTerms = paymentTerms;
     }
 
-    public TenantDTO getTenantDTO() {
-        return tenantDTO;
-    }
-
-    public void setTenantDTO(TenantDTO tenantDTO) {
-        this.tenantDTO = tenantDTO;
-    }
 
     public PropertyDTO getPropertyDTO() {
         return propertyDTO;
@@ -102,11 +96,20 @@ public class LeaseAgreementDTO {
         this.propertyDTO = propertyDTO;
     }
 
-    public InvestorDTO getInvestorDTO() {
-        return investorDTO;
+
+    public TenantShortDTO getTenantShortDTO() {
+        return tenantShortDTO;
     }
 
-    public void setInvestorDTO(InvestorDTO investorDTO) {
-        this.investorDTO = investorDTO;
+    public void setTenantShortDTO(TenantShortDTO tenantShortDTO) {
+        this.tenantShortDTO = tenantShortDTO;
+    }
+
+    public InvestorShortDTO getInvestorShortDTO() {
+        return investorShortDTO;
+    }
+
+    public void setInvestorShortDTO(InvestorShortDTO investorShortDTO) {
+        this.investorShortDTO = investorShortDTO;
     }
 }

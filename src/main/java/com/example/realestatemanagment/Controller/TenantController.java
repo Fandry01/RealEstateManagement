@@ -26,7 +26,7 @@ public class TenantController {
 
     @GetMapping
     public ResponseEntity<List<TenantDTO>> getAllTenants(){
-        List<TenantDTO> tenantDTOList = tenantService.getAllTenats();
+        List<TenantDTO> tenantDTOList = tenantService.getAllTenants();
 
         return ResponseEntity.ok().body(tenantDTOList);
     }
@@ -84,4 +84,10 @@ public class TenantController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @PutMapping(value = "/{username}/complaints/{complaintId}")
+    public ResponseEntity<Object> assignComplaintsToTenants(@PathVariable("username") String username, @PathVariable("complaintId") Long complaintId){
+        tenantService.assignComplaintToTenant(username,complaintId);
+        return ResponseEntity.noContent().build();
+    }
 }

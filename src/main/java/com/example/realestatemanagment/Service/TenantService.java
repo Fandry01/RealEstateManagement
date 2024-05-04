@@ -1,9 +1,13 @@
 package com.example.realestatemanagment.Service;
 
+import com.example.realestatemanagment.Dto.ComplaintDTO;
+import com.example.realestatemanagment.Dto.ComplaintShortDTO;
 import com.example.realestatemanagment.Dto.TenantDTO;
+import com.example.realestatemanagment.Dto.TenantShortDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Exceptions.UsernameNotFoundException;
 import com.example.realestatemanagment.Models.AuthorityRoles;
+import com.example.realestatemanagment.Models.Complaint;
 import com.example.realestatemanagment.Models.Tenant;
 import com.example.realestatemanagment.Repository.ComplaintRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
@@ -36,7 +40,7 @@ public class TenantService {
     }
 
 
-    public List<TenantDTO> getAllTenats(){
+    public List<TenantDTO> getAllTenants(){
         List<TenantDTO> tenantList = new ArrayList<>();
         List<Tenant> tenList = tenantRepo.findAll();
         for(Tenant tenant: tenList){
@@ -94,7 +98,7 @@ public class TenantService {
             var complaint = optionalComplaint.get();
             var tenant = optionalTenant.get();
 
-            tenant.setComplaint(complaint);
+            tenant.getComplaints().add(complaint);
             tenantRepo.save(tenant);
         }else{
             throw new RecordNotFoundException("Tenant or complaint not found");
@@ -129,11 +133,15 @@ public class TenantService {
     public TenantDTO transferToDTO(Tenant tenant){
         var dto = new TenantDTO();
 
-        if(tenant.getComplaint() != null){
-            dto.setComplaintDTO(complaintService.getComplaintsById(tenant.getComplaint().getId()));
+            if(tenant.getComplaints() != null){
+                List<Complaint> complaintList = tenant.getComplaints();
+                for(Complaint complaint : complaintList){
+                dto.getComplaintDTO().add(complaintService.transferToShortDTO(complaint));
+                }
+
         }
         if(tenant.getProperty() != null){
-            dto.setPropertyDTO(propertyService.getPropertyById(tenant.getProperty().getId()));
+            dto.setPropertyDTO(propertyService.transferToShortDTO(tenant.getProperty()));
         }
 
         dto.setUsername(tenant.getUsername());
@@ -145,6 +153,19 @@ public class TenantService {
 
         return dto;
     }
+    public TenantShortDTO transferToShortDTO(Tenant tenant){
+        var dto = new TenantShortDTO();
+
+        dto.setUsername(tenant.getUsername());
+        dto.setPassword(tenant.getPassword());
+        dto.setFirstName(tenant.getFirstName());
+        dto.setDob(tenant.getDob());
+        dto.setLastName(tenant.getLastName());
+
+        return dto;
+    }
+
+
     public Tenant transferToTenant(TenantDTO dto){
         var tenant = new Tenant();
 

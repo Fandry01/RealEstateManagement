@@ -26,8 +26,8 @@ public class Property {
 @OneToOne
     Tenant tenant;
 
-@OneToOne
-    Complaint complaint;
+@OneToMany(mappedBy = "property")
+    List<Complaint> complaint;
 @OneToOne(mappedBy = "property")
 private ImageData imageData;
 
@@ -136,13 +136,6 @@ public Property(Long id,HouseTypes type, Double boughtPrice, Double currentPrice
     public void setType(HouseTypes type) {
         this.type = type;
     }
-    public Complaint getComplaint() {
-        return complaint;
-    }
-
-    public void setComplaint(Complaint complaint) {
-        this.complaint = complaint;
-    }
 
     public ImageData getImageData() {
         return imageData;
@@ -150,6 +143,14 @@ public Property(Long id,HouseTypes type, Double boughtPrice, Double currentPrice
 
     public void setImageData(ImageData imageData) {
         this.imageData = imageData;
+    }
+
+    public List<Complaint> getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(List<Complaint> complaint) {
+        this.complaint = complaint;
     }
 }
 

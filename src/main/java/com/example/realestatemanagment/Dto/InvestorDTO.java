@@ -3,27 +3,28 @@ package com.example.realestatemanagment.Dto;
 import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public class InvestorDTO {
-    @NotBlank(message = "username can't be empty")
-    private String username;
-    @NotBlank()
-    @Size(min=5,max=15, message = "required password length 4-15 characters")
-    private String password;
-    @NotBlank(message = "first name can't be empty")
-    private String firstName;
-    @NotBlank(message = "last name can't be empty")
-    private String lastName;
-    @NotBlank(message = "Date of Birth can't be empty")
-    private LocalDate dob;
-    @NotBlank(message = "address can't be empty")
-    private String address;
-    private PropertyDTO propertyDTO;
+        @NotBlank(message = "username can't be empty")
+        private String username;
+        @NotBlank()
+        @Size(min=5,max=15, message = "required password length 4-15 characters")
+        private String password;
+        @NotBlank(message = "first name can't be empty")
+        private String firstName;
+        @NotBlank(message = "last name can't be empty")
+        private String lastName;
+        @NotBlank(message = "Date of Birth can't be empty")
+        private LocalDate dob;
+        @NotBlank(message = "address can't be empty")
+        private String address;
+
+    private List<PropertyDTO> propertyDTO;
     @JsonSerialize
     private Set<AuthorityRoles> authorities;
 
@@ -58,10 +59,6 @@ public class InvestorDTO {
         this.lastName = lastName;
     }
 
-    public void setPropertyDTO(PropertyDTO propertyDTO) {
-        this.propertyDTO = propertyDTO;
-    }
-
     public LocalDate getDob() {
         return dob;
     }
@@ -76,10 +73,6 @@ public class InvestorDTO {
 
     public String getLastname() {
         return lastName;
-    }
-
-    public PropertyDTO getPropertyDTO() {
-        return propertyDTO;
     }
 
     public String getUsername() {
@@ -104,5 +97,13 @@ public class InvestorDTO {
 
     public void setAuthorities(Set<AuthorityRoles> authorities) {
         this.authorities = authorities;
+    }
+
+    public List<PropertyDTO> getPropertyDTO() {
+        return propertyDTO;
+    }
+
+    public void setPropertyDTO(List<PropertyDTO> propertyDTO) {
+        this.propertyDTO = propertyDTO;
     }
 }

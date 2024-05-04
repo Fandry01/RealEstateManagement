@@ -82,6 +82,18 @@ public class LeaseAgreementService {
     public LeaseAgreementDTO transferToDTO(LeaseAgreement leaseAgreement){
         var dto = new LeaseAgreementDTO();
 
+        if(leaseAgreement.getTenant() != null){
+            dto.setTenantShortDTO(tenantService.transferToShortDTO(leaseAgreement.getTenant()));
+        }
+        if(leaseAgreement.getProperty() != null){
+            dto.setPropertyDTO(propertyservice.getPropertyById(leaseAgreement.getProperty().getId()));
+        }
+
+        if(leaseAgreement.getInvestor() != null){
+            dto.setInvestorShortDTO(investorService.transferToShortDTO(leaseAgreement.getInvestor()));
+        }
+
+
         dto.setId(leaseAgreement.getId());
         dto.setStartDate(leaseAgreement.getStartDate());
         dto.setEndDate(leaseAgreement.getEndDate());

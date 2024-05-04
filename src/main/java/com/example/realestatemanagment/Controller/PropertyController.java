@@ -96,7 +96,7 @@ public class PropertyController {
     }
 
 
-    @PutMapping("/{id}/maintenance")
+    @PutMapping("/{id}/maintenance/{maintenanceId}")
     public ResponseEntity<Object> assignMaintenanceProperties(@PathVariable ("id") Long id, @PathVariable("maintenanceId") Long maintenanceId)
     {
        propertyService.assignMaintenanceToProperty(id,maintenanceId);

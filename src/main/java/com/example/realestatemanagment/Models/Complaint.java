@@ -18,7 +18,7 @@ public class Complaint {
     @ManyToOne(fetch = FetchType.LAZY)
     Tenant tenant;
 
-    @OneToOne
+    @ManyToOne
     Property property;
     public Complaint(){
 

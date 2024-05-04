@@ -16,6 +16,8 @@ public class MaintenanceDTO {
     @Future(message = "Please date the maintenance ahead")
     private LocalDate maintenanceDate;
 
+    private PropertyDTO propertyDTO;
+
     public MaintenanceDTO()
     {
 
@@ -43,5 +45,13 @@ public class MaintenanceDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public PropertyDTO getPropertyDTO() {
+        return propertyDTO;
+    }
+
+    public void setPropertyDTO(PropertyDTO propertyDTO) {
+        this.propertyDTO = propertyDTO;
     }
 }

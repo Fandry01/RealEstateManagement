@@ -9,12 +9,10 @@ import java.util.*;
 @Table(name = "tenants")
 public class Tenant extends User {
 
-
     @OneToOne
     Property property;
     @OneToOne
     LeaseAgreement leaseAgreement;
-
     @OneToMany(mappedBy = "tenant")
     private List<Complaint> complaints;
 

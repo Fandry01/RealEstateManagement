@@ -1,6 +1,5 @@
 package com.example.realestatemanagment.Models;
 
-
 import com.example.realestatemanagment.Enums.MaintenanceTypes;
 import com.example.realestatemanagment.Enums.Priority;
 import jakarta.persistence.*;
@@ -23,8 +22,7 @@ public class Maintenance {
     @Enumerated(EnumType.STRING)
     public Priority priority;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Property property;
 
 

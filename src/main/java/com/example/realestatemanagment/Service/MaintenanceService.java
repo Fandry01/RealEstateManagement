@@ -1,7 +1,7 @@
 package com.example.realestatemanagment.Service;
 
 import com.example.realestatemanagment.Dto.MaintenanceDTO;
-import com.example.realestatemanagment.Dto.PropertyDTO;
+import com.example.realestatemanagment.Dto.MaintenanceShortDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Maintenance;
 import com.example.realestatemanagment.Repository.MaintenanceRepository;
@@ -16,8 +16,11 @@ public class MaintenanceService {
 
     private final MaintenanceRepository repo;
 
+
+
     public MaintenanceService(MaintenanceRepository repo) {
         this.repo = repo;
+
     }
 
     public List<MaintenanceDTO> getAllMaintenance(){
@@ -71,7 +74,7 @@ public class MaintenanceService {
 
 
 
-    public static MaintenanceDTO transferToDTO (Maintenance maintenance){
+    public MaintenanceDTO transferToDTO (Maintenance maintenance){
         var dto = new MaintenanceDTO();
         dto.setId(maintenance.getId());
         dto.setMaintenanceDate(maintenance.getMaintenanceDate());
@@ -79,6 +82,16 @@ public class MaintenanceService {
 
         return dto;
 
+    }
+
+    public MaintenanceShortDTO transferToShortDTO(Maintenance maintenance){
+        var dto = new MaintenanceShortDTO();
+
+        dto.setId(maintenance.getId());
+        dto.setMaintenanceDate(maintenance.getMaintenanceDate());
+        dto.setTypeOfMaintenance(maintenance.getTypeOfMaintenance());
+
+        return dto;
     }
 
     public Maintenance transferToMaintenance(MaintenanceDTO dto){

@@ -1,29 +1,31 @@
 package com.example.realestatemanagment.Service;
 
 import com.example.realestatemanagment.Dto.InvestorDTO;
+import com.example.realestatemanagment.Dto.InvestorShortDTO;
+import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Exceptions.UsernameNotFoundException;
 import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.example.realestatemanagment.Models.Investor;
+import com.example.realestatemanagment.Models.Property;
 import com.example.realestatemanagment.Repository.InvestorRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class InvestorService {
     private final InvestorRepository investorRepo;
     private final PropertyRepository propertyRepo;
+    private final PropertyService propertyService;
     private final PasswordEncoder passwordEncoder;
 
-    public InvestorService(InvestorRepository investorRepo, PropertyRepository propertyRepo, PasswordEncoder passwordEncoder) {
+    public InvestorService(InvestorRepository investorRepo, PropertyRepository propertyRepo, PropertyService propertyService, PasswordEncoder passwordEncoder) {
         this.investorRepo = investorRepo;
         this.propertyRepo = propertyRepo;
+        this.propertyService = propertyService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -94,6 +96,15 @@ public class InvestorService {
     public static InvestorDTO transferToDTO(Investor investor){
         var dto = new InvestorDTO();
 
+        if(investor.getProperties() != null){
+            List<PropertyDTO> propertyDTOSet = new ArrayList<>();
+            for(Property property : investor.getProperties()){
+                PropertyDTO propertyDTO = new PropertyDTO();
+                propertyDTO.setId(property.getId());
+                propertyDTOSet.add(propertyDTO);
+                dto.setPropertyDTO(propertyDTOSet);
+            }
+        }
         dto.setUsername(investor.getUsername());
         dto.setPassword(investor.getPassword());
         dto.setAddress(investor.getAddress());
@@ -101,6 +112,19 @@ public class InvestorService {
         dto.setFirstName(investor.getFirstName());
         dto.setLastName(investor.getLastName());
         dto.setAuthorities(investor.getAuthorities());
+
+        return dto;
+    }
+
+    public InvestorShortDTO transferToShortDTO(Investor investor){
+        var dto = new InvestorShortDTO();
+
+        dto.setUsername(investor.getUsername());
+        dto.setPassword(investor.getPassword());
+        dto.setAddress(investor.getAddress());
+        dto.setDob(investor.getDob());
+        dto.setFirstName(investor.getFirstName());
+        dto.setLastName(investor.getLastName());
 
         return dto;
     }

@@ -13,7 +13,6 @@ import com.example.realestatemanagment.Repository.ComplaintRepository;
 import com.example.realestatemanagment.Repository.InvestorRepository;
 import com.example.realestatemanagment.Repository.MaintenanceRepository;
 import com.example.realestatemanagment.Repository.PropertyRepository;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -44,7 +42,6 @@ class PropertyServiceTest {
     MaintenanceRepository maintenanceRepo;
     @Mock
     MaintenanceService maintenanceService;
-
     @Mock
     InvestorService investorService;
     @Mock
@@ -65,8 +62,8 @@ class PropertyServiceTest {
         property2 = new Property(12L,HouseTypes.VRIJSTAANDEHUIS,17500.00,19500.00,2015,"240m2",false,"Diemen15");
         complaint1 = new Complaint(10L, LocalDate.of(2024,10,15),"Its To cold here");
         maintenance1 = new Maintenance(20L, MaintenanceTypes.SAFETYMAINTENANCE,LocalDate.of(2024,5,5), Priority.MEDIUM);
-        propertyService = new PropertyService(propertyRepo, complaintRepo, complaintService, maintenanceRepo,
-                maintenanceService, investorService, investorRepo);
+        propertyService = new PropertyService(propertyRepo, complaintRepo, complaintService, maintenanceService, maintenanceRepo,
+                 investorRepo);
     }
 
 
@@ -208,8 +205,8 @@ class PropertyServiceTest {
 
         Property capturedProperty = argumentCaptor.getValue();
 
-        assertEquals(complaint1.getId(), capturedProperty.getComplaint().getId());
-        assertEquals(complaint1.getComplaintMessage(), capturedProperty.getComplaint().getComplaintMessage());
+        assertEquals(complaint1.getId(), capturedProperty.getComplaint());
+        assertEquals(complaint1.getComplaintMessage(), capturedProperty.getComplaint());
 
     }
 

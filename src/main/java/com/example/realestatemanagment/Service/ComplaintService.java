@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Service;
 
 import com.example.realestatemanagment.Dto.ComplaintDTO;
+import com.example.realestatemanagment.Dto.ComplaintShortDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Complaint;
 import com.example.realestatemanagment.Repository.ComplaintRepository;
@@ -71,6 +72,16 @@ private final ComplaintRepository complaintRepo;
 
         dto.setId(complaint.getId());
 
+        dto.setComplaintMessage(complaint.getComplaintMessage());
+        dto.setDateOfComplaint(complaint.getDateOfComplaint());
+
+        return dto;
+    }
+
+    public ComplaintShortDTO transferToShortDTO(Complaint complaint){
+        var dto = new ComplaintShortDTO();
+
+        dto.setId(complaint.getId());
         dto.setComplaintMessage(complaint.getComplaintMessage());
         dto.setDateOfComplaint(complaint.getDateOfComplaint());
 
