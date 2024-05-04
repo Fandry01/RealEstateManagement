@@ -35,7 +35,7 @@ public class MaintenanceController {
     public ResponseEntity<Object> addMaintenance(@RequestBody MaintenanceDTO maintenanceDTO){
         MaintenanceDTO maintenanceDto = maintenanceService.addMaintenance(maintenanceDTO);
 
-        return ResponseEntity.created(null).body(maintenanceDTO);
+        return ResponseEntity.created(null).body(maintenanceDto);
     }
 
     @PutMapping
