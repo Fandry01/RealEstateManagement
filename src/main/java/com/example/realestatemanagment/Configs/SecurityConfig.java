@@ -45,25 +45,14 @@ public class SecurityConfig {
 }
     @Bean
     protected SecurityFilterChain filter (HttpSecurity http) throws  Exception{
-
     http
             .csrf(csrf -> csrf.disable())
             .httpBasic(basic -> basic.disable())
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
 
-                            //.anyRequest().permitAll()
-            //.authorizeHttpRequests(auth -> auth
-
-                    //.requestMatchers("/**").permitAll()
-                    .requestMatchers(HttpMethod.GET,"/maintenances").hasRole("INVESTOR")
-                    .requestMatchers(HttpMethod.POST,"/maintenances").hasRole("INVESTOR")
-                    .requestMatchers(HttpMethod.PUT,"/maintenances").hasRole("INVESTOR")
-                    .requestMatchers(HttpMethod.DELETE,"/maintenances").hasRole("INVESTOR")
-                    .requestMatchers(HttpMethod.GET,"/properties").hasRole("INVESTOR")
-                    .requestMatchers(HttpMethod.POST,"/properties").hasRole("INVESTOR")
-                    .requestMatchers(HttpMethod.PUT,"/properties").hasRole("INVESTOR")
-                    .requestMatchers(HttpMethod.DELETE,"/properties").hasRole("INVESTOR")
+                            .requestMatchers("/maintenances/**").hasRole("INVESTOR")
+                            .requestMatchers("/properties/**").hasRole("INVESTOR")
                     .requestMatchers(HttpMethod.POST,"/tenants").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/tenants").hasAnyRole("ADMIN","INVESTOR")
                     .requestMatchers(HttpMethod.PUT,"/tenants").hasRole("TENANT")
@@ -76,6 +65,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.GET,"/leaseagreements").hasRole("INVESTOR")
                     .requestMatchers(HttpMethod.PUT,"/leaseagreements").hasRole("INVESTOR")
                     .requestMatchers(HttpMethod.DELETE,"/leaseagreements").hasRole("INVESTOR")
+                            .requestMatchers("/auth/**").permitAll()
 
                     //.requestMatchers(HttpMethod.POST,"/authenticate").permitAll()
                     //.requestMatchers("/authenticate").permitAll()

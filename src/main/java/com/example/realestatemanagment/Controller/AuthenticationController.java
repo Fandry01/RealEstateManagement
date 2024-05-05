@@ -16,6 +16,7 @@ import java.security.Principal;
 
 //@CrossOrigin
 @RestController
+@RequestMapping(value = "/auth")
 public class AuthenticationController {
 
     private final UserDetailsService userDetailsService;

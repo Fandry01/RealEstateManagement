@@ -15,7 +15,7 @@ import java.util.Optional;
 public class ImageService {
 
     private final ImageRepository imageRepo;
-    private  final PropertyRepository propertyRepo;
+    private final PropertyRepository propertyRepo;
     private final PropertyService propertyService;
 
 
@@ -26,7 +26,7 @@ public class ImageService {
     }
 
 
-    public  String uploadImage(MultipartFile multipartFile,Long id) throws IOException {
+    public String uploadImage(MultipartFile multipartFile, Long id) throws IOException {
         Optional<Property> property = propertyRepo.findById(id);
         Property property1 = property.get();
 
@@ -44,10 +44,10 @@ public class ImageService {
         return savedImage.getName();
     }
 
-    public byte[] downloadImage(Long id) throws IOException{
+    public byte[] downloadImage(Long id) throws IOException {
         Optional<Property> property = propertyRepo.findById(id);
         Property property1 = property.get();
-        if(property.isPresent()){
+        if (property.isPresent()) {
             property1 = property.get();
         }
 

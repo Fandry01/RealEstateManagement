@@ -61,7 +61,7 @@ class PropertyServiceTest {
         property1 = new Property(10L,HouseTypes.APPARTEMENT,15000.00,17000.00,1999,"150M2",true,"Holendrecht12");
         property2 = new Property(12L,HouseTypes.VRIJSTAANDEHUIS,17500.00,19500.00,2015,"240m2",false,"Diemen15");
         complaint1 = new Complaint(10L, LocalDate.of(2024,10,15),"Its To cold here");
-        maintenance1 = new Maintenance(20L, MaintenanceTypes.SAFETYMAINTENANCE,LocalDate.of(2024,5,5), Priority.MEDIUM);
+        maintenance1 = new Maintenance(20L, MaintenanceTypes.SAFETY_MAINTENANCE,LocalDate.of(2024,5,5), Priority.MEDIUM);
         propertyService = new PropertyService(propertyRepo, complaintRepo, complaintService, maintenanceService, maintenanceRepo,
                  investorRepo);
     }

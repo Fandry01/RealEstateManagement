@@ -1,7 +1,6 @@
 package com.example.realestatemanagment.Service;
 
-import com.example.realestatemanagment.Dto.ComplaintDTO;
-import com.example.realestatemanagment.Dto.ComplaintShortDTO;
+
 import com.example.realestatemanagment.Dto.TenantDTO;
 import com.example.realestatemanagment.Dto.TenantShortDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
@@ -39,108 +38,121 @@ public class TenantService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public static TenantShortDTO transferToShortDTO(Tenant tenant) {
+        var dto = new TenantShortDTO();
 
-    public List<TenantDTO> getAllTenants(){
+        dto.setUsername(tenant.getUsername());
+        dto.setPassword(tenant.getPassword());
+        dto.setFirstName(tenant.getFirstName());
+        dto.setDob(tenant.getDob());
+        dto.setLastName(tenant.getLastName());
+
+        return dto;
+    }
+
+    public List<TenantDTO> getAllTenants() {
         List<TenantDTO> tenantList = new ArrayList<>();
         List<Tenant> tenList = tenantRepo.findAll();
-        for(Tenant tenant: tenList){
+        for (Tenant tenant : tenList) {
             tenantList.add(transferToDTO(tenant));
         }
         return tenantList;
     }
-    public TenantDTO getTenantByUsername(String username){
+
+    public TenantDTO getTenantByUsername(String username) {
         Optional<Tenant> optionalTenant = tenantRepo.findById(username);
-        if(optionalTenant.isPresent()){
+        if (optionalTenant.isPresent()) {
             Tenant tenant = optionalTenant.get();
 
             return transferToDTO(tenant);
-        }else {
-            throw new RecordNotFoundException("Tenant with " +username+ " not found");
+        } else {
+            throw new RecordNotFoundException("Tenant with " + username + " not found");
         }
     }
 
-    public String createTenant(TenantDTO tenant){
+    public String createTenant(TenantDTO tenant) {
 
         Tenant newTenant = tenantRepo.save(transferToTenant(tenant));
         return newTenant.getUsername();
     }
 
-    public void updateTenant(String username, TenantDTO tenantDTO){
-        if(!tenantRepo.existsById(username)) throw new RecordNotFoundException("Tenant with " +username+ " not found");
-        Tenant tenant = tenantRepo.findById(username).get();
+    public void updateTenant(String username, TenantDTO tenantDTO) {
+        Optional<Tenant> optionalTenant = tenantRepo.findById(username);
+        if (optionalTenant.isEmpty()) {
+            throw new RecordNotFoundException("Tenant with" + username + "not found");
+        }
+        Tenant tenant = optionalTenant.get();
         tenant.setPassword(tenantDTO.getPassword());
         tenantRepo.save(tenant);
     }
-    public void deleteTenant(String username){
+
+    public void deleteTenant(String username) {
         tenantRepo.deleteById(username);
     }
 
-    public void assignPropertyToTenant(String username,Long propertyId){
+    public void assignPropertyToTenant(String username, Long propertyId) {
         var optionalProperty = propertyRepo.findById(propertyId);
         var optionalTenant = tenantRepo.findById(username);
 
-        if(optionalTenant.isPresent() && optionalProperty.isPresent()){
+        if (optionalTenant.isPresent() && optionalProperty.isPresent()) {
             var property = optionalProperty.get();
             var tenant = optionalTenant.get();
 
             tenant.setProperty(property);
             tenantRepo.save(tenant);
-        }else{
+        } else {
             throw new RecordNotFoundException("Tenant or Property not found");
         }
     }
 
-    public void assignComplaintToTenant(String username,Long complaintId){
+    public void assignComplaintToTenant(String username, Long complaintId) {
         var optionalComplaint = complaintRepo.findById(complaintId);
         var optionalTenant = tenantRepo.findById(username);
 
-        if(optionalTenant.isPresent() && optionalComplaint.isPresent()){
+        if (optionalTenant.isPresent() && optionalComplaint.isPresent()) {
             var complaint = optionalComplaint.get();
             var tenant = optionalTenant.get();
 
             tenant.getComplaints().add(complaint);
             tenantRepo.save(tenant);
-        }else{
+        } else {
             throw new RecordNotFoundException("Tenant or complaint not found");
         }
     }
 
-    public void addAuthority(String username, String authority){
-        if(!tenantRepo.existsById(username)) throw new RecordNotFoundException("Tenant not found");
+    public void addAuthority(String username, String authority) {
+        if (!tenantRepo.existsById(username)) throw new RecordNotFoundException("Tenant not found");
         Tenant tenant = tenantRepo.findById(username).get();
-        tenant.addAuthorityRoles(new AuthorityRoles(username,authority));
+        tenant.addAuthorityRoles(new AuthorityRoles(username, authority));
         tenantRepo.save(tenant);
     }
 
-    public Set<AuthorityRoles> getAuthorities(String username){
-        if(!tenantRepo.existsById(username)) throw new UsernameNotFoundException(username);
+    public Set<AuthorityRoles> getAuthorities(String username) {
+        if (!tenantRepo.existsById(username)) throw new UsernameNotFoundException(username);
         Tenant tenant = tenantRepo.findById(username).get();
         TenantDTO tenantDTO = transferToDTO(tenant);
         return tenantDTO.getAuthorities();
     }
 
-    public void removeAuthority(String username, String authority){
-        if(!tenantRepo.existsById(username)) throw new UsernameNotFoundException(username);
+    public void removeAuthority(String username, String authority) {
+        if (!tenantRepo.existsById(username)) throw new UsernameNotFoundException(username);
         Tenant tenant = tenantRepo.findById(username).get();
         AuthorityRoles authorityRemove = tenant.getRoles().stream().filter(a -> a.getAuthorityRoles().equalsIgnoreCase(authority)).findAny().get();
 
         tenant.deleteAuthorityRoles(authorityRemove);
     }
 
-
-
-
-    public TenantDTO transferToDTO(Tenant tenant){
+    public TenantDTO transferToDTO(Tenant tenant) {
         var dto = new TenantDTO();
 
-            if(tenant.getComplaints() != null){
-                List<Complaint> complaintList = tenant.getComplaints();
-                for(Complaint complaint : complaintList){
+        if (tenant.getComplaints() != null) {
+            List<Complaint> complaintList = tenant.getComplaints();
+            for (Complaint complaint : complaintList) {
                 dto.getComplaintDTO().add(complaintService.transferToShortDTO(complaint));
-                }
+            }
 
         }
-        if(tenant.getProperty() != null){
+        if (tenant.getProperty() != null) {
             dto.setPropertyDTO(propertyService.transferToShortDTO(tenant.getProperty()));
         }
 
@@ -153,20 +165,8 @@ public class TenantService {
 
         return dto;
     }
-    public TenantShortDTO transferToShortDTO(Tenant tenant){
-        var dto = new TenantShortDTO();
 
-        dto.setUsername(tenant.getUsername());
-        dto.setPassword(tenant.getPassword());
-        dto.setFirstName(tenant.getFirstName());
-        dto.setDob(tenant.getDob());
-        dto.setLastName(tenant.getLastName());
-
-        return dto;
-    }
-
-
-    public Tenant transferToTenant(TenantDTO dto){
+    public Tenant transferToTenant(TenantDTO dto) {
         var tenant = new Tenant();
 
         tenant.setUsername(dto.getUsername());

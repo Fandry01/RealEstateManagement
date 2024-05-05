@@ -22,44 +22,41 @@ public class ComplaintController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ComplaintDTO>> getAllComplaints(){
+    public ResponseEntity<List<ComplaintDTO>> getAllComplaints() {
         List<ComplaintDTO> complaintDTOS = complaintService.getAllComplaints();
 
         return ResponseEntity.ok().body(complaintDTOS);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ComplaintDTO> getComplaintsById(@PathVariable("id") Long id){
+    public ResponseEntity<ComplaintDTO> getComplaintsById(@PathVariable("id") Long id) {
         ComplaintDTO complaintDTO = complaintService.getComplaintsById(id);
 
         return ResponseEntity.ok().body(complaintDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Object> addComplaint(@RequestBody ComplaintDTO complaintDTO){
+    public ResponseEntity<Object> addComplaint(@RequestBody ComplaintDTO complaintDTO) {
         ComplaintDTO complaintD = complaintService.addComplaint(complaintDTO);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/"+ complaintD.getId()).buildAndExpand(complaintD.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + complaintD.getId()).buildAndExpand(complaintD.getId()).toUri();
 
         return ResponseEntity.created(location).body(complaintD);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateComplaint(@PathVariable Long id, ComplaintDTO complaintDTO){
-        ComplaintDTO complaintD = complaintService.updateComplaint(id,complaintDTO);
+    public ResponseEntity<Object> updateComplaint(@PathVariable Long id, ComplaintDTO complaintDTO) {
+        ComplaintDTO complaintD = complaintService.updateComplaint(id, complaintDTO);
 
         return ResponseEntity.ok().body(complaintD);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteComplaint(@PathVariable Long id){
+    public ResponseEntity<Object> deleteComplaint(@PathVariable Long id) {
         complaintService.deleteComplaint(id);
 
         return ResponseEntity.noContent().build();
     }
-
-
-
 
 
 }

@@ -1,7 +1,6 @@
 package com.example.realestatemanagment.Service;
 
 
-
 import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Dto.PropertyShortDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
@@ -29,7 +28,7 @@ public class PropertyService {
     private final MaintenanceRepository maintenanceRepo;
     private final InvestorRepository investorRepo;
 
-    public PropertyService(PropertyRepository propertyRepo, ComplaintRepository complaintRepo, ComplaintService complaintService, MaintenanceService maintenanceService, MaintenanceRepository maintenanceRepo, InvestorRepository investorRepo){
+    public PropertyService(PropertyRepository propertyRepo, ComplaintRepository complaintRepo, ComplaintService complaintService, MaintenanceService maintenanceService, MaintenanceRepository maintenanceRepo, InvestorRepository investorRepo) {
         this.propertyRepo = propertyRepo;
         this.complaintRepo = complaintRepo;
         this.complaintService = complaintService;
@@ -39,52 +38,52 @@ public class PropertyService {
 
     }
 
-    public List<PropertyDTO> getAllProperties(){
+    public List<PropertyDTO> getAllProperties() {
         List<PropertyDTO> propertyList = new ArrayList<>();
         List<Property> propList = propertyRepo.findAll();
 
-        for(Property property : propList){
+        for (Property property : propList) {
             propertyList.add(transferToDTO(property));
         }
         return propertyList;
 
     }
 
-    public PropertyDTO getPropertyById(Long id){
+    public PropertyDTO getPropertyById(Long id) {
         Optional<Property> optionalProperty = propertyRepo.findById(id);
-        if(optionalProperty.isPresent()){
+        if (optionalProperty.isPresent()) {
             Property property = optionalProperty.get();
 
-            return  transferToDTO(property);
-        }else {
+            return transferToDTO(property);
+        } else {
             throw new RecordNotFoundException("Property with ID " + id + "not found");
         }
     }
 
-    public PropertyDTO addProperty( PropertyDTO dto){
+    public PropertyDTO addProperty(PropertyDTO dto) {
         Property property = transferToProperty(dto);
         propertyRepo.save(property);
 
         return transferToDTO(property);
     }
-    public void deletePropertyById(Long id)
-    {
-        if(propertyRepo.findById(id).isPresent()){
+
+    public void deletePropertyById(Long id) {
+        if (propertyRepo.findById(id).isPresent()) {
             propertyRepo.deleteById(id);
-        }else {
+        } else {
             throw new RecordNotFoundException("property with ID " + id + "not found");
         }
 
     }
 
-    public PropertyDTO updateProperty(Long id, PropertyDTO dto){
-        if(propertyRepo.findById(id).isPresent()){
+    public PropertyDTO updateProperty(Long id, PropertyDTO dto) {
+        if (propertyRepo.findById(id).isPresent()) {
             Property property = propertyRepo.findById(id).get();
             Property property1 = transferToProperty(dto);
             property1.setId(property.getId());
             propertyRepo.save(property1);
             return transferToDTO(property1);
-        }else {
+        } else {
             throw new RecordNotFoundException("Property Not Found");
         }
 
@@ -101,110 +100,110 @@ public class PropertyService {
             }
         }
 
-        if(property.getMaintenances() != null){
+        if (property.getMaintenances() != null) {
             List<Maintenance> maintenanceList = property.getMaintenances();
-            for(Maintenance maintenance : maintenanceList){
+            for (Maintenance maintenance : maintenanceList) {
                 dto.getMaintenanceDTO().add(maintenanceService.transferToShortDTO(maintenance));
             }
         }
 
-            dto.setId(property.getId());
-            dto.setAddress(property.getAddress());
-            dto.setBoughtPrice(property.getBoughtPrice());
-            dto.setBuildYear(property.getBuildYear());
-            dto.setRented(property.getRented());
-            dto.setSquareFeet(property.getSquareFeet());
-            dto.setCurrentPrice(property.getCurrentPrice());
-            dto.setType(property.getType());
+        dto.setId(property.getId());
+        dto.setAddress(property.getAddress());
+        dto.setBoughtPrice(property.getBoughtPrice());
+        dto.setBuildYear(property.getBuildYear());
+        dto.setRented(property.getRented());
+        dto.setSquareFeet(property.getSquareFeet());
+        dto.setCurrentPrice(property.getCurrentPrice());
+        dto.setType(property.getType());
 
-            return dto;
+        return dto;
 
     }
 
 
-        public Property transferToProperty (PropertyDTO dto){
-            var property = new Property();
+    public Property transferToProperty(PropertyDTO dto) {
+        var property = new Property();
 
-            property.setAddress(dto.getAddress());
-            property.setBoughtPrice(dto.getBoughtPrice());
-            property.setBuildYear(dto.getBuildYear());
-            property.setType(dto.getType());
-            property.setSquareFeet(dto.getSquareFeet());
-            property.setRented(dto.getRented());
-            property.setCurrentPrice(dto.getCurrentPrice());
+        property.setAddress(dto.getAddress());
+        property.setBoughtPrice(dto.getBoughtPrice());
+        property.setBuildYear(dto.getBuildYear());
+        property.setType(dto.getType());
+        property.setSquareFeet(dto.getSquareFeet());
+        property.setRented(dto.getRented());
+        property.setCurrentPrice(dto.getCurrentPrice());
 
-            return property;
+        return property;
+    }
+
+
+    public PropertyShortDTO transferToShortDTO(Property property) {
+
+        var dto = new PropertyShortDTO();
+
+        dto.setId(property.getId());
+        dto.setAddress(property.getAddress());
+        dto.setBoughtPrice(property.getBoughtPrice());
+        dto.setBuildYear(property.getBuildYear());
+        dto.setRented(property.getRented());
+        dto.setSquareFeet(property.getSquareFeet());
+        dto.setCurrentPrice(property.getCurrentPrice());
+        dto.setType(property.getType());
+
+        return dto;
+    }
+
+
+    public void assignPropertyToInvestor(Long id, String investorId) {
+        var optionalProperty = propertyRepo.findById(id);
+        var optionalInvestor = investorRepo.findById(investorId);
+
+        if (optionalProperty.isPresent() && optionalInvestor.isPresent()) {
+            var property = optionalProperty.get();
+            var investor = optionalInvestor.get();
+
+            property.setInvestor(investor);
+            propertyRepo.save(property);
+
+        } else {
+            throw new RecordNotFoundException("Investor or Property not found");
+        }
+    }
+
+    public void assignComplaintToProperty(Long id, Long complaintId) {
+        var optionalProperty = propertyRepo.findById(id);
+        var optionalComplaint = complaintRepo.findById(complaintId);
+
+        if (optionalProperty.isPresent() && optionalComplaint.isPresent()) {
+            var property = optionalProperty.get();
+            var complaint = optionalComplaint.get();
+
+            property.getComplaint().add(complaint);
+            propertyRepo.save(property);
+        } else {
+            throw new RecordNotFoundException("property or complaint not found");
         }
 
+    }
 
-        public PropertyShortDTO transferToShortDTO(Property property){
+    public void assignMaintenanceToProperty(Long id, Long maintenanceId) {
+        var optionalProperty = propertyRepo.findById(id);
+        var optionalMaintenance = maintenanceRepo.findById(maintenanceId);
 
-            var dto = new PropertyShortDTO();
+        if (optionalProperty.isPresent() && optionalMaintenance.isPresent()) {
+            var property = optionalProperty.get();
+            var maintenance = optionalMaintenance.get();
 
-            dto.setId(property.getId());
-            dto.setAddress(property.getAddress());
-            dto.setBoughtPrice(property.getBoughtPrice());
-            dto.setBuildYear(property.getBuildYear());
-            dto.setRented(property.getRented());
-            dto.setSquareFeet(property.getSquareFeet());
-            dto.setCurrentPrice(property.getCurrentPrice());
-            dto.setType(property.getType());
+            property.getMaintenances().add(maintenance);
+            maintenance.setProperty(property);
 
-            return dto;
+            maintenanceRepo.save(maintenance);
+            propertyRepo.save(property);
+
+        } else {
+            throw new RecordNotFoundException("property or maintenance not found");
         }
 
-
-        public void assignPropertyToInvestor (Long id, String investorId){
-            var optionalProperty = propertyRepo.findById(id);
-            var optionalInvestor = investorRepo.findById(investorId);
-
-            if (optionalProperty.isPresent() && optionalInvestor.isPresent()) {
-                var property = optionalProperty.get();
-                var investor = optionalInvestor.get();
-
-                property.setInvestor(investor);
-                propertyRepo.save(property);
-
-            } else {
-                throw new RecordNotFoundException("Investor or Property not found");
-            }
-        }
-
-        public void assignComplaintToProperty (Long id, Long complaintId){
-            var optionalProperty = propertyRepo.findById(id);
-            var optionalComplaint = complaintRepo.findById(complaintId);
-
-            if (optionalProperty.isPresent() && optionalComplaint.isPresent()) {
-                var property = optionalProperty.get();
-                var complaint = optionalComplaint.get();
-
-                property.getComplaint().add(complaint);
-                propertyRepo.save(property);
-            } else {
-                throw new RecordNotFoundException("property or complaint not found");
-            }
-
-        }
-
-        public void assignMaintenanceToProperty (Long id, Long maintenanceId){
-            var optionalProperty = propertyRepo.findById(id);
-            var optionalMaintenance = maintenanceRepo.findById(maintenanceId);
-
-            if (optionalProperty.isPresent() && optionalMaintenance.isPresent()) {
-                var property = optionalProperty.get();
-                var maintenance = optionalMaintenance.get();
-
-                property.getMaintenances().add(maintenance);
-                maintenance.setProperty(property);
-
-                maintenanceRepo.save(maintenance);
-                propertyRepo.save(property);
-
-            } else {
-                throw new RecordNotFoundException("property or maintenance not found");
-            }
-
-        }
+    }
 
 
 }

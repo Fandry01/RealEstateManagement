@@ -15,95 +15,81 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
 @RequestMapping("/properties")
 @RestController
 public class PropertyController {
     private final PropertyService propertyService;
+
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
 
 
     @GetMapping
-    public ResponseEntity <List<PropertyDTO>> getAllProperties(){
-        try{
-            List<PropertyDTO> propDTOS = propertyService.getAllProperties();
-            return ResponseEntity.ok().body(propDTOS);
-        }catch (Exception ex){
-            throw new RecordNotFoundException("List cant be created");
-        }
+    public ResponseEntity<List<PropertyDTO>> getAllProperties() {
+        List<PropertyDTO> propDTOS = propertyService.getAllProperties();
+        return ResponseEntity.ok().body(propDTOS);
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PropertyDTO> getProperty(@PathVariable("id")Long id){
-            PropertyDTO propertyDTO = propertyService.getPropertyById(id);
+    public ResponseEntity<PropertyDTO> getProperty(@PathVariable("id") Long id) {
+        PropertyDTO propertyDTO = propertyService.getPropertyById(id);
 
-            return ResponseEntity.ok().body(propertyDTO);
+        return ResponseEntity.ok().body(propertyDTO);
 
     }
 
     @PostMapping
-    public ResponseEntity<Object> addProperty(@Valid @RequestBody PropertyDTO propertyDTO, BindingResult bindingResult) throws MethodArgumentNotValidException{
-            if(bindingResult.hasErrors() ){
-                throw new MethodArgumentNotValidException(null,bindingResult);
-            }else if(propertyDTO.getType() == HouseTypes.DEFAULT){
-                throw new HttpMessageNotReadableException("please choose type property");
-            }
+    public ResponseEntity<Object> addProperty(@Valid @RequestBody PropertyDTO propertyDTO) {
+        if (propertyDTO.getType() == HouseTypes.DEFAULT) {
+            throw new HttpMessageNotReadableException("please choose type property");
+        } else {
+            PropertyDTO propDto = propertyService.addProperty(propertyDTO);
 
-            else{
-                PropertyDTO propDto = propertyService.addProperty(propertyDTO);
+            URI uri = URI.create(
+                    ServletUriComponentsBuilder
+                            .fromCurrentRequest()
+                            .path("/" + propDto).toUriString());
 
-                URI uri = URI.create(
-                ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/" + propDto).toUriString());
-
-                return ResponseEntity.created(uri).body(propDto);
-            }
+            return ResponseEntity.created(uri).body(propDto);
+        }
 
     }
 
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteById(@PathVariable Long id){
-            propertyService.deletePropertyById(id);
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<Object> deleteById(@PathVariable Long id) {
+        propertyService.deletePropertyById(id);
+        return ResponseEntity.noContent().build();
 
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateProperty(@PathVariable Long id, PropertyDTO propertyDTO, BindingResult bindingResult) throws MethodArgumentNotValidException{
-        if(bindingResult.hasErrors()){
-            throw new MethodArgumentNotValidException(null,bindingResult);
-        }else{
-            PropertyDTO dto = propertyService.updateProperty(id,propertyDTO);
-            return ResponseEntity.ok().body(dto);
-        }
+    public ResponseEntity<Object> updateProperty(@PathVariable Long id, PropertyDTO propertyDTO) {
+        PropertyDTO dto = propertyService.updateProperty(id, propertyDTO);
+        return ResponseEntity.ok().body(dto);
     }
 
     @PutMapping("/{id}/complaints/{complaintId}")
-    public ResponseEntity<Object> assignComplaintToProperties(@PathVariable("id") Long id, @PathVariable("complaintId") Long complaintId){
-     propertyService.assignComplaintToProperty(id,complaintId);
-     return ResponseEntity.noContent().build();
+    public ResponseEntity<Object> assignComplaintToProperties(@PathVariable("id") Long id, @PathVariable("complaintId") Long complaintId) {
+        propertyService.assignComplaintToProperty(id, complaintId);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/investors/{username}")
-        public ResponseEntity<Object> assignPropertyToInvestor(@PathVariable("id") Long id,@PathVariable("username") String username){
-        propertyService.assignPropertyToInvestor(id,username);
+    public ResponseEntity<Object> assignPropertyToInvestor(@PathVariable("id") Long id, @PathVariable("username") String username) {
+        propertyService.assignPropertyToInvestor(id, username);
         return ResponseEntity.noContent().build();
     }
 
 
     @PutMapping("/{id}/maintenance/{maintenanceId}")
-    public ResponseEntity<Object> assignMaintenanceProperties(@PathVariable ("id") Long id, @PathVariable("maintenanceId") Long maintenanceId)
-    {
-       propertyService.assignMaintenanceToProperty(id,maintenanceId);
-       return ResponseEntity.noContent().build();
+    public ResponseEntity<Object> assignMaintenanceProperties(@PathVariable("id") Long id, @PathVariable("maintenanceId") Long maintenanceId) {
+        propertyService.assignMaintenanceToProperty(id, maintenanceId);
+        return ResponseEntity.noContent().build();
     }
-
-
 
 
 }

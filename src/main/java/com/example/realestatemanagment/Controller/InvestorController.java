@@ -62,14 +62,9 @@ public class InvestorController {
 
     @GetMapping(value = "/{username}/roles")
     public ResponseEntity<Object> addInvestorAuthorityRoles(@PathVariable("username") String username,@RequestBody Map<String, Object> fields){
-        try{
             String authorityName = (String) fields.get("authority");
             investorService.addAuthority(username,authorityName);
             return ResponseEntity.noContent().build();
-        }
-        catch (Exception ex){
-            throw new BadRequestException();
-        }
 
     }
     @GetMapping(value = "/{username}/authorities")
