@@ -1,9 +1,6 @@
 package com.example.realestatemanagment.Controller;
 
-import com.example.realestatemanagment.Exceptions.BadRequestException;
-import com.example.realestatemanagment.Exceptions.HttpMessageNotReadableException;
-import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
-import com.example.realestatemanagment.Exceptions.UsernameNotFoundException;
+import com.example.realestatemanagment.Exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -45,6 +42,11 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
     }
 
+
+    @ExceptionHandler(value = InvalidEnumException.class)
+    public  ResponseEntity<Object> exception (InvalidEnumException exception){
+        return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    }
 }
 
 

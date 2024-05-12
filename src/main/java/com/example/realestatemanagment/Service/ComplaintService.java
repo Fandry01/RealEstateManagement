@@ -19,25 +19,6 @@ public class ComplaintService {
         this.complaintRepo = complaintRepo;
     }
 
-    public static ComplaintDTO transferToDTO(Complaint complaint) {
-        var dto = new ComplaintDTO();
-
-        dto.setId(complaint.getId());
-
-        dto.setComplaintMessage(complaint.getComplaintMessage());
-        dto.setDateOfComplaint(complaint.getDateOfComplaint());
-
-        return dto;
-    }
-
-    public static Complaint transferToComplaint(ComplaintDTO complaintDTO) {
-        var complaint = new Complaint();
-
-        complaint.setComplaintMessage(complaintDTO.getComplaintMessage());
-        complaint.setDateOfComplaint(complaintDTO.getDateOfComplaint());
-
-        return complaint;
-    }
 
     public List<ComplaintDTO> getAllComplaints() {
         List<ComplaintDTO> complaintList = new ArrayList<>();
@@ -69,6 +50,7 @@ public class ComplaintService {
     }
 
     public void deleteComplaint(Long id) {
+        if(!complaintRepo.existsById(id))throw new RecordNotFoundException("Complaint with"+ id +"not found");
         complaintRepo.deleteById(id);
 
     }
@@ -84,6 +66,26 @@ public class ComplaintService {
         } else {
             throw new RecordNotFoundException("Complaint Not Found");
         }
+    }
+
+    public static ComplaintDTO transferToDTO(Complaint complaint) {
+        var dto = new ComplaintDTO();
+
+        dto.setId(complaint.getId());
+
+        dto.setComplaintMessage(complaint.getComplaintMessage());
+        dto.setDateOfComplaint(complaint.getDateOfComplaint());
+
+        return dto;
+    }
+
+    public static Complaint transferToComplaint(ComplaintDTO complaintDTO) {
+        var complaint = new Complaint();
+
+        complaint.setComplaintMessage(complaintDTO.getComplaintMessage());
+        complaint.setDateOfComplaint(complaintDTO.getDateOfComplaint());
+
+        return complaint;
     }
 
     public ComplaintShortDTO transferToShortDTO(Complaint complaint) {

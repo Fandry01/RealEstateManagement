@@ -18,39 +18,14 @@ import java.util.*;
 @Service
 public class InvestorService {
     private final InvestorRepository investorRepo;
-    private final PropertyRepository propertyRepo;
-    private final PropertyService propertyService;
+;
     private final PasswordEncoder passwordEncoder;
 
-    public InvestorService(InvestorRepository investorRepo, PropertyRepository propertyRepo, PropertyService propertyService, PasswordEncoder passwordEncoder) {
+    public InvestorService(InvestorRepository investorRepo, PasswordEncoder passwordEncoder) {
         this.investorRepo = investorRepo;
-        this.propertyRepo = propertyRepo;
-        this.propertyService = propertyService;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public static InvestorDTO transferToDTO(Investor investor) {
-        var dto = new InvestorDTO();
-
-        if (investor.getProperties() != null) {
-            List<PropertyDTO> propertyDTOSet = new ArrayList<>();
-            for (Property property : investor.getProperties()) {
-                PropertyDTO propertyDTO = new PropertyDTO();
-                propertyDTO.setId(property.getId());
-                propertyDTOSet.add(propertyDTO);
-                dto.setPropertyDTO(propertyDTOSet);
-            }
-        }
-        dto.setUsername(investor.getUsername());
-        dto.setPassword(investor.getPassword());
-        dto.setAddress(investor.getAddress());
-        dto.setDob(investor.getDob());
-        dto.setFirstName(investor.getFirstName());
-        dto.setLastName(investor.getLastName());
-        dto.setAuthorities(investor.getAuthorities());
-
-        return dto;
-    }
 
     public List<InvestorDTO> getALlInvestors() {
         List<InvestorDTO> investorList = new ArrayList<>();
@@ -110,6 +85,29 @@ public class InvestorService {
         AuthorityRoles authorityRemove = investor.getAuthorities().stream().filter(a -> a.getAuthorityRoles().equalsIgnoreCase(authority)).findAny().get();
 
         investor.deleteAuthorityRoles(authorityRemove);
+    }
+
+    public static InvestorDTO transferToDTO(Investor investor) {
+        var dto = new InvestorDTO();
+
+        if (investor.getProperties() != null) {
+            List<PropertyDTO> propertyDTOSet = new ArrayList<>();
+            for (Property property : investor.getProperties()) {
+                PropertyDTO propertyDTO = new PropertyDTO();
+                propertyDTO.setId(property.getId());
+                propertyDTOSet.add(propertyDTO);
+                dto.setPropertyDTO(propertyDTOSet);
+            }
+        }
+        dto.setUsername(investor.getUsername());
+        dto.setPassword(investor.getPassword());
+        dto.setAddress(investor.getAddress());
+        dto.setDob(investor.getDob());
+        dto.setFirstName(investor.getFirstName());
+        dto.setLastName(investor.getLastName());
+        dto.setAuthorities(investor.getAuthorities());
+
+        return dto;
     }
 
     public InvestorShortDTO transferToShortDTO(Investor investor) {
