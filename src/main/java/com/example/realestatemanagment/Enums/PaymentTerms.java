@@ -4,5 +4,5 @@ public enum PaymentTerms {
     MONTHLY,
     QUARTERLY,
     YEARLY,
-    DEFAULT;
+
 }

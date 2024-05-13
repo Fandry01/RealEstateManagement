@@ -5,6 +5,6 @@ public enum MaintenanceTypes {
     SAFETY_MAINTENANCE,
     SEASONAL_MAINTENANCE,
     TECHNICAL_MAINTENANCE,
-    DEFAULT;
+
 
 }

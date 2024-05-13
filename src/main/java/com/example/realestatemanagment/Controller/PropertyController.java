@@ -43,9 +43,7 @@ public class PropertyController {
 
     @PostMapping
     public ResponseEntity<Object> addProperty(@Valid @RequestBody PropertyDTO propertyDTO) {
-        if (propertyDTO.getType() == HouseTypes.DEFAULT) {
-            throw new HttpMessageNotReadableException("please choose type property");
-        } else {
+
             PropertyDTO propDto = propertyService.addProperty(propertyDTO);
 
             URI uri = URI.create(
@@ -54,7 +52,6 @@ public class PropertyController {
                             .path("/" + propDto).toUriString());
 
             return ResponseEntity.created(uri).body(propDto);
-        }
 
     }
 

@@ -16,7 +16,7 @@ public class Investor extends User {
     private String Address;
 
     public Investor() {
-    super();
+        super();
     }
 
     public Investor(String address) {

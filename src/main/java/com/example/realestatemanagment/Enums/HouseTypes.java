@@ -7,5 +7,5 @@ public enum HouseTypes {
     PENTHOUSE,
     TWEEONDEREENKAP,
     STUDIO,
-    DEFAULT;
+
 }

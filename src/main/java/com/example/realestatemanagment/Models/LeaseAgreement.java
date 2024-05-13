@@ -23,11 +23,12 @@ public class LeaseAgreement {
     private Tenant tenant;
     @OneToOne
     private Property property;
-    public LeaseAgreement(){
+
+    public LeaseAgreement() {
 
     }
 
-    public LeaseAgreement(Long id, Double rentalPrice,String rentalPeriod, LocalDate startDate, LocalDate endDate, PaymentTerms paymentTerms){
+    public LeaseAgreement(Long id, Double rentalPrice, String rentalPeriod, LocalDate startDate, LocalDate endDate, PaymentTerms paymentTerms) {
         this.id = id;
         this.endDate = endDate;
         this.rentalPeriod = rentalPeriod;
