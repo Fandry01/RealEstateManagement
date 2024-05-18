@@ -38,17 +38,7 @@ public class TenantService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public static TenantShortDTO transferToShortDTO(Tenant tenant) {
-        var dto = new TenantShortDTO();
 
-        dto.setUsername(tenant.getUsername());
-        dto.setPassword(tenant.getPassword());
-        dto.setFirstName(tenant.getFirstName());
-        dto.setDob(tenant.getDob());
-        dto.setLastName(tenant.getLastName());
-
-        return dto;
-    }
 
     public List<TenantDTO> getAllTenants() {
         List<TenantDTO> tenantList = new ArrayList<>();
@@ -162,6 +152,18 @@ public class TenantService {
         dto.setDob(tenant.getDob());
         dto.setLastName(tenant.getLastName());
 
+
+        return dto;
+    }
+
+    public static TenantShortDTO transferToShortDTO(Tenant tenant) {
+        var dto = new TenantShortDTO();
+
+        dto.setUsername(tenant.getUsername());
+        dto.setPassword(tenant.getPassword());
+        dto.setFirstName(tenant.getFirstName());
+        dto.setDob(tenant.getDob());
+        dto.setLastName(tenant.getLastName());
 
         return dto;
     }

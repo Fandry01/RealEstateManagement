@@ -14,7 +14,7 @@ public class MaintenanceTypesDeserializer extends JsonDeserializer<MaintenanceTy
     public MaintenanceTypes deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         String value = p.getValueAsString();
         if (value == null || value.isEmpty()) {
-            throw new InvalidEnumException("invalid maintenance Type");
+            throw new InvalidEnumException("Invalid maintenance Type");
         }
 
         MaintenanceTypes maintenanceTypes;

@@ -1,6 +1,7 @@
 package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Enums.MaintenanceTypes;
+import com.example.realestatemanagment.Enums.Priority;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ public class MaintenanceShortDTO {
     @NotNull
     @Future(message = "Please date the maintenance ahead")
     private LocalDate maintenanceDate;
+    private Priority priority;
 
     public Long getId() {
         return id;
@@ -37,5 +39,13 @@ public class MaintenanceShortDTO {
 
     public void setMaintenanceDate(LocalDate maintenanceDate) {
         this.maintenanceDate = maintenanceDate;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

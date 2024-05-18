@@ -13,7 +13,7 @@ public class HouseTypesDeserializer extends JsonDeserializer<HouseTypes> {
     public HouseTypes deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         String value = p.getValueAsString();
         if (value == null || value.isEmpty()) {
-            throw new InvalidEnumException("invalid HouseType");
+            throw new InvalidEnumException("Invalid HouseType");
         }
 
         HouseTypes houseTypes;

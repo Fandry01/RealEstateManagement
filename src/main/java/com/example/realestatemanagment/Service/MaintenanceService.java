@@ -78,6 +78,7 @@ public class MaintenanceService {
         dto.setId(maintenance.getId());
         dto.setMaintenanceDate(maintenance.getMaintenanceDate());
         dto.setTypeOfMaintenance(maintenance.getTypeOfMaintenance());
+        dto.setPriority(maintenance.getPriority());
 
         return dto;
 
@@ -89,6 +90,7 @@ public class MaintenanceService {
         dto.setId(maintenance.getId());
         dto.setMaintenanceDate(maintenance.getMaintenanceDate());
         dto.setTypeOfMaintenance(maintenance.getTypeOfMaintenance());
+        dto.setPriority(maintenance.getPriority());
 
         return dto;
     }
