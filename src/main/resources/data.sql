@@ -10,10 +10,11 @@ INSERT INTO complaints (id, date_of_complaint, complaint_message) VALUES (1,'202
 
 INSERT INTO investors(username, password,first_name,last_name,date_of_birth,address) VALUES ('jan', '$2a$12$CWUoMhcf9W/aPg6GFgxU2e1XfDROYEVc0hx/26E8FdpZddst.Eupq','derrick','rose','2000-12-12','rozengracht 12');
 INSERT INTO tenants(username,password,first_name,last_name,date_of_birth) VALUES ('markis','$2a$12$CWUoMhcf9W/aPg6GFgxU2e1XfDROYEVc0hx/26E8FdpZddst.Eupq','mark','anthony','1999-09-21');
-INSERT INTO users(username,password,first_name,last_name,date_of_birth) VALUES('admin','','piet','jansen','1990-10-10');
+INSERT INTO users(username,password,first_name,last_name,date_of_birth) VALUES('admin','$2a$12$NzllTH0aGjIo5DcjajglL.6CZbeGWYXfMcnSmxMgIMUPNS01dfWhi','piet','jansen','1990-10-10');
 INSERT INTO roles (username, authority_roles) VALUES ('jan','ROLE_INVESTOR');
 INSERT INTO roles (username, authority_roles) VALUES ('mark','ROLE_USER');
-INSERT INTO lease_agreement(id,rental_price,rental_period,start_date,end_date,payment_terms) VALUES(5,1500.00,'1 Year','2024-01-01','2024-01-01','MONTHLY');
+INSERT INTO roles (username, authority_roles) VALUES ('admin','ROLE_ADMIN');
+INSERT INTO lease_agreement (id, rental_price, rental_period, start_date, end_date, payment_terms) VALUES (5,1500.00,'1 Year','2024-01-01','2024-01-01','MONTHLY');
 
 
 UPDATE complaints SET tenant_username = 'markis' WHERE id = 2;
