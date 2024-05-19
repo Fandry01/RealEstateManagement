@@ -52,7 +52,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
 
-                        .requestMatchers("/properties/**").hasRole("INVESTOR")
+                        .requestMatchers("/properties/**").hasAnyRole("INVESTOR","ADMIN")
+                        .requestMatchers("/users/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/tenants").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/tenants").hasAnyRole("ADMIN", "INVESTOR")
                         .requestMatchers(HttpMethod.PUT, "/tenants").hasAnyRole("TENANT","ADMIN")
