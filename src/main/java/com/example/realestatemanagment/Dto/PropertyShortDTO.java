@@ -1,17 +1,11 @@
 package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Enums.HouseTypes;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.apache.tomcat.Jar;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-public class PropertyDTO {
+public class PropertyShortDTO {
     private Long id;
     @NotNull(message = "Please choose House type")
     private HouseTypes type;
@@ -30,102 +24,82 @@ public class PropertyDTO {
     @NotNull(message = "Please note the addres of the property")
     private String address;
 
-
-    private List<MaintenanceShortDTO> maintenanceDTO = new ArrayList<>();
-
-    private List<ComplaintShortDTO> complaintDTO = new ArrayList<>();
-    public PropertyDTO(){
+    public PropertyShortDTO(){
 
     }
-    public PropertyDTO(Long id, HouseTypes type, Double boughtPrice, Double currentPrice, Integer buildYear, String squareFeet, Boolean rented, String address){
+
+    public PropertyShortDTO(Long id, HouseTypes type, Double boughtPrice, Double currentPrice, Integer buildYear, String squareFeet, Boolean rented, String address) {
         this.id = id;
         this.type = type;
         this.boughtPrice = boughtPrice;
         this.currentPrice = currentPrice;
-        this.rented = rented;
-        this.squareFeet = squareFeet;
         this.buildYear = buildYear;
-        this.address = address;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setType(HouseTypes type) {
-        this.type = type;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setBoughtPrice(Double boughtPrice) {
-        this.boughtPrice = boughtPrice;
-    }
-
-    public void setBuildYear(Integer buildYear) {
-        this.buildYear = buildYear;
-    }
-
-    public void setCurrentPrice(Double currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    public void setRented(Boolean rented) {
-        this.rented = rented;
-    }
-
-    public void setSquareFeet(String squareFeet) {
         this.squareFeet = squareFeet;
+        this.rented = rented;
+        this.address = address;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getAddress() {
-        return address;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public HouseTypes getType() {
         return type;
     }
 
-    public Boolean getRented() {
-        return rented;
-    }
-
-    public Integer getBuildYear() {
-        return buildYear;
+    public void setType(HouseTypes type) {
+        this.type = type;
     }
 
     public Double getBoughtPrice() {
         return boughtPrice;
     }
 
+    public void setBoughtPrice(Double boughtPrice) {
+        this.boughtPrice = boughtPrice;
+    }
+
     public Double getCurrentPrice() {
         return currentPrice;
+    }
+
+    public void setCurrentPrice(Double currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public Integer getBuildYear() {
+        return buildYear;
+    }
+
+    public void setBuildYear(Integer buildYear) {
+        this.buildYear = buildYear;
     }
 
     public String getSquareFeet() {
         return squareFeet;
     }
 
-    public List<ComplaintShortDTO> getComplaintDTO() {
-        return complaintDTO;
+    public void setSquareFeet(String squareFeet) {
+        this.squareFeet = squareFeet;
     }
 
-    public void setComplaintDTO(List<ComplaintShortDTO> complaintDTO) {
-        this.complaintDTO = complaintDTO;
+    public Boolean getRented() {
+        return rented;
     }
 
-    public List<MaintenanceShortDTO> getMaintenanceDTO() {
-        return maintenanceDTO;
+    public void setRented(Boolean rented) {
+        this.rented = rented;
     }
 
-    public void setMaintenanceDTO(List<MaintenanceShortDTO> maintenanceDTO) {
-        this.maintenanceDTO = maintenanceDTO;
+    public String getAddress() {
+        return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

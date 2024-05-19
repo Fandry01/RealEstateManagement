@@ -1,43 +1,29 @@
-package com.example.realestatemanagment.Models;
+package com.example.realestatemanagment.Dto;
 
-import jakarta.persistence.*;
+import com.example.realestatemanagment.Models.AuthorityRoles;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
-@Table(name = "users")
-@MappedSuperclass
-public class User {
-    @Id
+public class TenantShortDTO {
+    @NotBlank(message = "username can't be empty")
     private String username;
-    @Column(nullable = false, length = 255)
+    @NotBlank()
+    @Size(min=5,max=15, message = "required password length 4-15 characters")
     private String password;
-    @Column(name = "first_name")
+    @NotBlank(message = "first name can't be empty")
     private String firstName;
-    @Column(name = "last_name")
+    @NotBlank(message = "last name can't be empty")
     private String lastName;
-    @Column(name = "date_of_birth")
+    @NotBlank(message = "Date of Birth can't be empty")
     private LocalDate Dob;
-    @OneToMany(
-            targetEntity = AuthorityRoles.class,
-            mappedBy = "username",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER)
-    private Set<AuthorityRoles> authorities = new HashSet<>();
 
-    public Set<AuthorityRoles> getRoles() {
-        return authorities;
-    }
+    @JsonSerialize
+    public Set<AuthorityRoles> authorities;
 
-    public void addAuthorityRoles(AuthorityRoles authorityRoles) {
-        this.authorities.add(authorityRoles);
-    }
-
-    public void deleteAuthorityRoles(AuthorityRoles authorityRoles) {
-        this.authorities.remove(authorityRoles);
-    }
 
     public String getUsername() {
         return username;

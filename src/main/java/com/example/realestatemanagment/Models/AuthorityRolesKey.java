@@ -1,6 +1,5 @@
 package com.example.realestatemanagment.Models;
 
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 

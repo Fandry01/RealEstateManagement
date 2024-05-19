@@ -1,17 +1,11 @@
 package com.example.realestatemanagment.Dto;
 
-import com.example.realestatemanagment.Models.AuthorityRoles;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
-public class TenantDTO {
+public class InvestorShortDTO {
     @NotBlank(message = "username can't be empty")
     private String username;
     @NotBlank()
@@ -22,14 +16,9 @@ public class TenantDTO {
     @NotBlank(message = "last name can't be empty")
     private String lastName;
     @NotBlank(message = "Date of Birth can't be empty")
-    private LocalDate Dob;
-
-
-    @JsonSerialize
-    public Set<AuthorityRoles> authorities;
-
-    private List<ComplaintShortDTO> complaintDTO = new ArrayList<>();
-    private PropertyShortDTO propertyDTO;
+    private LocalDate dob;
+    @NotBlank(message = "address can't be empty")
+    private String address;
 
 
     public String getUsername() {
@@ -65,35 +54,18 @@ public class TenantDTO {
     }
 
     public LocalDate getDob() {
-        return Dob;
+        return dob;
     }
 
     public void setDob(LocalDate dob) {
-        Dob = dob;
+        this.dob = dob;
     }
 
-
-    public Set<AuthorityRoles> getAuthorities() {
-        return authorities;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAuthorities(Set<AuthorityRoles> authorities) {
-        authorities = authorities;
-    }
-
-    public List<ComplaintShortDTO> getComplaintDTO() {
-        return complaintDTO;
-    }
-
-    public void setComplaintDTO(List<ComplaintShortDTO> complaintDTO) {
-       this.complaintDTO = complaintDTO;
-    }
-
-    public PropertyShortDTO getPropertyDTO() {
-        return propertyDTO;
-    }
-
-    public void setPropertyDTO(PropertyShortDTO propertyDTO) {
-        this.propertyDTO = propertyDTO;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

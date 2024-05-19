@@ -2,43 +2,27 @@ package com.example.realestatemanagment.Models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @Entity
 @Table(name = "tenants")
 public class Tenant extends User {
 
-    @Column(name = "rental_periode")
-    private LocalDate rentalPeriod;
-    @Column(name = "rent_price")
-    private Integer rentPrice;
-
     @OneToOne
     Property property;
-
     @OneToOne
-    Complaint complaint;
+    LeaseAgreement leaseAgreement;
+    @OneToMany(mappedBy = "tenant")
+    private List<Complaint> complaints;
 
-    public Tenant(){
+    public Tenant() {
         super();
     }
 
-
-    public LocalDate getRentalPeriod() {
-        return rentalPeriod;
-    }
-
-    public void setRentalPeriod(LocalDate rentalPeriod) {
-        this.rentalPeriod = rentalPeriod;
-    }
-
-    public Integer getRentPrice() {
-        return rentPrice;
-    }
-
-    public void setRentPrice(Integer rentPrice) {
-        this.rentPrice = rentPrice;
+    public Tenant(Property property, LeaseAgreement leaseAgreement, List<Complaint> complaints) {
+        this.property = property;
+        this.leaseAgreement = leaseAgreement;
+        this.complaints = complaints;
     }
 
     public Property getProperty() {
@@ -49,11 +33,20 @@ public class Tenant extends User {
         this.property = property;
     }
 
-    public Complaint getComplaint() {
-        return complaint;
+    public LeaseAgreement getLeaseAgreement() {
+        return leaseAgreement;
     }
 
-    public void setComplaint(Complaint complaint) {
-        this.complaint = complaint;
+    public void setLeaseAgreement(LeaseAgreement leaseAgreement) {
+        this.leaseAgreement = leaseAgreement;
+    }
+
+    public List<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(List<Complaint> complaints) {
+        this.complaints = complaints;
     }
 }
+

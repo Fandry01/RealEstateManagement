@@ -15,11 +15,11 @@ public class Complaint {
     @Column(name = "complaint_message")
     private String complaintMessage;
 
-        @OneToOne
-        Tenant tenant;
+    @ManyToOne(fetch = FetchType.LAZY)
+    Tenant tenant;
 
-        @OneToOne
-        Property property;
+    @ManyToOne
+    Property property;
     public Complaint(){
 
     }

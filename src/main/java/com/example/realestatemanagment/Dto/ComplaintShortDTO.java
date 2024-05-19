@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public class ComplaintDTO {
+public class ComplaintShortDTO {
     private Long id;
     @NotNull
     @PastOrPresent()
@@ -15,29 +15,18 @@ public class ComplaintDTO {
     @NotBlank()
     @Size(max=200, message = "Explain the situation within 200 characters")
     private String complaintMessage;
-
-    private TenantDTO tenant;
-
-    public ComplaintDTO(){
+    public ComplaintShortDTO(){
 
     }
 
-    public ComplaintDTO(Long id, LocalDate dateOfComplaint, String complaintMessage){
+    public ComplaintShortDTO(Long id, LocalDate dateOfComplaint, String complaintMessage){
         this.complaintMessage = complaintMessage;
         this.dateOfComplaint = dateOfComplaint;
         this.id = id;
     }
 
-    public void setDateOfComplaint(LocalDate dateOfComplaint) {
-        this.dateOfComplaint = dateOfComplaint;
-    }
-
-    public void setComplaintMessage(String complaintMessage) {
-        this.complaintMessage = complaintMessage;
-    }
-
-    public void setTenant(TenantDTO tenant) {
-        this.tenant = tenant;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -48,15 +37,15 @@ public class ComplaintDTO {
         return dateOfComplaint;
     }
 
+    public void setDateOfComplaint(LocalDate dateOfComplaint) {
+        this.dateOfComplaint = dateOfComplaint;
+    }
+
     public String getComplaintMessage() {
         return complaintMessage;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public TenantDTO getTenant() {
-        return tenant;
+    public void setComplaintMessage(String complaintMessage) {
+        this.complaintMessage = complaintMessage;
     }
 }

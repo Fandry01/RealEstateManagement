@@ -21,33 +21,46 @@ public class UserService {
     private final UserRepository userRepo;
     private final InvestorRepository investorRepo;
     private final TenantRepository tenantRepo;
+
     public UserService(UserRepository userRepo, InvestorRepository investorRepo, TenantRepository tenantRepo) {
         this.userRepo = userRepo;
         this.investorRepo = investorRepo;
         this.tenantRepo = tenantRepo;
     }
 
-    public List<UserDTO> getUsers(){
+    public static UserDTO fromUser(User user) {
+        var dto = new UserDTO();
+
+        dto.setUsername(user.getUsername());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setPassword(user.getPassword());
+        dto.setDob(user.getDob());
+        dto.setAuthorities(user.getAuthorities());
+
+        return dto;
+    }
+
+    public List<UserDTO> getUsers() {
         List<UserDTO> userList = new ArrayList<>();
         List<User> list = userRepo.findAll();
 
-        for(User user: list){
+        for (User user : list) {
             userList.add(fromUser(user));
         }
 
         return userList;
     }
 
-    public UserDTO getUser(String username){
+    public UserDTO getUser(String username) {
         UserDTO dto = new UserDTO();
         Optional<Tenant> tenant = tenantRepo.findById(username);
         Optional<Investor> investor = investorRepo.findById(username);
-        if (tenant.isPresent()){
+        if (tenant.isPresent()) {
             dto = fromUser(tenant.get());
-        }else if(investor.isPresent()){
+        } else if (investor.isPresent()) {
             dto = fromUser(investor.get());
-        }
-        else{
+        } else {
             throw new UsernameNotFoundException(username);
         }
         return dto;
@@ -61,12 +74,14 @@ public class UserService {
     public void deleteUser(String username) {
         userRepo.deleteById(username);
     }
+
     public void updateUser(String username, UserDTO newUser) {
         if (!userRepo.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepo.findById(username).get();
         user.setPassword(newUser.getPassword());
         userRepo.save(user);
     }
+
     public Set<AuthorityRoles> getAuthorities(String username) {
         if (userRepo.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepo.findById(username).get();
@@ -90,21 +105,7 @@ public class UserService {
         userRepo.save(user);
     }
 
-
-    public static UserDTO fromUser(User user){
-        var dto = new UserDTO();
-
-        dto.setUsername(user.getUsername());
-        dto.setFirstName(user.getFirstName());
-        dto.setLastName(user.getLastName());
-        dto.setPassword(user.getPassword());
-        dto.setDob(user.getDob());
-        dto.setAuthorities(user.getAuthorities());
-
-        return dto;
-    }
-
-    public User toUser(UserDTO userDTO){
+    public User toUser(UserDTO userDTO) {
         var user = new User();
 
         user.setUsername(userDTO.getUsername());

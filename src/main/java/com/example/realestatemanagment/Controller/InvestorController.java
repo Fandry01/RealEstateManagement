@@ -5,7 +5,9 @@ import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Service.InvestorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +35,17 @@ public class InvestorController {
         return ResponseEntity.ok().body(optionalInvestor);
     }
 
+    @PostMapping
+    public ResponseEntity<Object> createInvestors(@RequestBody InvestorDTO dto){
+
+        String newUsername = investorService.createInvestor(dto);
+        investorService.addAuthority(newUsername,"ROLE_INVESTOR");
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(newUsername).toUri();
+
+        return  ResponseEntity.created(location).build();
+    }
+
 
     @PutMapping(value="/{username}")
     public ResponseEntity<InvestorDTO> updateInvestor(@PathVariable("username") String username, @RequestBody InvestorDTO dto){
@@ -49,14 +62,9 @@ public class InvestorController {
 
     @GetMapping(value = "/{username}/roles")
     public ResponseEntity<Object> addInvestorAuthorityRoles(@PathVariable("username") String username,@RequestBody Map<String, Object> fields){
-        try{
             String authorityName = (String) fields.get("authority");
             investorService.addAuthority(username,authorityName);
             return ResponseEntity.noContent().build();
-        }
-        catch (Exception ex){
-            throw new BadRequestException();
-        }
 
     }
     @GetMapping(value = "/{username}/authorities")

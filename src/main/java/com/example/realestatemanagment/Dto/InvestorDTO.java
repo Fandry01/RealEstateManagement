@@ -2,25 +2,29 @@ package com.example.realestatemanagment.Dto;
 
 import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public class InvestorDTO {
-    @NotNull
-    private String username;
-    @NotNull
-    private String password;
-    @NotNull
-    private String firstname;
-    @NotNull
-    private String lastname;
-    @NotNull
-    private LocalDate dob;
-    @NotNull
-    private String address;
-    private PropertyDTO propertyDTO;
+        @NotBlank(message = "username can't be empty")
+        private String username;
+        @NotBlank()
+        @Size(min=5,max=15, message = "required password length 4-15 characters")
+        private String password;
+        @NotBlank(message = "first name can't be empty")
+        private String firstName;
+        @NotBlank(message = "last name can't be empty")
+        private String lastName;
+        @NotBlank(message = "Date of Birth can't be empty")
+        private LocalDate dob;
+        @NotBlank(message = "address can't be empty")
+        private String address;
+
+    private List<PropertyDTO> propertyDTO;
     @JsonSerialize
     private Set<AuthorityRoles> authorities;
 
@@ -28,13 +32,13 @@ public class InvestorDTO {
 
     }
 
-    public InvestorDTO(String username, String password, String firstname, String lastname, LocalDate dob, String address, Set<AuthorityRoles> authorities){
+    public InvestorDTO(String username, String password, String firstName, String lastName, LocalDate dob, String address, Set<AuthorityRoles> authorities){
         this.username = username;
         this.password = password;
         this.address = address;
         this.dob = dob;
-        this.lastname = lastname;
-        this.firstname = firstname;
+        this.lastName = lastName;
+        this.firstName = firstName;
 
         this.authorities = authorities;
     }
@@ -48,15 +52,11 @@ public class InvestorDTO {
     }
 
     public void setFirstName(String firstName) {
-        this.firstname = firstName;
+        this.firstName = firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public void setPropertyDTO(PropertyDTO propertyDTO) {
-        this.propertyDTO = propertyDTO;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public LocalDate getDob() {
@@ -68,15 +68,11 @@ public class InvestorDTO {
     }
 
     public String getFirstName() {
-        return firstname;
+        return firstName;
     }
 
     public String getLastname() {
-        return lastname;
-    }
-
-    public PropertyDTO getPropertyDTO() {
-        return propertyDTO;
+        return lastName;
     }
 
     public String getUsername() {
@@ -101,5 +97,13 @@ public class InvestorDTO {
 
     public void setAuthorities(Set<AuthorityRoles> authorities) {
         this.authorities = authorities;
+    }
+
+    public List<PropertyDTO> getPropertyDTO() {
+        return propertyDTO;
+    }
+
+    public void setPropertyDTO(List<PropertyDTO> propertyDTO) {
+        this.propertyDTO = propertyDTO;
     }
 }
