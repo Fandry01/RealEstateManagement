@@ -66,6 +66,14 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/leaseagreements").hasRole("INVESTOR")
                         .requestMatchers(HttpMethod.PUT, "/leaseagreements").hasRole("INVESTOR")
                         .requestMatchers(HttpMethod.DELETE, "/leaseagreements").hasRole("INVESTOR")
+                        .requestMatchers(HttpMethod.POST, "/complaints").hasRole("TENANT")
+                        .requestMatchers(HttpMethod.GET, "/complaints").hasAnyRole("TENANT","ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/complaints").hasAnyRole("TENANT","ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/complaints").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/maintenances").hasRole("INVESTOR")
+                        .requestMatchers(HttpMethod.GET, "/maintenances").hasAnyRole("INVESTOR","ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/maintenances").hasAnyRole("INVESTOR","ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/maintenances").hasAnyRole("INVESTOR","ADMIN")
                         .requestMatchers("/auth/**").permitAll()
 
 
