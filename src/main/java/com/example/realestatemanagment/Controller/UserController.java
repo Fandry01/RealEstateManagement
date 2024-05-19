@@ -17,7 +17,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "users")
+@RequestMapping(value="users")
 public class UserController {
     private final UserService userService;
     private final TenantService tenantService;
@@ -30,21 +30,22 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getUsers() {
+    public ResponseEntity<List<UserDTO>> getUsers(){
         List<UserDTO> userDTOList = userService.getUsers();
         return ResponseEntity.ok().body(userDTOList);
     }
 
     @PostMapping(value = "/{username}")
-    public ResponseEntity<UserDTO> creatUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> creatUser(@RequestBody UserDTO userDTO){
         String newUsername = userService.createUser(userDTO);
 
-        userService.addAuthority(newUsername, "ROLE_ADMIN");
+        userService.addAuthority(newUsername,"ROLE_ADMIN");
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
                 .buildAndExpand(newUsername).toUri();
 
         return ResponseEntity.created(location).build();
     }
+
 
 
     @PutMapping(value = "/{username}")
@@ -73,7 +74,8 @@ public class UserController {
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
             return ResponseEntity.noContent().build();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             throw new BadRequestException();
         }
     }
