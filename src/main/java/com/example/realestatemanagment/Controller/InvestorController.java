@@ -35,8 +35,8 @@ public class InvestorController {
         return ResponseEntity.ok().body(optionalInvestor);
     }
 
-    @PostMapping("/investors")
-    public ResponseEntity<InvestorDTO> createInvestors(@RequestBody InvestorDTO dto){
+    @PostMapping
+    public ResponseEntity<Object> createInvestors(@RequestBody InvestorDTO dto){
 
         String newUsername = investorService.createInvestor(dto);
         investorService.addAuthority(newUsername,"ROLE_INVESTOR");

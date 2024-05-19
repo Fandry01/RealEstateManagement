@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Table(name = "users")
 @MappedSuperclass
 public class User {
     @Id

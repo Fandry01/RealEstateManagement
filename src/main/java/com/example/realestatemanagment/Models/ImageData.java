@@ -1,6 +1,5 @@
 package com.example.realestatemanagment.Models;
 
-import com.example.realestatemanagment.Repository.ImageRepository;
 import jakarta.persistence.*;
 
 @Entity

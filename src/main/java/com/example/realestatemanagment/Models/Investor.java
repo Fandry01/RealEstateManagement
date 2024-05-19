@@ -1,6 +1,6 @@
 package com.example.realestatemanagment.Models;
 
-import com.example.realestatemanagment.Service.LeaseAgreementService;
+
 import jakarta.persistence.*;
 
 
