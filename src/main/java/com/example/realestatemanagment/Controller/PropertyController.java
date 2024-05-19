@@ -1,20 +1,15 @@
 package com.example.realestatemanagment.Controller;
 
 import com.example.realestatemanagment.Dto.PropertyDTO;
-import com.example.realestatemanagment.Enums.HouseTypes;
-import com.example.realestatemanagment.Exceptions.BadRequestException;
-import com.example.realestatemanagment.Exceptions.HttpMessageNotReadableException;
-import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Service.PropertyService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
 @CrossOrigin
 @RequestMapping("/properties")
 @RestController
@@ -44,14 +39,14 @@ public class PropertyController {
     @PostMapping
     public ResponseEntity<Object> addProperty(@Valid @RequestBody PropertyDTO propertyDTO) {
 
-            PropertyDTO propDto = propertyService.addProperty(propertyDTO);
+        PropertyDTO propDto = propertyService.addProperty(propertyDTO);
 
-            URI uri = URI.create(
-                    ServletUriComponentsBuilder
-                            .fromCurrentRequest()
-                            .path("/" + propDto).toUriString());
+        URI uri = URI.create(
+                ServletUriComponentsBuilder
+                        .fromCurrentRequest()
+                        .path("/" + propDto).toUriString());
 
-            return ResponseEntity.created(uri).body(propDto);
+        return ResponseEntity.created(uri).body(propDto);
 
     }
 

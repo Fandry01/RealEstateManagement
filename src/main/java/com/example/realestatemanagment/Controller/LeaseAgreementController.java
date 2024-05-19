@@ -2,10 +2,9 @@ package com.example.realestatemanagment.Controller;
 
 
 import com.example.realestatemanagment.Dto.LeaseAgreementDTO;
-import com.example.realestatemanagment.Exceptions.BadRequestException;
 import com.example.realestatemanagment.Service.LeaseAgreementService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,9 +1,7 @@
 package com.example.realestatemanagment.Controller;
 
 import com.example.realestatemanagment.Dto.ComplaintDTO;
-import com.example.realestatemanagment.Dto.MaintenanceDTO;
 import com.example.realestatemanagment.Service.ComplaintService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

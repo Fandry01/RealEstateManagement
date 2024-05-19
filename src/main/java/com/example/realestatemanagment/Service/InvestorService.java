@@ -9,7 +9,6 @@ import com.example.realestatemanagment.Models.AuthorityRoles;
 import com.example.realestatemanagment.Models.Investor;
 import com.example.realestatemanagment.Models.Property;
 import com.example.realestatemanagment.Repository.InvestorRepository;
-import com.example.realestatemanagment.Repository.PropertyRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

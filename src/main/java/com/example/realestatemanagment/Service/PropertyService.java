@@ -5,7 +5,6 @@ import com.example.realestatemanagment.Dto.PropertyDTO;
 import com.example.realestatemanagment.Dto.PropertyShortDTO;
 import com.example.realestatemanagment.Exceptions.RecordNotFoundException;
 import com.example.realestatemanagment.Models.Complaint;
-
 import com.example.realestatemanagment.Models.Maintenance;
 import com.example.realestatemanagment.Models.Property;
 import com.example.realestatemanagment.Repository.ComplaintRepository;
